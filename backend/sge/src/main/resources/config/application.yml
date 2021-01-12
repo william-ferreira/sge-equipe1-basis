@@ -3,7 +3,7 @@ application:
 
 spring:
     application:
-        name: srsservice
+        name: sgeservice
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:postgresql://localhost:5432/sge
