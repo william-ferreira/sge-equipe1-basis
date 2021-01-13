@@ -5,23 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <include file="config/liquibase/changelog/v00.0004_criacao_de_tabela_usuario.xml"
-             relativeToChangelogFile="false"/>
-=======
-    <include file="config/liquibase/changelog/v00.0001_criacao_de_tabela_evento.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/v00.0001.1_criar_tabela_tipo_evento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/v00.0001_criacao_de_tabelas.xml" relativeToChangelogFile="false"/>
 
->>>>>>> origin/aurelio
-=======
-    <include file="config/liquibase/changelog/v00.0002_criacao_de_tabelas_pre_inscricao.xml"
-             relativeToChangelogFile="false"/>
->>>>>>> origin/vinicius
-=======
-    <include file="config/liquibase/changelog/v00.0003_criacao_de_tabela_pergunta_evento_pergunta_resposta.xml"
-             relativeToChangelogFile="false"/>
-
->>>>>>> origin/edson
+<!--    <include file="config/liquibase/changelog/v00.0004_criacao_de_tabela_usuario.xml" relativeToChangelogFile="false"/>-->
+<!--    <include file="config/liquibase/changelog/v00.0001_criacao_de_tabela_evento.xml" relativeToChangelogFile="false"/>-->
+<!--    <include file="config/liquibase/changelog/v00.0001.1_criar_tabela_tipo_evento.xml" relativeToChangelogFile="false"/>-->
+<!--    <include file="config/liquibase/changelog/v00.0002_criacao_de_tabelas_pre_inscricao.xml" relativeToChangelogFile="false"/>-->
+<!--    <include file="config/liquibase/changelog/v00.0003_criacao_de_tabela_pergunta_evento_pergunta_resposta.xml" relativeToChangelogFile="false"/>-->
 </databaseChangeLog>

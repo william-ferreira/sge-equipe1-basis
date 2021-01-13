@@ -4,20 +4,6 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="2" author="marcos.vinicius">
-        <comment>
-            tipo_situacao
-            id_tipo_situacao NUMBER PK
-            descricao VARCHAR(50)
-
-            pre_inscricao
-            id_pre_inscricao NUMBER NOT NULL PK  SEQUENCE
-            id_usuario NUMBER NOT NULL  FK
-            id_evento NUMBER NOT NULL  FK
-            id_tipo_situacao
-
-        </comment>
-
-
         <createTable tableName="tipo_situacao">
             <column name="id_tipo_situacao" type="NUMBER" remarks="coluna de id da tabela tipo_situacao">
                 <constraints nullable="false"></constraints>
@@ -50,9 +36,9 @@
         <addPrimaryKey tableName="pre_inscricao" columnNames="id_pre_inscricao" constraintName="pk_pre_inscricao"/>
         <createSequence sequenceName="sq_id_pre_inscricao" cycle="false" cacheSize="20" incrementBy="1" startValue="1"/>
 
-        <!-- <addForeignKeyConstraint baseTableName="pre_inscricao" baseColumnNames="id_usuario, id_evento" constraintName="fk_usuario" referencedTableName=""
+        <addForeignKeyConstraint baseTableName="pre_inscricao" baseColumnNames="id_usuario, id_evento" constraintName="fk_usuario" referencedTableName=""
                                  referencedColumnNames="id"/>
-        -->
+
 
 
 

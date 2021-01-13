@@ -39,10 +39,10 @@
         </createTable>
         <addPrimaryKey tableName="evento" columnNames="id_evento" constraintName="pk_evento"/>
         <createSequence sequenceName="sq_evento" cycle="false" incrementBy="1" startValue="1"/>
-        <!--<addForeignKeyConstraint baseTableName="evento"
+        <addForeignKeyConstraint baseTableName="evento"
                                  baseColumnNames="id_tipo_evento"
                                  constraintName="fk_tipo_evento"
                                  referencedTableName="tipo_evento"
-                                 referencedColumnNames="id" /> -->
+                                 referencedColumnNames="id" />
     </changeSet>
 </databaseChangeLog>

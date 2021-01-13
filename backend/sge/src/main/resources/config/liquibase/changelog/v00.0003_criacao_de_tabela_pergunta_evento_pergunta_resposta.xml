@@ -39,11 +39,11 @@
                                  referencedTableName="pergunta"
                                  referencedColumnNames="id"/>
 
-<!--        <addForeignKeyConstraint baseTableName="evento_pergunta"-->
-<!--                                 baseColumnNames="id_evento"-->
-<!--                                 constraintName="fk_ev_pergunta_evento"-->
-<!--                                 referencedTableName="evento"-->
-<!--                                 referencedColumnNames="id"/>-->
+        <addForeignKeyConstraint baseTableName="evento_pergunta"
+                                 baseColumnNames="id_evento"
+                                 constraintName="fk_ev_pergunta_evento"
+                                 referencedTableName="evento"
+                                 referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="3" author="Edson">
