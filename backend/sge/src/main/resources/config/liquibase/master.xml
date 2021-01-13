@@ -6,6 +6,7 @@
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <include file="config/liquibase/changelog/v00.0004_criacao_de_tabela_usuario.xml"
              relativeToChangelogFile="false"/>
 =======
@@ -13,4 +14,8 @@
     <include file="config/liquibase/changelog/v00.0001.1_criar_tabela_tipo_evento.xml" relativeToChangelogFile="false"/>
 
 >>>>>>> origin/aurelio
+=======
+    <include file="config/liquibase/changelog/v00.0002_criacao_de_tabelas_pre_inscricao.xml"
+             relativeToChangelogFile="false"/>
+>>>>>>> origin/vinicius
 </databaseChangeLog>
