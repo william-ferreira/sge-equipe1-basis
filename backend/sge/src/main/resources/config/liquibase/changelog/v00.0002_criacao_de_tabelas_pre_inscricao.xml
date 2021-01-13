@@ -1,10 +1,68 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet id="20201206093940-001" author="rai.maciel">
+    <changeSet id="2" author="marcos.vinicius">
+        <comment>
+            tipo_situacao
+            id_tipo_situacao NUMBER PK
+            descricao VARCHAR(50)
+
+            pre_inscricao
+            id_pre_inscricao NUMBER NOT NULL PK  SEQUENCE
+            id_usuario NUMBER NOT NULL  FK
+            id_evento NUMBER NOT NULL  FK
+            id_tipo_situacao
+
+        </comment>
+
+
+        <createTable tableName="tipo_situacao">
+            <column name="id_tipo_situacao" type="NUMBER" remarks="coluna de id da tabela tipo_situacao">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="descricao" type="VARCHAR(50) " remarks="tabela para referenciar a situacao em que pode ser Aguardando Aprovação, Aprovada, Recusada, Cancelada, etc. ">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="tipo_situacao" columnNames="id_tipo_situacao" constraintName="pk_tipo_situacao"/>
+
+        <createTable tableName="pre_inscricao">
+            <column name="id_pre_inscricao" type="NUMBER" remarks="coluna que referencia o id da pre_inscricao">
+                <constraints nullable="false" ></constraints>
+            </column>
+            <column name="id_usuario" type="NUMBER" remarks=" FK tabela que referencia o usuario pelo id">
+                <constraints nullable="false" ></constraints>
+            </column>
+            <column name="id_evento" type="NUMBER" remarks=" FK tabela que referencia o usuario pelo id">
+                <constraints nullable="false" ></constraints>
+            </column>
+            <column name="id_tipo_situacao" type="NUMBER" remarks=" FK coluna que vai referenciar o id da tabela tipo_situacao">
+                <constraints nullable="false"></constraints>
+            </column>
+
+
+        </createTable>
+
+
+        <addPrimaryKey tableName="pre_inscricao" columnNames="id_pre_inscricao" constraintName="pk_pre_inscricao"/>
+        <createSequence sequenceName="sq_id_pre_inscricao" cycle="false" cacheSize="20" incrementBy="1" startValue="1"/>
+
+        <!-- <addForeignKeyConstraint baseTableName="pre_inscricao" baseColumnNames="id_usuario, id_evento" constraintName="fk_usuario" referencedTableName=""
+                                 referencedColumnNames="id"/>
+        -->
+
+
+
+
+
+
     </changeSet>
 
+
 </databaseChangeLog>
+
+
+
