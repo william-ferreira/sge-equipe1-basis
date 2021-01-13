@@ -6,7 +6,7 @@
 
     <changeSet id="1" author="jose.aurelio">
         <createTable tableName="evento" remarks="tabela que armazena os eventos">
-            <column name="id_evento" type="NUMBER" remarks="chave primaria da tabela">
+            <column name="id" type="NUMBER" remarks="chave primaria da tabela">
                 <constraints nullable="false"/>
             </column>
             <column name="titulo" type="VARCHAR(255)" remarks="armazena titulo do evento">
@@ -37,7 +37,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey tableName="evento" columnNames="id_evento" constraintName="pk_evento"/>
+        <addPrimaryKey tableName="evento" columnNames="id" constraintName="pk_evento"/>
         <createSequence sequenceName="sq_evento" cycle="false" incrementBy="1" startValue="1"/>
         <!--<addForeignKeyConstraint baseTableName="evento"
                                  baseColumnNames="id_tipo_evento"
