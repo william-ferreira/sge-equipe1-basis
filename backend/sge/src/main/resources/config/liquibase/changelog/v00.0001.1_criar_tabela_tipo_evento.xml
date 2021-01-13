@@ -4,7 +4,13 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet id="20201206093940-001" author="rai.maciel">
+    <changeSet id="1.1" author="jose.aurelio">
+        <createTable tableName="tipo_evento">
+            <column name="id" type="NUMBER" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descricao" type="VARCHAR(50)"/>
+        </createTable>
+        <addPrimaryKey tableName="tipo_evento" columnNames="id" constraintName="pk_tipo_evento"/>
     </changeSet>
-
 </databaseChangeLog>
