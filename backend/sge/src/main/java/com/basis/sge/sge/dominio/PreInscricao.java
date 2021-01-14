@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Table(name = "PreInscricao")
+@Table(name = "pre_inscricao")
 @Getter
 @Setter
 public class PreInscricao implements Serializable {

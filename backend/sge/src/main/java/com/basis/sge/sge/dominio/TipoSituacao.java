@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-@Table(name = "TipoSituacao")
+@Table(name = "tipo_situacao")
 @Setter
 @Getter
 public class TipoSituacao implements Serializable {
