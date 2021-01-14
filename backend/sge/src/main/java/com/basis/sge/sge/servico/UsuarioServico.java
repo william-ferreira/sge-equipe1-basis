@@ -1,8 +1,8 @@
-package servico;
+package com.basis.sge.sge.servico;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import servico.dto.UsuarioDTO;
+import com.basis.sge.sge.servico.dto.UsuarioDTO;
 
 import javax.transaction.Transactional;
 import java.util.List;

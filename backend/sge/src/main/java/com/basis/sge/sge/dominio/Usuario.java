@@ -1,6 +1,5 @@
-package dominio;
+package com.basis.sge.sge.dominio;
 
-import liquibase.pro.packaged.id;
 import lombok.Getter;
 import lombok.Setter;
 
