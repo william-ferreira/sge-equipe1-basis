@@ -1,5 +1,6 @@
 package com.basis.sge.sge.servico;
 
+import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.basis.sge.sge.servico.dto.UsuarioDTO;
@@ -20,4 +21,9 @@ public class UsuarioServico {
         return null;
     }
 
+    public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
+        return null;
+    }
+
+    // TODO: métodos para editar e remover
 }
