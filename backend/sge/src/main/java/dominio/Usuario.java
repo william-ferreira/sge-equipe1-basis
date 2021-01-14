@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuario")
@@ -33,7 +34,7 @@ public class Usuario implements Serializable {
     private String telefone;
 
     @Column(name = "data_nascimento")
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
     @Column(name = "chave_usuario")
     private String chaveUsuario;
