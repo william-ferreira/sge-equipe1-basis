@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 public class Evento implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "evento_sequence")
-    @SequenceGenerator(name="evento_sequence", sequenceName = "sq_evento")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name="titulo")
@@ -43,7 +42,7 @@ public class Evento implements Serializable {
     @Column(name = "tipo_inscricao")
     private boolean tipoInscricao;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
     private TipoEvento idTipoEvento;
 }
