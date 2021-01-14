@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 public class Evento implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_evento")
+    @SequenceGenerator(name = "sq_evento", allocationSize = 1, sequenceName = "sq_evento")
     private Integer id;
 
     @Column(name="titulo")
