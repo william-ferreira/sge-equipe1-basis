@@ -20,15 +20,15 @@ public class PreInscricao implements Serializable {
     @Column(name = "id_usuario")
     @ManyToOne
     @JoinColumn(name = "id_usuario",referencedColumnName = "id_usuario")
-    private Number id_usuario;
+    private Integer idUsuario;
 
     @Column(name = "id_evento")
     @ManyToOne
     @JoinColumn(name = "id_evento",referencedColumnName = "id_evento")
-    private Number id_evento;
+    private Integer idEvento;
 
     @Column(name = "id_tipo_situacao")
     @ManyToOne
     @JoinColumn(name = "id_tipo_situacao",referencedColumnName = "id_situacao")
-    private Number id_tipo_situacao;
+    private Integer idTipoSituacao;
 }
