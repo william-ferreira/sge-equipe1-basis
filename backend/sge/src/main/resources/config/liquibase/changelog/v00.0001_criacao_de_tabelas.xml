@@ -198,7 +198,8 @@
             </column>
         </createTable>
 
-        <addPrimaryKey tableName="inscricao_resposta" columnNames="id_inscricao, id_evento, id_pergunta" constraintName="pk_inscricao_resposta"/>
+        <addPrimaryKey tableName="inscricao_resposta" columnNames="id_inscricao, id_evento, id_pergunta"
+                       constraintName="pk_inscricao_resposta"/>
 
         <addForeignKeyConstraint baseTableName="inscricao_resposta"
                                  baseColumnNames="id_evento, id_pergunta" constraintName="fk_inscricao_resposta"
