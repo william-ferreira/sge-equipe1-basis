@@ -1,7 +1,10 @@
 package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.Evento;
+import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.servico.dto.EventoDTO;
+import com.basis.sge.sge.servico.exception.RegraNegocioException;
+import com.basis.sge.sge.servico.mapper.EventoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,27 +16,31 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class EventoServico {
-    private final List<EventoDTO> listaEventos = new ArrayList<>();
+    private final EventoMapper eventoMapper;
+    private final EventoRepositorio eventoRepositorio;
 
     public List<EventoDTO> listar() {
-        return this.listaEventos;
+        return eventoMapper.toDto(this.eventoRepositorio.findAll());
     }
 
     public EventoDTO obterPorId(Integer id){
-        return this.listaEventos.get(id);
+        Evento evento = this.eventoRepositorio.findById(id)
+                .orElseThrow(()-> new RegraNegocioException("ID não encontrado"));
+        return eventoMapper.toDto(evento);
     }
 
-    public EventoDTO salvar(EventoDTO evento){
-        this.listaEventos.add(evento);
-        return evento;
+    public EventoDTO salvar(EventoDTO eventoDTO){
+        //verificar tratamento nullpointexception
+        this.eventoRepositorio.save(eventoMapper.toEntity(eventoDTO));
+        return eventoDTO;
     }
 
-    public EventoDTO update(Integer id, EventoDTO eventoDTO){
-        this.listaEventos.set(id, eventoDTO);
+    public EventoDTO atualizar(EventoDTO eventoDTO){
+        this.eventoRepositorio.save(eventoMapper.toEntity(eventoDTO));
         return eventoDTO;
     }
 
     public void deletar(EventoDTO eventoDTO){
-        this.listaEventos.remove(eventoDTO);
+        this.eventoRepositorio.delete(eventoMapper.toEntity(eventoDTO));
     }
 }

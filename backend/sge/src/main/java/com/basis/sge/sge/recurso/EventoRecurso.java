@@ -36,8 +36,8 @@ public class EventoRecurso {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventoDTO> update(@PathVariable Integer id, @RequestBody EventoDTO eventoDTO){
-        EventoDTO evento = eventoServico.update(id, eventoDTO);
+    public ResponseEntity<EventoDTO> atualizar(@RequestBody EventoDTO eventoDTO){
+        EventoDTO evento = eventoServico.atualizar(eventoDTO);
         return ResponseEntity.ok(evento);
     }
 
