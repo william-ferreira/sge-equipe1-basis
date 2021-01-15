@@ -4,11 +4,9 @@ package servico;
 import com.basis.sge.sge.dominio.TipoSituacao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import repositorio.TipoSituacaoRepositorio;
-
-
 import servico.dto.TipoSituacaoDTO;
+import servico.exception.RegraNegocioException;
 import servico.mapper.TipoSituacaoMapper;
 
 import javax.transaction.Transactional;
@@ -22,30 +20,12 @@ public class TipoSituacaoServico {
     private final TipoSituacaoMapper tipoSituacaoMapper;
 
     public List<TipoSituacaoDTO> listar() {
-        List<TipoSituacao> lista = tipoSituacaoRepositorio.findAll();
-        return tipoSituacaoMapper.toDto(lista);
+        return tipoSituacaoMapper.toDto(this.tipoSituacaoRepositorio.findAll());
     }
 
     public TipoSituacaoDTO obterPorId(Integer id) {
-        TipoSituacao preInscricao = tipoSituacaoRepositorio.findById(id).get();
-        return tipoSituacaoMapper.toDto(preInscricao);
+        TipoSituacao tipoSituacao = this.tipoSituacaoRepositorio.findById(id).orElseThrow(()->new RegraNegocioException("ID não encontrado"));
+        return tipoSituacaoMapper.toDto(tipoSituacao);
     }
-
-    public TipoSituacaoDTO salvar(TipoSituacaoDTO tipoSituacaoDTO){
-        return null;
-    }
-    public TipoSituacaoDTO editar(TipoSituacaoDTO tipoSituacaoDTO) {
-        return null;
-    }
-    public TipoSituacaoDTO remover(Integer id) {
-        return null;
-    }
-
-
-
-
-
-
-
 
 }

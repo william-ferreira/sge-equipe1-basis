@@ -24,18 +24,9 @@ public class TipoSituacaoRecurso {
     public ResponseEntity<TipoSituacaoDTO> obterPoId(@PathVariable int id){
         return null;
     }
-    @PostMapping
-    public ResponseEntity<TipoSituacaoDTO> salvar(@RequestBody TipoSituacaoDTO tipoSituacaoDTO){
-        return null;
-    }
-    @PutMapping
-    public ResponseEntity<TipoSituacaoDTO> editar(@RequestBody TipoSituacaoDTO tipoSituacaoDTO){
-        return null;
-    }
-    @DeleteMapping("{/id}")
-    public void remover(){
 
-    }
+
+
 
 
 }
