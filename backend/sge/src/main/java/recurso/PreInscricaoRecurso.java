@@ -25,10 +25,6 @@ public class PreInscricaoRecurso {
     public ResponseEntity<PreInscricaoDTO> salvar(@RequestBody PreInscricaoDTO preInscricaoDTO){
         return null;
     }
-    @PutMapping
-    public ResponseEntity<PreInscricaoDTO> editar(@RequestBody PreInscricaoDTO preInscricaoDTO){
-        return null;
-    }
     @DeleteMapping("{/id}")
     public void remover(){
 

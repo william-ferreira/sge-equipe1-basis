@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import repositorio.PreInscricaoRepositorio;
 import servico.dto.PreInscricaoDTO;
-import servico.dto.UsuarioDTO;
+import servico.exception.RegraNegocioException;
 import servico.mapper.PreInscricaoMapper;
 
 import javax.transaction.Transactional;
@@ -19,23 +19,23 @@ public class PreInscricaoServico {
     private final PreInscricaoMapper preInscricaoMapper;
 
     public List<PreInscricaoDTO> listar() {
-        List<PreInscricao> lista = preInscricaoRepositorio.findAll();
-        return preInscricaoMapper.toDto(lista);
+        return preInscricaoMapper.toDto(this.preInscricaoRepositorio.findAll());
     }
 
     public PreInscricaoDTO obterPorId(Integer id) {
-        PreInscricao preInscricao = preInscricaoRepositorio.findById(id).get();
+        PreInscricao preInscricao = this.preInscricaoRepositorio.findById(id).orElseThrow(()->new RegraNegocioException("ID não encontrado"));
         return preInscricaoMapper.toDto(preInscricao);
     }
 
     public PreInscricaoDTO salvar(PreInscricaoDTO preInscricaoDTO){
-        return null;
+
+        this.preInscricaoRepositorio.save(preInscricaoMapper.toEntity(preInscricaoDTO));
+        return preInscricaoDTO;
     }
-    public PreInscricaoDTO editar(PreInscricaoDTO preInscricaoDTO) {
-        return null;
-    }
-    public PreInscricaoDTO remover(Integer id) {
-        return null;
+
+    public void remover(PreInscricaoDTO preInscricaoDTO)
+    {
+        this.preInscricaoRepositorio.delete(preInscricaoMapper.toEntity(preInscricaoDTO));
     }
 
 
