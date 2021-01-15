@@ -19,5 +19,5 @@ public class EventoDTO {
     private double valor;
     private String localEvento;
     private boolean tipoInscricao;
-    private TipoEvento idTipoEvento;
+    private Integer idTipoEvento;
 }

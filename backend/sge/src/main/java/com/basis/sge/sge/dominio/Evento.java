@@ -45,5 +45,5 @@ public class Evento implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
-    private TipoEvento idTipoEvento;
+    private Integer idTipoEvento;
 }
