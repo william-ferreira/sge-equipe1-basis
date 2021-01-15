@@ -31,7 +31,11 @@ public class EventoServico {
 
     public EventoDTO salvar(EventoDTO eventoDTO){
         //verificar tratamento nullpointexception
-        this.eventoRepositorio.save(eventoMapper.toEntity(eventoDTO));
+        try{
+            this.eventoRepositorio.save(eventoMapper.toEntity(eventoDTO));
+        }catch (NullPointerException e){
+            System.out.println("O evento não existe");
+        }
         return eventoDTO;
     }
 
@@ -41,6 +45,13 @@ public class EventoServico {
     }
 
     public void deletar(EventoDTO eventoDTO){
-        this.eventoRepositorio.delete(eventoMapper.toEntity(eventoDTO));
+        try{
+            this.eventoRepositorio.delete(eventoMapper.toEntity(eventoDTO));
+        }catch(NullPointerException e){
+            System.out.println("O evento não existe");
+        }
+
+
+
     }
 }
