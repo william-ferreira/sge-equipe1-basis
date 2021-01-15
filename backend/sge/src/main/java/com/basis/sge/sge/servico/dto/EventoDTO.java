@@ -1,10 +1,14 @@
 package com.basis.sge.sge.servico.dto;
 
 import com.basis.sge.sge.dominio.TipoEvento;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class EventoDTO {
     private Integer id;
     private String titulo;
