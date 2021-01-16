@@ -12,7 +12,7 @@ public class PreInscricao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_id_pre_inscricao")
-    @SequenceGenerator(name = "sq_id_pre_inscricao", allocationSize = 1, sequenceName = "sq_id_pre_inscricao")
+    @SequenceGenerator(name = "pre_inscricao", allocationSize = 1, sequenceName = "sq_id_pre_inscricao")
     @Column(name="id")
     private Integer id;
 
