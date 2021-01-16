@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="evento")
@@ -46,4 +47,7 @@ public class Evento implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
     private TipoEvento idTipoEvento;
+
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+    private List<EventoPergunta> perguntas;
 }

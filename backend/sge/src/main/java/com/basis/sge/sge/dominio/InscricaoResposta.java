@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -17,13 +18,8 @@ public class InscricaoResposta {
     @Column(name = "id_inscricao")
     private int idInscricao;
 
-    @Id
-    @Column(name = "id_evento")
-    private int idEvento;
-
-    @Id
-    @Column(name = "id_pergunta")
-    private int idPergunta;
+    @EmbeddedId
+    private EventoPerguntaId eventoPerguntaId;
 
     @Column(name = "resposta")
     private String resposta;
