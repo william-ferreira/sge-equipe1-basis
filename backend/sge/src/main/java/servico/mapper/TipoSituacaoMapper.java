@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 import servico.dto.PreInscricaoDTO;
 import servico.dto.TipoSituacaoDTO;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring")
 public interface TipoSituacaoMapper extends EntityMapper <TipoSituacaoDTO, TipoSituacao>{
 }
