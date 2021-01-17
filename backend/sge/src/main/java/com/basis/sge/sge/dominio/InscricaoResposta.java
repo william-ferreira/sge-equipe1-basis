@@ -5,18 +5,21 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "inscricao_resposta")
 @Getter
 @Setter
-@Table(name = "inscricao_resposta")
-public class InscricaoResposta {
+public class InscricaoResposta implements Serializable {
 
     @Id
     @Column(name = "id_inscricao")
-    private int idInscricao;
+    private Integer idInscricao;
 
     @EmbeddedId
     private EventoPerguntaId eventoPerguntaId;

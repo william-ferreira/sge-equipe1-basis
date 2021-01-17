@@ -9,21 +9,22 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity(name = "EventoPergunta")
 @Table(name = "evento_pergunta")
 @Getter
 @Setter
-public class EventoPergunta {
+public class EventoPergunta implements Serializable {
 
     @EmbeddedId
     private EventoPerguntaId id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("id")
     private Evento evento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("id")
     private Pergunta pergunta;
 }

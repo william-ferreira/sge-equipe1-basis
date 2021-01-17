@@ -11,9 +11,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TipoEvento implements Serializable {
+
     @Id
     private Integer id;
 
-    @Column
+    @Column(name = "descricao")
     private String descricao;
 }
