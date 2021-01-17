@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/eventos")
+@RequestMapping("/api/v2/eventos")
 @RequiredArgsConstructor
 public class EventoRecurso {
     private final EventoServico eventoServico;
-    private final EventoMapper eventoMapper;
 
     @GetMapping
     public ResponseEntity<List<EventoDTO>> listar(){

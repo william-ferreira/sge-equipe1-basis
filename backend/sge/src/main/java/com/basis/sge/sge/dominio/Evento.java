@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name="evento")
+@Table(name = "evento")
 @Getter
 @Setter
 public class Evento implements Serializable {
@@ -32,7 +32,7 @@ public class Evento implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "quantidade-vagas")
+    @Column(name = "quantidade_vagas")
     private int quantVagas;
 
     @Column(name = "valor")
@@ -41,13 +41,18 @@ public class Evento implements Serializable {
     @Column(name = "local_evento")
     private String localEvento;
 
-    @Column(name = "tipo_inscricao")
-    private boolean tipoInscricao;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
     private TipoEvento idTipoEvento;
 
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
-    private List<EventoPergunta> perguntas;
-}
+
+    @Column(name = "tipo_inscricao")
+    private boolean tipoInscricao;
+
+
+    @ManyToMany
+    @JoinTable(name="envento_pergunta",
+            joinColumns={@JoinColumn(name="id")},
+            inverseJoinColumns={@JoinColumn(name="id_evento")})
+    private List<Pergunta> perguntas;}
+

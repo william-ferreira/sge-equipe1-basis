@@ -12,9 +12,9 @@ import java.io.Serializable;
 @Setter
 public class TipoEvento implements Serializable {
     @Id
-
+    @Column(name = "id")
     private Integer id;
 
-    @Column
+    @Column(name = "descricao")
     private String descricao;
 }

@@ -1,6 +1,7 @@
 package com.basis.sge.sge.recurso;
 
 import com.basis.sge.sge.servico.UsuarioServico;
+import com.basis.sge.sge.servico.dto.PerguntaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,8 @@ public class UsuarioRecurso {
 
     @GetMapping
     public ResponseEntity<List<UsuarioDTO>> listar() {
-        List list = usuarioServico.listar();
-        return ResponseEntity.ok(list);
+        List<UsuarioDTO> usuarios = usuarioServico.listar();
+        return ResponseEntity.ok(usuarios);
     }
 
     @GetMapping("{/id}")

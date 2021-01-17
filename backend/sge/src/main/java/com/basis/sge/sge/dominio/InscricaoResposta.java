@@ -18,9 +18,6 @@ public class InscricaoResposta {
     @Column(name = "id_inscricao")
     private int idInscricao;
 
-    @EmbeddedId
-    private EventoPerguntaId eventoPerguntaId;
-
     @Column(name = "resposta")
     private String resposta;
 }
