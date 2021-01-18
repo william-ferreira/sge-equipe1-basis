@@ -1,5 +1,9 @@
 package com.basis.sge.sge.servico;
 
+import com.basis.sge.sge.dominio.Usuario;
+import com.basis.sge.sge.repositorio.UsuarioRepositorio;
+import com.basis.sge.sge.servico.exception.RegraNegocioException;
+import com.basis.sge.sge.servico.mapper.UsuarioMapper;
 import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,17 +17,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsuarioServico {
 
+    private final UsuarioRepositorio usuarioRepositorio;
+    private final UsuarioMapper usuarioMapper;
+    //private final RegraNegocioException exception;
+
     public List<UsuarioDTO> listar() {
-        return null;
+        List usuarios = usuarioRepositorio.findAll();
+        return usuarioMapper.toDto(usuarios);
     }
 
     public UsuarioDTO obterPorId(Integer id) {
-        return null;
+        Usuario usuarioBuscado = usuarioRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Usuário não encontrado."));
+        return usuarioMapper.toDto(usuarioBuscado);
     }
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
-        return null;
+        Usuario usuarioSalvo = usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
+        return usuarioMapper.toDto(usuarioSalvo);
     }
 
-    // TODO: métodos para editar e remover
+    public UsuarioDTO editar(UsuarioDTO usuarioDTO) {
+        Usuario usuarioEditado = usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
+        return usuarioMapper.toDto(usuarioEditado);
+    }
+
+    public void remover(Integer id) {
+        usuarioRepositorio.deleteById(id);
+    }
 }

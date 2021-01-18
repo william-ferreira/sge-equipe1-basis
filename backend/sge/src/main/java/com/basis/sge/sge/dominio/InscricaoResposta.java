@@ -8,15 +8,16 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Table(name = "inscricao_resposta")
-public class InscricaoResposta {
+public class InscricaoResposta implements Serializable {
 
     @Id
     @Column(name = "id_inscricao")
-    private int idInscricao;
+    private Integer idInscricao;
 
     @Column(name = "resposta")
     private String resposta;

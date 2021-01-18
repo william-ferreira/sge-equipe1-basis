@@ -41,13 +41,12 @@ public class Evento implements Serializable {
     @Column(name = "local_evento")
     private String localEvento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
-    private TipoEvento idTipoEvento;
-
-
     @Column(name = "tipo_inscricao")
     private boolean tipoInscricao;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
+    private TipoEvento idTipoEvento;
 
 
     @ManyToMany

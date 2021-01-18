@@ -4,12 +4,12 @@ import com.basis.sge.sge.dominio.TipoEvento;
 import lombok.Getter;
 import lombok.Setter;
 
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class EventoDTO {
+public class EventoDTO implements Serializable {
     private Integer id;
     private String titulo;
     private LocalDateTime dataInicio;

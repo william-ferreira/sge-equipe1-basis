@@ -21,7 +21,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v2/pergunta")
+@RequestMapping("/api/pergunta")
 @RequiredArgsConstructor
 public class PerguntaRecurso {
 
@@ -53,6 +53,7 @@ public class PerguntaRecurso {
     }
 
     @DeleteMapping("{/id}")
-    public void remover() {
+    public void remover(@PathVariable Integer id) {
+        perguntaServico.deletar(id);
     }
 }

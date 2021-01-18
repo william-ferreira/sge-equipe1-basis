@@ -2,13 +2,15 @@ package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.Pergunta;
 import com.basis.sge.sge.repositorio.PerguntaRepositorio;
+import com.basis.sge.sge.servico.dto.EventoDTO;
 import com.basis.sge.sge.servico.dto.PerguntaDTO;
 import com.basis.sge.sge.servico.mapper.PerguntaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class PerguntaServico {
@@ -31,7 +33,9 @@ public class PerguntaServico {
         Pergunta perguntaAux = perguntaRepositorio.save(pergunta);
         return perguntaMapper.toDto(perguntaAux);
     }
+    //TODO:Arrumar este método
+    public void deletar(Integer id){
 
-
-
+        perguntaRepositorio.deleteById(id);
+    }
 }
