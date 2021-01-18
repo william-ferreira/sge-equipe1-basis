@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TipoEvento implements Serializable {
+
     @Id
     private Integer id;
 

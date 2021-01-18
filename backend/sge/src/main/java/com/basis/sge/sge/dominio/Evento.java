@@ -48,5 +48,6 @@ public class Evento implements Serializable {
     @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
     private TipoEvento idTipoEvento;
 
-    
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+    private List<EventoPergunta> perguntas;
 }

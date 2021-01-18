@@ -2,28 +2,23 @@ package com.basis.sge.sge.dominio;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
+@EntityScan(basePackages = {"com.mypackage.entity"})
+@Table(name = "inscricao_resposta")
 @Getter
 @Setter
-@Table(name = "inscricao_resposta")
-public class InscricaoResposta {
+public class InscricaoResposta implements Serializable {
 
     @Id
     @Column(name = "id_inscricao")
-    private int idInscricao;
+    private Integer idInscricao;
 
-    @Id
-    @Column(name = "id_evento")
-    private int idEvento;
-
-    @Id
-    @Column(name = "id_pergunta")
-    private int idPergunta;
+    @EmbeddedId
+    private EventoPerguntaId eventoPerguntaId;
 
     @Column(name = "resposta")
     private String resposta;
