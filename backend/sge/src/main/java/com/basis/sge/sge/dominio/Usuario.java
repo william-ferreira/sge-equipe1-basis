@@ -8,10 +8,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "usuario")
 @Getter
 @Setter
-
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
     @Id
@@ -34,6 +33,7 @@ public class Usuario implements Serializable {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chave_usuario")
     private String chaveUsuario;
 

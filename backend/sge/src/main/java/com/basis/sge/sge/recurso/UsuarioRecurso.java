@@ -35,11 +35,9 @@ public class UsuarioRecurso {
         return ResponseEntity.ok(usuarioDTO);
     }
 
-    @SneakyThrows
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuarioSalvo = usuarioServico.salvar(usuarioDTO);
-        return ResponseEntity.created(new URI("/api/usuario")).body(usuarioSalvo);
+    public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO usuarioDTO) throws URISyntaxException, RegraNegocioException {
+        return ResponseEntity.created(new URI("/api/usuario")).body(usuarioServico.salvar(usuarioDTO));
     }
 
     @SneakyThrows

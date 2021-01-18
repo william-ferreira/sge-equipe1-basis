@@ -11,6 +11,7 @@ import com.basis.sge.sge.servico.dto.UsuarioDTO;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -32,8 +33,11 @@ public class UsuarioServico {
     }
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
-        Usuario usuarioSalvo = usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
-        return usuarioMapper.toDto(usuarioSalvo);
+
+        Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
+        usuario.setChaveUsuario(UUID.randomUUID().toString());
+        Usuario usuarioCriado = usuarioRepositorio.save(usuario);
+        return usuarioMapper.toDto(usuarioCriado);
     }
 
     public UsuarioDTO editar(UsuarioDTO usuarioDTO) {

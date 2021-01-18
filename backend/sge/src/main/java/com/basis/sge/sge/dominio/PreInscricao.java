@@ -17,16 +17,16 @@ public class PreInscricao implements Serializable {
     private Integer id;
 
 
-    @ManyToOne
+    @ManyToOne(fetch =FetchType.LAZY)
     @JoinColumn(name = "id_usuario",referencedColumnName = "id")
     private Integer idUsuario;
 
-    @ManyToOne
+    @ManyToOne(fetch =FetchType.LAZY)
     @JoinColumn(name = "id_evento",referencedColumnName = "id")
     private Integer idEvento;
 
 
-    @ManyToOne
+    @ManyToOne(fetch =FetchType.LAZY)
     @JoinColumn(name = "id_tipo_situacao",referencedColumnName = "id")
     private Integer idTipoSituacao;
 }
