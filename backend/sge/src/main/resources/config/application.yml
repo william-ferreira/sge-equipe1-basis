@@ -22,6 +22,8 @@ spring:
         url: jdbc:postgresql://localhost:5432/sge
         username: sge
         password: sge
+        hikari:
+            auto-commit: false
     jackson:
         date-format: yyyy-MM-dd
         deserialization:

@@ -35,14 +35,14 @@ public class EventoRecurso {
         return ResponseEntity.ok(evento);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<EventoDTO> atualizar(@RequestBody EventoDTO eventoDTO){
         EventoDTO evento = eventoServico.atualizar(eventoDTO);
         return ResponseEntity.ok(evento);
     }
 
-    @DeleteMapping
-    public void deletar(@RequestBody EventoDTO eventoDTO){
-        eventoServico.deletar(eventoDTO);
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Integer id){
+        eventoServico.deletar(id);
     }
 }

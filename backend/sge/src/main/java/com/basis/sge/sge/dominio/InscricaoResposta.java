@@ -13,13 +13,24 @@ import java.io.Serializable;
 @Setter
 public class InscricaoResposta implements Serializable {
 
-    @Id
-    @Column(name = "id_inscricao")
-    private Integer idInscricao;
-
     @EmbeddedId
-    private EventoPerguntaId eventoPerguntaId;
+    private InscricaoRespostaId inscricaoRespostaId;
 
     @Column(name = "resposta")
     private String resposta;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idEvento")
+    @JoinColumn(name = "id_evento", referencedColumnName = "id")
+    private Evento evento;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idPergunta")
+    @JoinColumn(name = "id_pergunta", referencedColumnName = "id")
+    private Pergunta pergunta;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idInscricao")
+    @JoinColumn(name = "id_inscricao", referencedColumnName = "id")
+    private PreInscricao preInscricao;
 }

@@ -33,21 +33,21 @@ public class Evento implements Serializable {
     private String descricao;
 
     @Column(name = "quantidade_vagas")
-    private int quantVagas;
+    private Integer quantVagas;
 
     @Column(name = "valor")
-    private double valor;
+    private Double valor;
 
     @Column(name = "local_evento")
     private String localEvento;
 
     @Column(name = "tipo_inscricao")
-    private boolean tipoInscricao;
+    private Boolean tipoInscricao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
-    private TipoEvento idTipoEvento;
+    private TipoEvento tipoEvento;
 
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "evento")
     private List<EventoPergunta> perguntas;
 }

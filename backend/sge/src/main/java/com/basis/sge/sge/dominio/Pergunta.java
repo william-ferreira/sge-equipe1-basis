@@ -31,7 +31,7 @@ public class Pergunta implements Serializable {
     private String titulo;
 
     @Column(name = "obrigatoriedade")
-    private boolean obrigatoriedade;
+    private Boolean obrigatoriedade;
 
     @OneToMany(mappedBy = "pergunta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventoPergunta> eventos;

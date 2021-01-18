@@ -17,18 +17,20 @@ public class PreInscricao implements Serializable {
     @SequenceGenerator(name = "sq_id_pre_inscricao", allocationSize = 1, sequenceName = "sq_id_pre_inscricao")
     private Integer id;
 
-    //@Column(name = "id_usuario")
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idUsuario")
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     private Usuario idUsuario;
 
-    //@Column(name = "id_evento")
+
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idEvento")
     @JoinColumn(name = "id_evento", referencedColumnName = "id")
     private Evento idEvento;
 
-    //@Column(name = "id_tipo_situacao")
+
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idTipoSitucao")
     @JoinColumn(name = "id_tipo_situacao",referencedColumnName = "id")
     private TipoSituacao idTipoSituacao;
 }

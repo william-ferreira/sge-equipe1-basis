@@ -40,18 +40,16 @@ public class EventoServico {
     }
 
     public EventoDTO atualizar(EventoDTO eventoDTO){
-        this.eventoRepositorio.save(eventoMapper.toEntity(eventoDTO));
-        return eventoDTO;
+        Evento evento = this.eventoRepositorio.save(eventoMapper.toEntity(eventoDTO));
+        return eventoMapper.toDto(evento);
     }
 
-    public void deletar(EventoDTO eventoDTO){
+    public void deletar(Integer id){
         try{
-            this.eventoRepositorio.delete(eventoMapper.toEntity(eventoDTO));
+            this.eventoRepositorio.deleteById(id);
         }catch(NullPointerException e){
             System.out.println("O evento não existe");
         }
-
-
 
     }
 }
