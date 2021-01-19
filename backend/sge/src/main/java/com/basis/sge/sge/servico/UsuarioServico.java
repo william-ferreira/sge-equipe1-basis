@@ -11,6 +11,7 @@ import com.basis.sge.sge.servico.dto.UsuarioDTO;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -18,6 +19,7 @@ import java.util.List;
 public class UsuarioServico {
     private final UsuarioRepositorio usuarioRepositorio;
     private final UsuarioMapper usuarioMapper;
+    private String chave;
 
     public List<UsuarioDTO> listar() {
         return usuarioMapper.toDto(usuarioRepositorio.findAll());
@@ -26,17 +28,20 @@ public class UsuarioServico {
     public UsuarioDTO obterPorId(Integer id) {
         Usuario user = usuarioRepositorio.findById(id)
                 .orElseThrow(()-> new RegraNegocioException("Id do usuário não encontrado"));
-        return null;
+        return usuarioMapper.toDto(user);
     }
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
-        usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
-        return usuarioDTO;
+        Usuario user = usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
+        user.setChaveUsuario(UUID.randomUUID().toString());
+        chave = user.getChaveUsuario();
+        return usuarioMapper.toDto(user);
     }
 
     public UsuarioDTO atualizar(UsuarioDTO usuarioDTO){
-        usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
-        return usuarioDTO;
+        Usuario user = usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
+        user.setChaveUsuario(chave);
+        return usuarioMapper.toDto(user);
     }
 
     public void deletar(Integer id){

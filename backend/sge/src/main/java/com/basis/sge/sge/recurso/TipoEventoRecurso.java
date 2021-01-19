@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/api/tipo-evento")
 @RequiredArgsConstructor
 public class TipoEventoRecurso {
-    private final TipoEventoMapper tipoEventoMapper;
     private final TipoEventoServico tipoEventoServico;
 
     @GetMapping

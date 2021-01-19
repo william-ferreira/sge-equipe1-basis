@@ -21,7 +21,7 @@ public class UsuarioRecurso {
         return ResponseEntity.ok(usuarioServico.listar());
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> obterPorID(@PathVariable Integer id) {
         UsuarioDTO usuarioDTO = usuarioServico.obterPorId(id);
         return ResponseEntity.ok(usuarioDTO);
@@ -38,7 +38,7 @@ public class UsuarioRecurso {
         return ResponseEntity.ok(usuarioServico.atualizar(usuarioDTO));
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public void deletar(@PathVariable Integer id) {
         usuarioServico.deletar(id);
     }
