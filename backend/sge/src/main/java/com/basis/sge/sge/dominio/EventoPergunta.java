@@ -18,11 +18,11 @@ public class EventoPergunta implements Serializable {
     // TODO: Testar nomes de variavel idEvento e idPergunta em EventoPerguntage
     @MapsId("eventoId")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_evento")
     private Evento evento;
 
     @MapsId("perguntaId")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_inscricao_pergunta")
     private Pergunta pergunta;
 }

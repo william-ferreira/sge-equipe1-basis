@@ -18,6 +18,7 @@ public class PreInscricao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_id_pre_inscricao")
     @SequenceGenerator(name = "sq_id_pre_inscricao", allocationSize = 1, sequenceName = "sq_id_pre_inscricao")
+    @Column(name = "id_pre_inscricao")
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,6 +33,6 @@ public class PreInscricao implements Serializable {
     @JoinColumn(name = "id_tipo_situacao")
     private TipoSituacao tipoSituacao;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "pre_inscricao")
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "preInscricao")
     private List<InscricaoResposta> respostas;
 }

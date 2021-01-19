@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 public interface InscricaoRespostaMapper extends EntityMapper<InscricaoRespostaDTO, InscricaoResposta>{
 
     @Override
-    @Mapping(source = "idInscricao", target = "preInscricaoId.id")
+    @Mapping(source = "idInscricao", target = "preInscricao.id")
     @Mapping(source = "idEvento", target = "evento.id")
     @Mapping(source = "idPergunta", target = "pergunta.id")
 
@@ -21,7 +21,7 @@ public interface InscricaoRespostaMapper extends EntityMapper<InscricaoRespostaD
     InscricaoResposta toEntity(InscricaoRespostaDTO inscricaoRespostaDTO);
 
     @Override
-    @Mapping(source = "preInscricaoId.id", target = "idInscricao")
+    @Mapping(source = "preInscricao.id", target = "idInscricao")
     @Mapping(source = "evento.id", target = "idEvento")
     @Mapping(source = "pergunta.id", target = "idPergunta")
     InscricaoRespostaDTO toDto(InscricaoResposta inscricaoResposta);
