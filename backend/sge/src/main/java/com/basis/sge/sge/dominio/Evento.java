@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="evento")
@@ -18,32 +19,34 @@ public class Evento implements Serializable {
     @SequenceGenerator(name = "sq_evento", allocationSize = 1, sequenceName = "sq_evento")
     private Integer id;
 
-    @Column(name="titulo")
+    @Column(name= "titulo")
     private String titulo;
 
-    //LocalDate se apenas existir o Date no liquibase
     @Column(name = "data_inicio")
     private LocalDateTime dataInicio;
 
     @Column(name = "data_fim")
-    private LocalDateTime dataFim;
+    private LocalDateTime dataTermino;
 
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "quantidade-vagas")
-    private int quantVagas;
+    @Column(name = "quantidade_vagas")
+    private Integer quantVagas;
 
     @Column(name = "valor")
-    private double valor;
+    private Double valor;
 
     @Column(name = "local_evento")
     private String localEvento;
 
     @Column(name = "tipo_inscricao")
-    private boolean tipoInscricao;
+    private Boolean tipoInscricao;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
-    private TipoEvento idTipoEvento;
+    @JoinColumn(name = "id_tipo_evento")
+    private TipoEvento tipoEvento;
+
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "evento")
+    private List<EventoPergunta> perguntas;
 }

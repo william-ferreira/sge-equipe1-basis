@@ -11,9 +11,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TipoEvento implements Serializable {
+
+    // TODO: Tentar rodar sem o @Column
     @Id
+    @Column(name = "id")
     private Integer id;
 
-    @Column
+    @Column(name = "descricao")
     private String descricao;
 }

@@ -1,3 +1,4 @@
+
 package com.basis.sge.sge.dominio;
 
 import lombok.Getter;
@@ -5,30 +6,32 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
+@Entity
 @Table(name = "pre_inscricao")
 @Getter
 @Setter
 public class PreInscricao implements Serializable {
 
+    // TODO: Ajustar nome da sequence
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_id_pre_inscricao")
     @SequenceGenerator(name = "sq_id_pre_inscricao", allocationSize = 1, sequenceName = "sq_id_pre_inscricao")
-    @Column(name="id")
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
-    @Column(name = "id_usuario")
-    @ManyToOne
-    @JoinColumn(name = "id_usuario",referencedColumnName = "id_usuario")
-    private Number id_usuario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_evento")
+    private Evento evento;
 
-    @Column(name = "id_evento")
-    @ManyToOne
-    @JoinColumn(name = "id_evento",referencedColumnName = "id_evento")
-    private Number id_evento;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo_situacao")
+    private TipoSituacao tipoSituacao;
 
-    @Column(name = "id_tipo_situacao")
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_situacao",referencedColumnName = "id_situacao")
-    private Number id_tipo_situacao;
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "pre_inscricao")
+    private List<InscricaoResposta> respostas;
 }
