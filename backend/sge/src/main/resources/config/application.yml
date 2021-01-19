@@ -1,20 +1,10 @@
 application:
     appName: sge
+    mail:
+        endereco-remetente: jose.edson.filho@maisunifacisa.com.br
+        nome-remetente: jose.edson
 
 spring:
-    mail:
-        host: smtp.gmail.com
-        port: 587
-        username: sapedteste@gmail.com
-        password: sapedteste123
-        properties:
-            mail:
-                smtp:
-                    auth: true
-                    starttls:
-                        enable: true
-                        required: true
-                    quitwait: false
     application:
         name: sgeservice
     datasource:
@@ -42,5 +32,18 @@ spring:
     liquibase:
         change-log: classpath:/config/liquibase/master.xml
 #        drop-first: true
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: basisemail3@gmail.com
+        password: 1234@bcd
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true
+                    quitwait: false
 server:
     port: 8080
