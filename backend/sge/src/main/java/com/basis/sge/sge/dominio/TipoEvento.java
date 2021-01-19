@@ -7,12 +7,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name="tipo_evento")
 @Getter
 @Setter
-@Table(name="tipo_evento")
 public class TipoEvento implements Serializable {
+
     @Id
-    @Column(name = "id")
     private Integer id;
 
     @Column(name = "descricao")

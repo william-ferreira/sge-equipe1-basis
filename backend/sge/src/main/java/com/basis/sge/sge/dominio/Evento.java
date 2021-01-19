@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "evento")
+@Table(name="evento")
 @Getter
 @Setter
 public class Evento implements Serializable {
@@ -22,36 +22,31 @@ public class Evento implements Serializable {
     @Column(name="titulo")
     private String titulo;
 
-    //LocalDate se apenas existir o Date no liquibase
     @Column(name = "data_inicio")
     private LocalDateTime dataInicio;
 
     @Column(name = "data_fim")
-    private LocalDateTime dataFim;
+    private LocalDateTime dataTermino;
 
     @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "quantidade_vagas")
-    private int quantVagas;
+    private Integer quantVagas;
 
     @Column(name = "valor")
-    private double valor;
+    private Double valor;
 
     @Column(name = "local_evento")
     private String localEvento;
 
     @Column(name = "tipo_inscricao")
-    private boolean tipoInscricao;
+    private Boolean tipoInscricao;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_tipo_evento", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tipo_evento")
     private TipoEvento idTipoEvento;
 
-
-    @ManyToMany
-    @JoinTable(name="envento_pergunta",
-            joinColumns={@JoinColumn(name="id")},
-            inverseJoinColumns={@JoinColumn(name="id_evento")})
-    private List<Pergunta> perguntas;}
-
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "evento")
+    private List<EventoPergunta> perguntas;
+}

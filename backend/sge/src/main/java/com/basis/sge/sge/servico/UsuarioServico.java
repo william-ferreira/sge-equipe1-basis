@@ -4,7 +4,6 @@ import com.basis.sge.sge.dominio.Usuario;
 import com.basis.sge.sge.repositorio.UsuarioRepositorio;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.UsuarioMapper;
-import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.basis.sge.sge.servico.dto.UsuarioDTO;
@@ -33,11 +32,9 @@ public class UsuarioServico {
     }
 
     public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
-
-        Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
-        usuario.setChaveUsuario(UUID.randomUUID().toString());
-        Usuario usuarioCriado = usuarioRepositorio.save(usuario);
-        return usuarioMapper.toDto(usuarioCriado);
+        Usuario usuarioSalvo = usuarioRepositorio.save(usuarioMapper.toEntity(usuarioDTO));
+        usuarioSalvo.setChaveUsuario(UUID.randomUUID().toString());
+        return usuarioMapper.toDto(usuarioSalvo);
     }
 
     public UsuarioDTO editar(UsuarioDTO usuarioDTO) {
@@ -48,4 +45,5 @@ public class UsuarioServico {
     public void remover(Integer id) {
         usuarioRepositorio.deleteById(id);
     }
+
 }

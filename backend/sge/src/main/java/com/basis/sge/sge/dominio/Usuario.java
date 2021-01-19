@@ -1,21 +1,26 @@
 package com.basis.sge.sge.dominio;
 
+import com.sun.xml.bind.v2.TODO;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Table(name = "usuario")
 @Getter
 @Setter
-@Table(name = "usuario")
+
 public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_usuario")
-    @SequenceGenerator(name = "sq_usuario", allocationSize = 1)
+    @SequenceGenerator(name = "sq_usuario", allocationSize = 1, sequenceName = "sq_usuario")
     private Integer id;
 
     @Column(name = "nome")
@@ -33,8 +38,9 @@ public class Usuario implements Serializable {
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chave_usuario")
     private String chaveUsuario;
+
+
 
 }

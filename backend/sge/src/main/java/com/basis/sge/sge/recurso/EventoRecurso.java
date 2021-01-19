@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/evento")
+@RequestMapping("/api/eventos")
 @RequiredArgsConstructor
 public class EventoRecurso {
     private final EventoServico eventoServico;
+    private final EventoMapper eventoMapper;
 
     @GetMapping
     public ResponseEntity<List<EventoDTO>> listar(){
@@ -45,3 +46,4 @@ public class EventoRecurso {
         eventoServico.deletar(eventoDTO);
     }
 }
+

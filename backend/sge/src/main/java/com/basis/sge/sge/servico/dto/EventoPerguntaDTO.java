@@ -1,9 +1,9 @@
 package com.basis.sge.sge.servico.dto;
 
-public class InscricaoRespostaDTO {
+import java.io.Serializable;
 
-    private String resposta;
-    private Integer idInscricao;
+public class EventoPerguntaDTO implements Serializable {
+
     private Integer idEvento;
     private Integer idPergunta;
 
