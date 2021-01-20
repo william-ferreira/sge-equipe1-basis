@@ -33,6 +33,7 @@ public class PerguntaServico {
     public PerguntaDTO salvar(PerguntaDTO perguntaDTO) {
         Pergunta pergunta = perguntaMapper.toEntity(perguntaDTO);
         perguntaRepositorio.save(pergunta);
+        pergunta.getId();
         return perguntaMapper.toDto(pergunta);
     }
 

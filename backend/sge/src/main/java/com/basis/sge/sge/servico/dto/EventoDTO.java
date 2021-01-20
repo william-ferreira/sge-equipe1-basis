@@ -15,7 +15,7 @@ public class EventoDTO implements Serializable {
     private Integer id;
     private String titulo;
     private LocalDateTime dataInicio;
-    private LocalDateTime dataFim;
+    private LocalDateTime dataTermino;
     private String descricao;
     private Integer quantVagas;
     private Double valor;

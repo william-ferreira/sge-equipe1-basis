@@ -41,12 +41,6 @@ public class PreInscricaoRecurso {
         return ResponseEntity.ok(entidade);
     }
 
-    @PutMapping
-    public ResponseEntity<PreInscricaoDTO> editar(@RequestBody PreInscricaoDTO entidadeDTO) {
-        PreInscricaoDTO entidade = preInscricaoServico.salvar(entidadeDTO);
-        return ResponseEntity.ok(entidade);
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Integer id) {
         preInscricaoServico.remover(id);

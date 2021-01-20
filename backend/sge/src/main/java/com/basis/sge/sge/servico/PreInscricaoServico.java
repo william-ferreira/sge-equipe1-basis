@@ -40,12 +40,6 @@ public class PreInscricaoServico {
         return inscricaoMapper.toDto(inscricao);
     }
 
-    public PreInscricaoDTO editar(PreInscricaoDTO inscricaoDTO) {
-        PreInscricao inscricao = inscricaoMapper.toEntity(inscricaoDTO);
-        inscricaoRepositorio.save(inscricao);
-        return inscricaoMapper.toDto(inscricao);
-    }
-
     public void remover(Integer id) {
         PreInscricao inscricao = obter(id);
         inscricaoRepositorio.delete(inscricao);

@@ -1,7 +1,7 @@
-/*package com.basis.sge.service.servico;
+package com.basis.sge.sge.servico;
 
-import com.basis.sge.service.configuracao.ApplicationProperties;
-import com.basis.sge.service.servico.dto.EmailDTO;
+import com.basis.sge.sge.configuracao.ApplicationProperties;
+import com.basis.sge.sge.servico.dto.EmailDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -38,4 +38,4 @@ public class EmailServico {
         }
     }
 
-}*/
+}

@@ -19,17 +19,17 @@ public class InscricaoResposta implements Serializable {
     @Column(name = "resposta")
     private String resposta;
 
-    @MapsId("preInscricao")
+    @MapsId("idPreInscricao")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_inscricao")
     private PreInscricao preInscricao;
 
-    @MapsId("evento")
+    @MapsId("idEvento")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_evento")
     private Evento evento;
 
-    @MapsId("pergunta")
+    @MapsId("idPergunta")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pergunta")
     private Pergunta pergunta;

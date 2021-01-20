@@ -15,9 +15,9 @@ public interface InscricaoRespostaMapper extends EntityMapper<InscricaoRespostaD
     @Mapping(source = "idEvento", target = "evento.id")
     @Mapping(source = "idPergunta", target = "pergunta.id")
 
-    @Mapping(source = "idInscricao", target = "id.eventoId")
-    @Mapping(source = "idEvento", target = "id.perguntaId")
-    @Mapping(source = "idPergunta", target = "id.preInscricaoId")
+    @Mapping(source = "idInscricao", target = "id.idPreInscricao")
+    @Mapping(source = "idEvento", target = "id.idEvento")
+    @Mapping(source = "idPergunta", target = "id.idPergunta")
     InscricaoResposta toEntity(InscricaoRespostaDTO inscricaoRespostaDTO);
 
     @Override

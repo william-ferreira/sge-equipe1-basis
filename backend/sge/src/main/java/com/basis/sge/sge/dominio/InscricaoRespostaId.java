@@ -11,8 +11,8 @@ import java.io.Serializable;
 @Setter
 public class InscricaoRespostaId implements Serializable {
 
-    private Integer eventoId;
-    private Integer perguntaId;
-    private Integer preInscricaoId;
+    private Integer idEvento;
+    private Integer idPergunta;
+    private Integer idPreInscricao;
 
 }

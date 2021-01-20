@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -16,6 +17,6 @@ public class EmailDTO implements Serializable {
 
     private String assunto;
 
-    private List<String> copias;
+    private List<String> copias = new ArrayList<>();
 
 }
