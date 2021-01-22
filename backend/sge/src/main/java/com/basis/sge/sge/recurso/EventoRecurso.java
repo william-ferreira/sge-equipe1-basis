@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,13 +33,13 @@ public class EventoRecurso {
     }
 
     @PostMapping
-    public ResponseEntity<EventoDTO> salvar(@RequestBody EventoDTO entidadeDTO){
+    public ResponseEntity<EventoDTO> salvar(@Valid @RequestBody EventoDTO entidadeDTO){
         EventoDTO entidade = eventoServico.salvar(entidadeDTO);
-        return ResponseEntity.ok(entidade);
+        return ResponseEntity.created(URI.create("/api/eventos")).build();
     }
 
     @PutMapping
-    public ResponseEntity<EventoDTO> editar(@RequestBody EventoDTO entidadeDTO){
+    public ResponseEntity<EventoDTO> editar(@Valid @RequestBody EventoDTO entidadeDTO){
         EventoDTO entidade = eventoServico.salvar(entidadeDTO);
         return ResponseEntity.ok(entidade);
     }
