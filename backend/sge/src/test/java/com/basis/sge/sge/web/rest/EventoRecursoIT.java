@@ -41,7 +41,7 @@ public class EventoRecursoIT extends IntTestComum {
     //Tests of expected status is ok
     @Test
     public void listarTest() throws Exception{
-        //Evento evento = eventoBuilder.construir();
+        Evento evento = eventoBuilder.construir();
         getMockMvc().perform(get("/api/eventos")).andExpect(status().isOk());
     }
     @Test

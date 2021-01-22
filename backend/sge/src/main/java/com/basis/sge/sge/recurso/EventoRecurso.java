@@ -23,6 +23,8 @@ public class EventoRecurso {
     @GetMapping
     public ResponseEntity<List<EventoDTO>> listar(){
         List<EventoDTO> list = eventoServico.listar();
+        if(list.isEmpty())
+            return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

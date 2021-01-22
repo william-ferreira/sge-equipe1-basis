@@ -3,8 +3,10 @@ package com.basis.sge.sge.builder;
 import com.basis.sge.sge.dominio.Evento;
 import com.basis.sge.sge.dominio.EventoPergunta;
 import com.basis.sge.sge.dominio.TipoEvento;
+import com.basis.sge.sge.repositorio.TipoEventoRepositorio;
 import com.basis.sge.sge.servico.EventoServico;
 import com.basis.sge.sge.servico.dto.EventoDTO;
+import com.basis.sge.sge.servico.dto.TipoEventoDTO;
 import com.basis.sge.sge.servico.mapper.EventoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,6 +52,7 @@ public class EventoBuilder extends ConstrutorDeEntidade<Evento>{
     @Override
     protected Evento persistir(Evento entidade) {
         EventoDTO eventoDTO = eventoServico.salvar(eventoMapper.toDto(entidade));
+
         return eventoMapper.toEntity(eventoDTO);
     }
 
