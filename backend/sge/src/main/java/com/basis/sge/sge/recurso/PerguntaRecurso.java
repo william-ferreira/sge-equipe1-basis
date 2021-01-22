@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -40,14 +41,15 @@ public class PerguntaRecurso {
         return ResponseEntity.ok(entidadeDTO);
     }
 
+    @SneakyThrows
     @PostMapping
-    public ResponseEntity<PerguntaDTO> salvar(@RequestBody PerguntaDTO entidadeDTO) {
+    public ResponseEntity<PerguntaDTO> salvar(@Valid @RequestBody PerguntaDTO entidadeDTO) {
         PerguntaDTO entidade = perguntaServico.salvar(entidadeDTO);
-        return ResponseEntity.ok(entidade);
+        return ResponseEntity.created(new URI("/api/perguntas")).build();
     }
 
     @PutMapping
-    public ResponseEntity<PerguntaDTO> editar(@RequestBody PerguntaDTO entidadeDTO) {
+    public ResponseEntity<PerguntaDTO> editar(@Valid @RequestBody PerguntaDTO entidadeDTO) {
         PerguntaDTO entidade = perguntaServico.salvar(entidadeDTO);
         return ResponseEntity.ok(entidade);
     }
