@@ -1,11 +1,15 @@
 package com.basis.sge.sge.servico;
 
+import com.basis.sge.sge.dominio.Evento;
 import com.basis.sge.sge.dominio.PreInscricao;
+import com.basis.sge.sge.dominio.Usuario;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
+import com.basis.sge.sge.util.EmailUtil;
 import lombok.RequiredArgsConstructor;
+import org.apache.naming.factory.SendMailFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,6 +22,8 @@ public class PreInscricaoServico {
 
     private final PreInscricaoRepositorio inscricaoRepositorio;
     private final PreInscricaoMapper inscricaoMapper;
+    private final EmailUtil emailUtil;
+
 
     public List<PreInscricaoDTO> listar() {
         List<PreInscricao> inscricoes = inscricaoRepositorio.findAll();
@@ -36,7 +42,15 @@ public class PreInscricaoServico {
 
     public PreInscricaoDTO salvar(PreInscricaoDTO inscricaoDTO) {
         PreInscricao inscricao = inscricaoMapper.toEntity(inscricaoDTO);
+//
+//        String mensagem = "Sua Inscrição no evento"
+//                +inscricao.getEvento().getTitulo()+"e sua Chave de Inscricão é "
+//                +inscricao.getUsuario().getChave()+"Guarde essa chave para o caso de um Cancelamento";
+//
+//        emailUtil.enviarEmail( inscricao.getEvento().getTitulo(),mensagem,"Incrição Realizada Com Sucesso");
+
         inscricaoRepositorio.save(inscricao);
+
         return inscricaoMapper.toDto(inscricao);
     }
 
