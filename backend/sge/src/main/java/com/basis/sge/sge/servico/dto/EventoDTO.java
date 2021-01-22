@@ -29,5 +29,5 @@ public class EventoDTO implements Serializable {
     private Boolean tipoInscricao;
     @NotNull(message = "o id do tipo do evento deve ser informado")
     private Integer idTipoEvento;
-    private List<EventoPerguntaDTO> perguntas;
+    private List<EventoPerguntaDTO> pergunta;
 }
