@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,7 @@ public class InscricaoRespostaRecurso {
     }
 
     @PostMapping
-    public ResponseEntity<InscricaoRespostaDTO> salvar(@RequestBody InscricaoRespostaDTO inscricaoRespostaDTO) {
+    public ResponseEntity<InscricaoRespostaDTO> salvar(@Valid @RequestBody InscricaoRespostaDTO inscricaoRespostaDTO) {
         InscricaoRespostaDTO inscricaoResposta = inscricaoRespostaServico.salvar(inscricaoRespostaDTO);
         return ResponseEntity.ok(inscricaoResposta);
     }

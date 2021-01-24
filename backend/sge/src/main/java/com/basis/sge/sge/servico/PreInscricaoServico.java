@@ -1,10 +1,17 @@
 package com.basis.sge.sge.servico;
 
+import com.basis.sge.sge.dominio.Evento;
 import com.basis.sge.sge.dominio.PreInscricao;
+import com.basis.sge.sge.dominio.Usuario;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
+import com.basis.sge.sge.servico.dto.EventoDTO;
+import com.basis.sge.sge.servico.dto.InscricaoChaveUsuarioDTO;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
+import com.basis.sge.sge.servico.dto.UsuarioDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
+import com.basis.sge.sge.servico.mapper.EventoMapper;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +25,10 @@ public class PreInscricaoServico {
 
     private final PreInscricaoRepositorio inscricaoRepositorio;
     private final PreInscricaoMapper inscricaoMapper;
+
+    private final UsuarioServico usuarioServico;
+
+    private static final Integer ID_TIPO_SITUACAO_CANCELADO = 4;
 
     public List<PreInscricaoDTO> listar() {
         List<PreInscricao> inscricoes = inscricaoRepositorio.findAll();
@@ -35,6 +46,8 @@ public class PreInscricaoServico {
     }
 
     public PreInscricaoDTO salvar(PreInscricaoDTO inscricaoDTO) {
+        validaUsuarioJaInscrito(inscricaoDTO);
+
         PreInscricao inscricao = inscricaoMapper.toEntity(inscricaoDTO);
         inscricaoRepositorio.save(inscricao);
         return inscricaoMapper.toDto(inscricao);
@@ -45,4 +58,27 @@ public class PreInscricaoServico {
         inscricaoRepositorio.delete(inscricao);
     }
 
+    public void removerPorChave(InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO) {
+        UsuarioDTO usuario = usuarioServico.obterPorChave(inscricaoChaveUsuarioDTO.getChaveUsuario());
+
+        PreInscricaoDTO preInscricaoDTO = obterPorId(inscricaoChaveUsuarioDTO.getIdInscricao());
+        if (preInscricaoDTO.getIdTipoSituacao().equals(ID_TIPO_SITUACAO_CANCELADO))
+            throw new RegraNegocioException("A situação da pré inscrição já está cancelada");
+
+        preInscricaoDTO.setIdTipoSituacao(ID_TIPO_SITUACAO_CANCELADO);
+
+        PreInscricao preInscricao = inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
+
+        inscricaoMapper.toDto(preInscricao);
+    }
+
+    private void validaUsuarioJaInscrito(PreInscricaoDTO inscricaoDTO) {
+        inscricaoRepositorio.findAll().forEach(preInscricao -> {
+            Boolean eventoJaExistente = preInscricao.getEvento().getId().equals(inscricaoDTO.getIdEvento());
+            Boolean usuarioJaExistente = preInscricao.getUsuario().getId().equals(inscricaoDTO.getIdUsuario());
+
+            if (eventoJaExistente && usuarioJaExistente)
+                throw new RegraNegocioException("Já existe um usuário inscrito nesse evento");
+        });
+    }
 }

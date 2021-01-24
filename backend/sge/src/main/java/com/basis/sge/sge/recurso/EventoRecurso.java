@@ -38,7 +38,7 @@ public class EventoRecurso {
 
     @PutMapping
     public ResponseEntity<EventoDTO> editar(@RequestBody EventoDTO entidadeDTO){
-        EventoDTO entidade = eventoServico.salvar(entidadeDTO);
+        EventoDTO entidade = eventoServico.editar(entidadeDTO);
         return ResponseEntity.ok(entidade);
     }
 
