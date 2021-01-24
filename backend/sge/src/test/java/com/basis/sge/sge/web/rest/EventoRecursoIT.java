@@ -68,7 +68,7 @@ public class EventoRecursoIT extends IntTestComum {
 
     @Test
     public void salvarTest() throws Exception{
-        Evento evento = eventoBuilder.construir();
+        Evento evento = eventoBuilder.construirEntidade();
 
         getMockMvc().perform(post("/api/eventos")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
