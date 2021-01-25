@@ -55,14 +55,14 @@ public class PreInscricaoServico {
 
 
 
-//        Usuario usuario = usuarioRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Usuario invalido!"));
-//        Evento evento = eventoRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Evento invalido!"));
-//
-//        String mensagem = "Sua Inscrição no evento"
-//                + evento.getTitulo() +"e sua Chave de Inscricão é "
-//                + usuario.getChave() +" Guarde essa chave para o caso de um Cancelamento";
-//
-//        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso");
+        Usuario usuario = usuarioRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Usuario invalido!"));
+        Evento evento = eventoRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Evento invalido!"));
+
+        String mensagem = "Sua Inscrição no evento"
+                + evento.getTitulo() +"e sua Chave de Inscricão é "
+                + usuario.getChave() +" Guarde essa chave para o caso de um Cancelamento";
+
+        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso");
 
         return inscricaoMapper.toDto(inscricao);
     }
