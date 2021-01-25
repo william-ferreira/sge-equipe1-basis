@@ -1,10 +1,13 @@
 package com.basis.sge.sge.builder;
 
 import com.basis.sge.sge.dominio.*;
+import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
 import com.basis.sge.sge.servico.PreInscricaoServico;
+import com.basis.sge.sge.servico.UsuarioServico;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
+import com.basis.sge.sge.servico.mapper.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,25 +29,26 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
     @Autowired
     private PreInscricaoRepositorio preInscricaoRepositorio;
 
+    @Autowired
+    private UsuarioServico usuarioServico;
+
+    @Autowired
+    private UsuarioMapper usuarioMapper;
+
+    @Autowired
+    private EventoRepositorio eventoRepositorio;
+
     @Override
-    public PreInscricao construirEntidade() throws ParseException{
-        TipoEvento tipoEvento = new TipoEvento();
-        PreInscricao preInscricao = new PreInscricao();
-        Usuario usuario = new Usuario();
-        TipoSituacao tipoSituacao = new TipoSituacao();
-        Evento evento = new Evento();
-        List<EventoPergunta> perguntas = new ArrayList<>();
-
-        //Criação das Situações do Evento
-
-        tipoSituacao.setDescricao("Aprovada");
-
-        //Criação do Tipo do Evento
-        tipoEvento.setId(1);
-        tipoEvento.setDescricao("Treinamento");
-
+    public PreInscricao construirEntidade(){
 
         //Criação do Evento
+        TipoEvento tpEvento = new TipoEvento();
+        tpEvento.setId(1);
+        tpEvento.setDescricao("Treinamento");
+
+        List<EventoPergunta> perguntas = new ArrayList<>();
+
+        Evento evento = new Evento();
         evento.setId(null);
         evento.setTitulo("Curso de capacitação da Basis");
         evento.setDataInicio(LocalDateTime.now());
@@ -54,10 +58,11 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
         evento.setValor(0.0);
         evento.setLocalEvento("Unifacisa");
         evento.setTipoInscricao(true);
-        evento.setTipoEvento(tipoEvento);
+        evento.setTipoEvento(tpEvento);
         evento.setPerguntas(perguntas);
 
         //Criação de Usuário
+        Usuario usuario = new Usuario();
         usuario.setId(null);
         usuario.setCpf("37128105042");
         usuario.setDataNascimento(LocalDate.now());
@@ -65,8 +70,11 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
         usuario.setNome("Usuário de teste");
         usuario.setTelefone("999999999");
 
-        //Criação da PreInscricao
+        TipoSituacao tipoSituacao = new TipoSituacao();
+        tipoSituacao.setId(1);
 
+        PreInscricao preInscricao = new PreInscricao();
+        preInscricao.setId(null);
         preInscricao.setEvento(evento);
         preInscricao.setUsuario(usuario);
         preInscricao.setTipoSituacao(tipoSituacao);
@@ -91,7 +99,9 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
         PreInscricao preInscricao = preInscricaoRepositorio.findById(id).orElse(null);
 
         return preInscricao;
+
     }
+
 
     public void limparBanco(){
 

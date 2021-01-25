@@ -5,7 +5,11 @@ import com.basis.sge.sge.dominio.PreInscricao;
 import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
 import com.basis.sge.sge.repositorio.UsuarioRepositorio;
+import com.basis.sge.sge.servico.EventoServico;
+import com.basis.sge.sge.servico.UsuarioServico;
+import com.basis.sge.sge.servico.mapper.EventoMapper;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
+import com.basis.sge.sge.servico.mapper.UsuarioMapper;
 import com.basis.sge.sge.util.IntTestComum;
 import com.basis.sge.sge.util.TestUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +37,14 @@ public class PreInscricaoRecursoIT extends IntTestComum {
     private UsuarioRepositorio usuarioRepositorio;
     @Autowired
     private EventoRepositorio eventoRepositorio;
+    @Autowired
+    private UsuarioServico usuarioServico;
+    @Autowired
+    private UsuarioMapper usuarioMapper;
+    @Autowired
+    private EventoServico eventoServico;
+    @Autowired
+    private EventoMapper eventoMapper;
 
     @BeforeEach
     public void inicializar() {
@@ -49,8 +61,12 @@ public class PreInscricaoRecursoIT extends IntTestComum {
 
     @Test
     public void salvarTest() throws Exception {
-        PreInscricao preInscricao = preinscricaoBuilder.construir();
-        preInscricao.getTipoSituacao().setId(2);
+        PreInscricao preInscricao = preinscricaoBuilder.construirEntidade();
+
+        usuarioServico.salvar(usuarioMapper.toDto(preInscricao.getUsuario()));
+        eventoServico.salvar(eventoMapper.toDto(preInscricao.getEvento()));
+
+//        eventoRepositorio.save(preInscricao.getEvento());
 
         getMockMvc().perform(post("/api/inscricoes")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -62,6 +78,9 @@ public class PreInscricaoRecursoIT extends IntTestComum {
     @Test
     public void deletarTest() throws Exception {
         PreInscricao preInscricao = preinscricaoBuilder.construir();
+        usuarioRepositorio.save(preInscricao.getUsuario());
+        eventoRepositorio.save(preInscricao.getEvento());
+
         getMockMvc().perform(delete("/api/inscricoes/" + preInscricao.getId())).andExpect(status().isOk());
 
     }

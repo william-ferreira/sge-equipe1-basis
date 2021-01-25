@@ -1,9 +1,13 @@
 package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.Evento;
+import com.basis.sge.sge.dominio.InscricaoResposta;
 import com.basis.sge.sge.dominio.PreInscricao;
 import com.basis.sge.sge.dominio.Usuario;
+import com.basis.sge.sge.recurso.UsuarioRecurso;
+import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
+import com.basis.sge.sge.repositorio.UsuarioRepositorio;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
@@ -23,6 +27,11 @@ public class PreInscricaoServico {
     private final PreInscricaoRepositorio inscricaoRepositorio;
     private final PreInscricaoMapper inscricaoMapper;
     private final EmailUtil emailUtil;
+    private final UsuarioServico usuarioServico;
+
+    private final UsuarioRepositorio usuarioRepositorio;
+    private final EventoRepositorio eventoRepositorio;
+
 
 
     public List<PreInscricaoDTO> listar() {
@@ -42,14 +51,18 @@ public class PreInscricaoServico {
 
     public PreInscricaoDTO salvar(PreInscricaoDTO inscricaoDTO) {
         PreInscricao inscricao = inscricaoMapper.toEntity(inscricaoDTO);
+        inscricaoRepositorio.save(inscricao);
+
+
+
+//        Usuario usuario = usuarioRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Usuario invalido!"));
+//        Evento evento = eventoRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Evento invalido!"));
 //
 //        String mensagem = "Sua Inscrição no evento"
-//                +inscricao.getEvento().getTitulo()+"e sua Chave de Inscricão é "
-//                +inscricao.getUsuario().getChave()+"Guarde essa chave para o caso de um Cancelamento";
+//                + evento.getTitulo() +"e sua Chave de Inscricão é "
+//                + usuario.getChave() +" Guarde essa chave para o caso de um Cancelamento";
 //
-//        emailUtil.enviarEmail( inscricao.getEvento().getTitulo(),mensagem,"Incrição Realizada Com Sucesso");
-
-        inscricaoRepositorio.save(inscricao);
+//        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso");
 
         return inscricaoMapper.toDto(inscricao);
     }
