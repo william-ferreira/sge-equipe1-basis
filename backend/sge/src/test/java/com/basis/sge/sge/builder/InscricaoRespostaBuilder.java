@@ -56,7 +56,7 @@ public class InscricaoRespostaBuilder extends ConstrutorDeEntidade<InscricaoResp
         evento.setLocalEvento("Unifacisa");
         evento.setTipoInscricao(true);
         evento.setTipoEvento(tipoEvento);
-        evento.setPerguntas(perguntas);
+        evento.setPergunta(perguntas);
 
         //Criação de Usuário
         Usuario usuario = new Usuario();
