@@ -69,19 +69,19 @@ public class PreInscricaoServico {
 
         preInscricaoDTO.setIdTipoSituacao(ID_TIPO_SITUACAO_CANCELADO);
 
-        PreInscricao preInscricao = enviarEmailCancelamento(inscricaoChaveUsuarioDTO, usuario, preInscricaoDTO);
+        PreInscricao preInscricao = inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
+
+        enviarEmailCancelamento(inscricaoChaveUsuarioDTO, usuario, preInscricaoDTO);
 
         inscricaoMapper.toDto(preInscricao);
     }
 
-    private PreInscricao enviarEmailCancelamento(InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO, UsuarioDTO usuario, PreInscricaoDTO preInscricaoDTO) {
+    private void enviarEmailCancelamento(InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO, UsuarioDTO usuario, PreInscricaoDTO preInscricaoDTO) {
         PreInscricao preInscricao = inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
         String corpoEmail = "A pre inscrição no evento foi cancelada com sucesso";
         String assunto = "Cancelamento de pré inscrição";
 
         emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, assunto);
-
-        return preInscricao;
     }
 
     private void validaUsuarioJaInscrito(PreInscricaoDTO inscricaoDTO) {
