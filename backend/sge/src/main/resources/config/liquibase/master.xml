@@ -6,10 +6,6 @@
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/v00.0001_criacao_de_tabelas.xml" relativeToChangelogFile="false"/>
-<<<<<<< HEAD
-    <include file="config/liquibase/changelog/v00.0002_insercao_de_tabelas_dominio_fixo.xml" relativeToChangelogFile="false"/>
-=======
     <include file="config/liquibase/changelog/v00.0002_insercao_tabelas_dominio_fixo.xml" relativeToChangelogFile="false"/>
->>>>>>> origin/aurelio-sprint-2
 
 </databaseChangeLog>
