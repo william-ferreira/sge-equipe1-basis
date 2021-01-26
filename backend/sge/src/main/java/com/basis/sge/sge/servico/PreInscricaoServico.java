@@ -3,20 +3,20 @@ package com.basis.sge.sge.servico;
 import com.basis.sge.sge.dominio.Evento;
 import com.basis.sge.sge.dominio.PreInscricao;
 import com.basis.sge.sge.dominio.Usuario;
+import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
-import com.basis.sge.sge.servico.dto.EventoDTO;
+import com.basis.sge.sge.repositorio.UsuarioRepositorio;
 import com.basis.sge.sge.servico.dto.InscricaoChaveUsuarioDTO;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import com.basis.sge.sge.servico.dto.UsuarioDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
-import com.basis.sge.sge.servico.mapper.EventoMapper;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
 import com.basis.sge.sge.util.EmailUtil;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,9 +26,11 @@ public class PreInscricaoServico {
 
     private final PreInscricaoRepositorio inscricaoRepositorio;
     private final PreInscricaoMapper inscricaoMapper;
-
-    private final UsuarioServico usuarioServico;
     private final EmailUtil emailUtil;
+    private final UsuarioServico usuarioServico;
+
+    private final UsuarioRepositorio usuarioRepositorio;
+    private final EventoRepositorio eventoRepositorio;
 
     private static final Integer ID_TIPO_SITUACAO_CANCELADO = 4;
 
@@ -52,12 +54,23 @@ public class PreInscricaoServico {
 
         PreInscricao inscricao = inscricaoMapper.toEntity(inscricaoDTO);
         inscricaoRepositorio.save(inscricao);
+
+        Usuario usuario = usuarioRepositorio.findById(inscricao.getUsuario().getId()).orElseThrow(() -> new RegraNegocioException("Usuario invalido!"));
+        Evento evento = eventoRepositorio.findById(inscricao.getEvento().getId()).orElseThrow(() -> new RegraNegocioException("Evento invalido!"));
+
+        String mensagem = "Sua Inscrição no evento"
+                + evento.getTitulo() +"e sua Chave de Inscricão é "
+                + usuario.getChave() +" Guarde essa chave para o caso de um Cancelamento";
+
+        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso", new ArrayList<>());
+
         return inscricaoMapper.toDto(inscricao);
     }
 
     public void remover(Integer id) {
-        PreInscricao inscricao = obter(id);
-        inscricaoRepositorio.delete(inscricao);
+        PreInscricao preInscricao = inscricaoRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Num tem"));
+
+        inscricaoRepositorio.deleteById(id);
     }
 
     public void removerPorChave(InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO) {
@@ -81,7 +94,7 @@ public class PreInscricaoServico {
         String corpoEmail = "A pre inscrição no evento foi cancelada com sucesso";
         String assunto = "Cancelamento de pré inscrição";
 
-        emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, assunto);
+        emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, assunto, new ArrayList<>());
     }
 
     private void validaUsuarioJaInscrito(PreInscricaoDTO inscricaoDTO) {

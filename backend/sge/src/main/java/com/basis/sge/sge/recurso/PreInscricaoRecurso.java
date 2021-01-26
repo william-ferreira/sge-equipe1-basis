@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -39,7 +40,7 @@ public class PreInscricaoRecurso {
     @PostMapping
     public ResponseEntity<PreInscricaoDTO> salvar(@RequestBody PreInscricaoDTO entidadeDTO) {
         PreInscricaoDTO entidade = preInscricaoServico.salvar(entidadeDTO);
-        return ResponseEntity.ok(entidade);
+        return ResponseEntity.status(201).body(entidade);
     }
 
     @DeleteMapping("/{id}")

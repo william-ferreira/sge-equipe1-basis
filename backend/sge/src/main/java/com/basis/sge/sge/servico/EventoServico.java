@@ -1,6 +1,8 @@
 package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.Evento;
+import com.basis.sge.sge.dominio.EventoPergunta;
+import com.basis.sge.sge.repositorio.EventoPerguntaRepositorio;
 import com.basis.sge.sge.dominio.PreInscricao;
 import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.servico.dto.EventoDTO;
@@ -24,6 +26,7 @@ public class EventoServico {
 
     private final EventoRepositorio eventoRepositorio;
     private final EventoMapper eventoMapper;
+    private final EventoPerguntaRepositorio eventoPerguntaRepositorio;
 
     private final PreInscricaoServico preInscricaoServico;
     private final UsuarioServico usuarioServico;
@@ -72,7 +75,7 @@ public class EventoServico {
 
                 String corpoEmail = "O evento com o titulo:".concat(evento.getTitulo()).concat(" foi alterado.");
 
-                emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, "Alteração no evento");
+                emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, "Alteração no evento", new ArrayList<>());
             }
         }
     }

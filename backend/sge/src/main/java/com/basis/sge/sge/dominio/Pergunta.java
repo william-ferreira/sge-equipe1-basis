@@ -23,6 +23,7 @@ import java.util.List;
 @Setter
 public class Pergunta implements Serializable {
 
+    // TODO: Tentar rodar sem o @Column
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_pergunta")
     @SequenceGenerator(name = "sq_pergunta", allocationSize = 1, sequenceName = "sq_pergunta")
@@ -34,4 +35,5 @@ public class Pergunta implements Serializable {
 
     @Column(name = "obrigatoriedade")
     private Boolean obrigatoriedade;
+
 }
