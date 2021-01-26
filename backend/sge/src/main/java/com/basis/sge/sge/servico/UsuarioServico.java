@@ -50,12 +50,12 @@ public class UsuarioServico {
     }
 
     public UsuarioDTO editar(UsuarioDTO usuarioDTO) {
+        if (usuarioDTO.getId()==null) { usuarioDTO.setId(0); } // TODO: Refatorar todas as validações de maneira mais eficiente e coesa
         Usuario usuarioSalvo = buscar(usuarioDTO.getId());
         Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
         usuario.setChave(usuarioSalvo.getChave());
 
         if (cpfExistente(usuario) && (((usuarioSalvo.getId().intValue())!=(usuario.getId().intValue())))) {
-            System.out.println(("ENTROU AQUI --------------------------------"));
             throw new RegraNegocioException("O número de CPF já está sendo utilizado."); }
         if (emailExistente(usuario) && (!usuarioSalvo.getId().equals(usuario.getId()))) {
             throw new RegraNegocioException("O endereço de email já está sendo utilizado."); }
@@ -85,8 +85,10 @@ public class UsuarioServico {
 
         // Percorre usuarios do banco verificando se há algum elemento com o ID de usuario
         for (Usuario u : usuariosNoBanco) {
-            if (u.getId().intValue()==usuario.getId().intValue()) {
-                return false; // Há um usuário com o mesmo ID na base de dados
+            if (u.getId()!=null) {
+                if (u.getId().intValue() == usuario.getId().intValue()) {
+                    return false; // Há um usuário com o mesmo ID na base de dados
+                }
             }
         }
 
@@ -95,7 +97,6 @@ public class UsuarioServico {
 
     public Boolean cpfExistente(Usuario usuario) {
         List<Usuario> usuariosNoBanco = usuarioRepositorio.findAll();
-        //System.out.println(("ENTROU AQUI --------------------------------"));
         // Percorre usuarios do banco verificando se o CPF é unico
         for (Usuario u : usuariosNoBanco) {
             if (/*(u.getId().intValue() != usuario.getId().intValue()) &&*/ u.getCpf().contentEquals(usuario.getCpf())) {
