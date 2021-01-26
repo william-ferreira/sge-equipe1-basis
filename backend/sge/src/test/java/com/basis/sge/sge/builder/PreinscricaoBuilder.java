@@ -44,7 +44,6 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
         //Criação do Evento
         TipoEvento tpEvento = new TipoEvento();
         tpEvento.setId(1);
-        tpEvento.setDescricao("Treinamento");
 
         List<EventoPergunta> perguntas = new ArrayList<>();
 
@@ -59,7 +58,7 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
         evento.setLocalEvento("Unifacisa");
         evento.setTipoInscricao(true);
         evento.setTipoEvento(tpEvento);
-        evento.setPerguntas(perguntas);
+        evento.setPergunta(perguntas);
 
         //Criação de Usuário
         Usuario usuario = new Usuario();
@@ -74,7 +73,6 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
         tipoSituacao.setId(1);
 
         PreInscricao preInscricao = new PreInscricao();
-        preInscricao.setId(null);
         preInscricao.setEvento(evento);
         preInscricao.setUsuario(usuario);
         preInscricao.setTipoSituacao(tipoSituacao);
@@ -115,5 +113,39 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
     public PreInscricao criar(PreInscricao preInscricao){
 
         return preInscricaoRepositorio.save(preInscricao);
+    }
+
+    public Usuario usuarioBuilder(){
+        Usuario usuario = new Usuario();
+        usuario.setId(null);
+        usuario.setCpf("37128105042");
+        usuario.setDataNascimento(LocalDate.now());
+        usuario.setEmail("vo7775832@gmail.com");
+        usuario.setNome("Usuário de teste");
+        usuario.setTelefone("999999999");
+        return usuarioMapper.toEntity(usuarioServico.salvar(usuarioMapper.toDto(usuario)));
+    }
+
+    public Evento eventoBuilder(){
+        List<EventoPergunta> perguntas = new ArrayList<>();
+        //Criação do Evento
+        TipoEvento tpEvento = new TipoEvento();
+        tpEvento.setId(1);
+
+        Evento evento = new Evento();
+        evento.setId(null);
+        evento.setTitulo("Curso de capacitação da Basis");
+        evento.setDataInicio(LocalDateTime.now());
+        evento.setDataTermino(LocalDateTime.now());
+        evento.setDescricao("curso da empresa Basis para ensinar quais são as ferramentas utilizadas no mercado de trabalho");
+        evento.setQuantVagas(20);
+        evento.setValor(0.0);
+        evento.setLocalEvento("Unifacisa");
+        evento.setTipoInscricao(true);
+        evento.setTipoEvento(tpEvento);
+        evento.setPergunta(perguntas);
+
+        return eventoRepositorio.save(evento);
+
     }
 }

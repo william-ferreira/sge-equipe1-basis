@@ -39,7 +39,7 @@ public class PreInscricaoRecurso {
     @PostMapping
     public ResponseEntity<PreInscricaoDTO> salvar(@RequestBody PreInscricaoDTO entidadeDTO) {
         PreInscricaoDTO entidade = preInscricaoServico.salvar(entidadeDTO);
-        return ResponseEntity.created(URI.create("/api/incricoes")).build();
+        return ResponseEntity.status(201).body(entidade);
     }
 
     @DeleteMapping("/{id}")

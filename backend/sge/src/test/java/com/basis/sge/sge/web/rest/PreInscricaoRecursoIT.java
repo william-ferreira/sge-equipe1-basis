@@ -1,12 +1,16 @@
 package com.basis.sge.sge.web.rest;
 
 import com.basis.sge.sge.builder.PreinscricaoBuilder;
+import com.basis.sge.sge.dominio.Evento;
 import com.basis.sge.sge.dominio.PreInscricao;
+import com.basis.sge.sge.dominio.Usuario;
 import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
 import com.basis.sge.sge.repositorio.UsuarioRepositorio;
 import com.basis.sge.sge.servico.EventoServico;
+import com.basis.sge.sge.servico.PreInscricaoServico;
 import com.basis.sge.sge.servico.UsuarioServico;
+import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import com.basis.sge.sge.servico.mapper.EventoMapper;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
 import com.basis.sge.sge.servico.mapper.UsuarioMapper;
@@ -20,6 +24,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,6 +37,8 @@ public class PreInscricaoRecursoIT extends IntTestComum {
     private PreinscricaoBuilder preinscricaoBuilder = new PreinscricaoBuilder();
     @Autowired
     private PreInscricaoMapper preInscricaoMapper;
+    @Autowired
+    private PreInscricaoServico preInscricaoServico;
     @Autowired
     private PreInscricaoRepositorio preInscricaoRepositorio;
     @Autowired
@@ -59,35 +67,47 @@ public class PreInscricaoRecursoIT extends IntTestComum {
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    public void salvarTest() throws Exception {
-//        PreInscricao preInscricao = preinscricaoBuilder.construirEntidade();
-//
-//        usuarioServico.salvar(usuarioMapper.toDto(preInscricao.getUsuario()));
-//        eventoServico.salvar(eventoMapper.toDto(preInscricao.getEvento()));
-//
-////        eventoRepositorio.save(preInscricao.getEvento());
-//
-//        getMockMvc().perform(post("/api/inscricoes")
-//                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-//                .content(TestUtil.convertObjectToJsonBytes(preInscricaoMapper.toDto(preInscricao))))
-//                .andExpect(status().isCreated());
-//
-//    }
+    @Test
+    public void salvarTest() throws Exception {
 
-//    @Test
-//    public void deletarTest() throws Exception {
-//        PreInscricao preInscricao = preinscricaoBuilder.construir();
-//        usuarioRepositorio.save(preInscricao.getUsuario());
-//        eventoRepositorio.save(preInscricao.getEvento());
-//
-//        getMockMvc().perform(delete("/api/inscricoes/" + preInscricao.getId())).andExpect(status().isOk());
-//
-//    }
+        Usuario usuario = preinscricaoBuilder.usuarioBuilder();
+        Evento evento = preinscricaoBuilder.eventoBuilder();
+
+        PreInscricao preInscricao = preinscricaoBuilder.construirEntidade();
+
+        preInscricao.setEvento(evento);
+        preInscricao.setUsuario(usuario);
+        preInscricao.setRespostas(new ArrayList<>());
+
+        getMockMvc().perform(post("/api/inscricoes")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(preInscricaoMapper.toDto(preInscricao))))
+                .andExpect(status().isCreated());
+
+    }
+
+    @Test
+    public void deletarTest() throws Exception {
+        Usuario usuario = preinscricaoBuilder.usuarioBuilder();
+        Evento evento = preinscricaoBuilder.eventoBuilder();
+
+        PreInscricao preInscricao = preinscricaoBuilder.construirEntidade();
+
+        preInscricao.setEvento(evento);
+        preInscricao.setUsuario(usuario);
+        preInscricao.setRespostas(new ArrayList<>());
+
+        PreInscricaoDTO preInscricao1 = preInscricaoServico.salvar(preInscricaoMapper.toDto(preInscricao));
+
+        getMockMvc().perform(delete("/api/inscricoes/" + preInscricao1.getId()))
+                .andExpect(status().isOk());
+
+    }
 
     @Test
     public void deletarVazioTest() throws Exception {
-        getMockMvc().perform(delete("/api/inscricoes/" + 100)).andExpect(status().isBadRequest());
+        getMockMvc().perform(delete("/api/inscricoes/" + 100))
+                .andExpect(status().isBadRequest());
 
     }
 
@@ -97,13 +117,5 @@ public class PreInscricaoRecursoIT extends IntTestComum {
                 .andExpect(status().isBadRequest());
 
     }
-
-
-
-
-
-
-
-
 
 }

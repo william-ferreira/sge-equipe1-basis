@@ -17,6 +17,7 @@ import org.apache.naming.factory.SendMailFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,23 +54,22 @@ public class PreInscricaoServico {
         PreInscricao inscricao = inscricaoMapper.toEntity(inscricaoDTO);
         inscricaoRepositorio.save(inscricao);
 
-
-
-        Usuario usuario = usuarioRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Usuario invalido!"));
-        Evento evento = eventoRepositorio.findById(inscricao.getId()).orElseThrow(() -> new RegraNegocioException("Evento invalido!"));
+        Usuario usuario = usuarioRepositorio.findById(inscricao.getUsuario().getId()).orElseThrow(() -> new RegraNegocioException("Usuario invalido!"));
+        Evento evento = eventoRepositorio.findById(inscricao.getEvento().getId()).orElseThrow(() -> new RegraNegocioException("Evento invalido!"));
 
         String mensagem = "Sua Inscrição no evento"
                 + evento.getTitulo() +"e sua Chave de Inscricão é "
                 + usuario.getChave() +" Guarde essa chave para o caso de um Cancelamento";
 
-        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso");
+        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso", new ArrayList<>());
 
         return inscricaoMapper.toDto(inscricao);
     }
 
     public void remover(Integer id) {
-        PreInscricao inscricao = obter(id);
-        inscricaoRepositorio.delete(inscricao);
+        PreInscricao preInscricao = inscricaoRepositorio.findById(id).orElseThrow(() -> new RegraNegocioException("Num tem"));
+
+        inscricaoRepositorio.deleteById(id);
     }
 
 }

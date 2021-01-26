@@ -11,6 +11,7 @@ import com.basis.sge.sge.servico.dto.UsuarioDTO;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,7 +44,7 @@ public class UsuarioServico {
 
         // TODO: Refatorar envio de email
         String mensagem = "Email de testes";
-        emailUtil.enviarEmail(usuario.getEmail(), mensagem, "Cadastro do Usuário");
+        emailUtil.enviarEmail(usuario.getEmail(), mensagem, "Cadastro do Usuário", new ArrayList<>());
 
         usuarioRepositorio.save(usuario);
         return usuarioMapper.toDto(usuario);
