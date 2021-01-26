@@ -11,6 +11,7 @@ import com.basis.sge.sge.servico.dto.UsuarioDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.EventoMapper;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
+import com.basis.sge.sge.util.EmailUtil;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class PreInscricaoServico {
     private final PreInscricaoMapper inscricaoMapper;
 
     private final UsuarioServico usuarioServico;
+    private final EmailUtil emailUtil;
 
     private static final Integer ID_TIPO_SITUACAO_CANCELADO = 4;
 
@@ -67,9 +69,19 @@ public class PreInscricaoServico {
 
         preInscricaoDTO.setIdTipoSituacao(ID_TIPO_SITUACAO_CANCELADO);
 
-        PreInscricao preInscricao = inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
+        PreInscricao preInscricao = enviarEmailCancelamento(inscricaoChaveUsuarioDTO, usuario, preInscricaoDTO);
 
         inscricaoMapper.toDto(preInscricao);
+    }
+
+    private PreInscricao enviarEmailCancelamento(InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO, UsuarioDTO usuario, PreInscricaoDTO preInscricaoDTO) {
+        PreInscricao preInscricao = inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
+        String corpoEmail = "A pre inscrição no evento foi cancelada com sucesso";
+        String assunto = "Cancelamento de pré inscrição";
+
+        emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, assunto);
+
+        return preInscricao;
     }
 
     private void validaUsuarioJaInscrito(PreInscricaoDTO inscricaoDTO) {
