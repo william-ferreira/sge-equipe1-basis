@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.basis.sge.sge.servico.dto.UsuarioDTO;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -33,14 +34,14 @@ public class UsuarioRecurso {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvar(@RequestBody UsuarioDTO entidadeDTO) {
+    public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO entidadeDTO) {
         UsuarioDTO entidade = usuarioServico.salvar(entidadeDTO);
-        return ResponseEntity.ok(entidade);
+        return ResponseEntity.created(URI.create("/api/usuarios")).build();
     }
 
     @PutMapping
     public ResponseEntity<UsuarioDTO> editar(@RequestBody UsuarioDTO entidadeDTO) {
-        UsuarioDTO entidade = usuarioServico.salvar(entidadeDTO);
+        UsuarioDTO entidade = usuarioServico.editar(entidadeDTO);
         return ResponseEntity.ok(entidade);
     }
 

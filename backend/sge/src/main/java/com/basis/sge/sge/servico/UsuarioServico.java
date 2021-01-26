@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.basis.sge.sge.servico.dto.UsuarioDTO;
 
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,9 +33,13 @@ public class UsuarioServico {
         return usuarioMapper.toDto(usuario);
     }
 
-    public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
+    public UsuarioDTO salvar(UsuarioDTO usuarioDTO) throws RegraNegocioException {
         Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
         usuario.setChave(UUID.randomUUID().toString());
+
+        // Verifica os campos de CPF e email antes de salvar o usuário no banco
+        if (cpfExistente(usuario)) { throw new RegraNegocioException("O número de CPF já está sendo utilizado."); }
+        if (emailExistente(usuario)) { throw new RegraNegocioException("O endereço de email já está sendo utilizado."); }
 
         // TODO: Refatorar envio de email
         String mensagem = "Email de testes";
@@ -45,9 +50,16 @@ public class UsuarioServico {
     }
 
     public UsuarioDTO editar(UsuarioDTO usuarioDTO) {
-        Usuario usuarioSalvo = buscar(usuarioDTO.getId()); // verifica se o usuario já existe
+        if (usuarioDTO.getId()==null) { usuarioDTO.setId(0); } // TODO: Refatorar todas as validações de maneira mais eficiente e coesa
+        Usuario usuarioSalvo = buscar(usuarioDTO.getId());
         Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
         usuario.setChave(usuarioSalvo.getChave());
+
+        if (cpfExistente(usuario) && (((usuarioSalvo.getId().intValue())!=(usuario.getId().intValue())))) {
+            throw new RegraNegocioException("O número de CPF já está sendo utilizado."); }
+        if (emailExistente(usuario) && (!usuarioSalvo.getId().equals(usuario.getId()))) {
+            throw new RegraNegocioException("O endereço de email já está sendo utilizado."); }
+
         usuarioRepositorio.save(usuario);
         return usuarioMapper.toDto(usuario);
     }
@@ -60,6 +72,52 @@ public class UsuarioServico {
     public Usuario buscar(Integer id) {
         return usuarioRepositorio.findById(id)
                 .orElseThrow(() -> new RegraNegocioException("Usuário não encontrado."));
+    }
+
+    /**
+     * Retorna true caso o ID seja unico no banco
+     * @param usuario
+     * @return
+     * @Author William
+     */
+    public Boolean idUnico(Usuario usuario) {
+        List<Usuario> usuariosNoBanco = usuarioRepositorio.findAll();
+
+        // Percorre usuarios do banco verificando se há algum elemento com o ID de usuario
+        for (Usuario u : usuariosNoBanco) {
+            if (u.getId()!=null) {
+                if (u.getId().intValue() == usuario.getId().intValue()) {
+                    return false; // Há um usuário com o mesmo ID na base de dados
+                }
+            }
+        }
+
+        return true; // O ID do usuario é único no banco
+    }
+
+    public Boolean cpfExistente(Usuario usuario) {
+        List<Usuario> usuariosNoBanco = usuarioRepositorio.findAll();
+        // Percorre usuarios do banco verificando se o CPF é unico
+        for (Usuario u : usuariosNoBanco) {
+            if (/*(u.getId().intValue() != usuario.getId().intValue()) &&*/ u.getCpf().contentEquals(usuario.getCpf())) {
+                return true; // O CPF já está sendo utilizado por algum usuário no banco
+            }
+        }
+
+        return false;
+    }
+
+    public Boolean emailExistente(Usuario usuario) {
+        List<Usuario> usuariosNoBanco = usuarioRepositorio.findAll();
+
+        // Percorre usuarios do banco verificando se o CPF é unico
+        for (Usuario u : usuariosNoBanco) {
+            if (/*(u.getId().intValue() != usuario.getId().intValue()) &&*/ u.getEmail().contentEquals(usuario.getEmail())) {
+                return true; // O email já está sendo utilizado por algum usuário no banco
+            }
+        }
+
+        return false;
     }
 
 }

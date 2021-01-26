@@ -126,5 +126,4 @@ public class EventoRecursoIT extends IntTestComum {
         getMockMvc().perform(delete("/api/eventos/"+evento.getId()))
                 .andExpect(status().isBadRequest());
     }
-
 }
