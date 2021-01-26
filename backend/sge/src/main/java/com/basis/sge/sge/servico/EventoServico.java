@@ -1,6 +1,8 @@
 package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.Evento;
+import com.basis.sge.sge.dominio.EventoPergunta;
+import com.basis.sge.sge.repositorio.EventoPerguntaRepositorio;
 import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.servico.dto.EventoDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
@@ -19,6 +21,7 @@ public class EventoServico {
 
     private final EventoRepositorio eventoRepositorio;
     private final EventoMapper eventoMapper;
+    private final EventoPerguntaRepositorio eventoPerguntaRepositorio;
 
     public List<EventoDTO> listar() {
         List<Evento> eventos = eventoRepositorio.findAll();
