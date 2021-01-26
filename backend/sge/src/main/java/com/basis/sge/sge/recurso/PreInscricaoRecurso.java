@@ -1,6 +1,7 @@
 package com.basis.sge.sge.recurso;
 
 import com.basis.sge.sge.servico.PreInscricaoServico;
+import com.basis.sge.sge.servico.dto.InscricaoChaveUsuarioDTO;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,12 @@ public class PreInscricaoRecurso {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> remover(@PathVariable Integer id) {
         preInscricaoServico.remover(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/cancelar-inscricao")
+    public ResponseEntity<Void> cancelarInscricao(@RequestBody InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO) {
+        preInscricaoServico.removerPorChave(inscricaoChaveUsuarioDTO);
         return ResponseEntity.ok().build();
     }
 

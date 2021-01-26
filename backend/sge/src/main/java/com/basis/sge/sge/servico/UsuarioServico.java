@@ -121,4 +121,12 @@ public class UsuarioServico {
         return false;
     }
 
+    public UsuarioDTO obterPorChave(String chave) {
+        Usuario usuario = usuarioRepositorio.findByChave(chave);
+        if (usuario == null)
+            throw new RegraNegocioException("Não há um usuario com essa chave na base");
+
+        return usuarioMapper.toDto(usuario);
+    }
+
 }
