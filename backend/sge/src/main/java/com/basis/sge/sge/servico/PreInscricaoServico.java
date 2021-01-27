@@ -6,11 +6,13 @@ import com.basis.sge.sge.dominio.Usuario;
 import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
 import com.basis.sge.sge.repositorio.UsuarioRepositorio;
+import com.basis.sge.sge.servico.dto.EmailDTO;
 import com.basis.sge.sge.servico.dto.InscricaoChaveUsuarioDTO;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import com.basis.sge.sge.servico.dto.UsuarioDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
+import com.basis.sge.sge.servico.producer.SgeProducer;
 import com.basis.sge.sge.util.EmailUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,7 @@ public class PreInscricaoServico {
     private final PreInscricaoMapper inscricaoMapper;
     private final EmailUtil emailUtil;
     private final UsuarioServico usuarioServico;
+    private final SgeProducer sgeProducer;
 
     private final UsuarioRepositorio usuarioRepositorio;
     private final EventoRepositorio eventoRepositorio;
@@ -62,7 +65,13 @@ public class PreInscricaoServico {
                 + evento.getTitulo() +"e sua Chave de Inscricão é "
                 + usuario.getChave() +" Guarde essa chave para o caso de um Cancelamento";
 
-        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso", new ArrayList<>());
+        EmailDTO emailDTO = new EmailDTO();
+        emailDTO.setCopias(new ArrayList<>());
+        emailDTO.setAssunto("Cadastro do Usuário");
+        emailDTO.setCorpo(mensagem);
+        emailDTO.setDestinatario(usuario.getEmail());
+
+        this.sgeProducer.enviarEmail(emailDTO);
 
         return inscricaoMapper.toDto(inscricao);
     }

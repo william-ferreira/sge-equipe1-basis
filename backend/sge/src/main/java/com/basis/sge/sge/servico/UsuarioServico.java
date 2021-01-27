@@ -2,8 +2,10 @@ package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.Usuario;
 import com.basis.sge.sge.repositorio.UsuarioRepositorio;
+import com.basis.sge.sge.servico.dto.EmailDTO;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.UsuarioMapper;
+import com.basis.sge.sge.servico.producer.SgeProducer;
 import com.basis.sge.sge.util.EmailUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class UsuarioServico {
     private final UsuarioRepositorio usuarioRepositorio;
     private final UsuarioMapper usuarioMapper;
     private final EmailUtil emailUtil;
+    private final SgeProducer sgeProducer;
 
     public List<UsuarioDTO> listar() {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
@@ -44,7 +47,13 @@ public class UsuarioServico {
 
         // TODO: Refatorar envio de email
         String mensagem = "Email de testes";
-        emailUtil.enviarEmail(usuario.getEmail(), mensagem, "Cadastro do Usuário", new ArrayList<>());
+        EmailDTO emailDTO = new EmailDTO();
+        emailDTO.setCopias(new ArrayList<>());
+        emailDTO.setAssunto("Cadastro do Usuário");
+        emailDTO.setCorpo(mensagem);
+        emailDTO.setDestinatario(usuario.getEmail());
+
+        this.sgeProducer.enviarEmail(emailDTO);
 
         usuarioRepositorio.save(usuario);
         return usuarioMapper.toDto(usuario);
