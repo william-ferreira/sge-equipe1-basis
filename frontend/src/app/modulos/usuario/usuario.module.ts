@@ -7,14 +7,24 @@ import { ListagemComponent } from './components/listagem/listagem.component';
 import { CardComponent } from '../../shared/card/card.component';
 import { CardModule } from 'primeng';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UsuarioService } from './services/usuario.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CpfPipe } from './components/pipes/cpf.pipe';
+import { TelefonePipe } from './components/pipes/telefone.pipe';
 
 
 @NgModule({
-  declarations: [FormularioComponent, ListagemComponent],
+  declarations: [FormularioComponent, ListagemComponent, CpfPipe, TelefonePipe],
+  providers: [
+    UsuarioService,
+    CpfPipe,
+    TelefonePipe
+  ],
   imports: [
     CommonModule,
     UsuarioRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ]
 })
 export class UsuarioModule { }
