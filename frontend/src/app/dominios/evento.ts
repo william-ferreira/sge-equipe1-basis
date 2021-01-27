@@ -1,4 +1,4 @@
-//import EventoPergunta from './'
+import { EventoPergunta } from './eventoPergunta';
 
 export class Evento{
     // TODO: perguntar se pode colocar o tipo primitivo, pois o dto nao pode
@@ -13,7 +13,7 @@ export class Evento{
     tipoInscricao: boolean;
     idTipoEvento: number;
     //TODO: colocar o tipo do array EventoPergunta
-    pergunta: Array<any>;
+    pergunta: Array<EventoPergunta>;
 
 
     constructor(){}
