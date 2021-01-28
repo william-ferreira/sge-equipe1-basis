@@ -7,12 +7,15 @@ import { ListagemComponent } from './components/listagem/listagem.component';
 import { CardComponent } from '../../shared/card/card.component';
 import { CardModule } from 'primeng';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [FormularioComponent, ListagemComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     UsuarioRoutingModule,
     SharedModule
   ]

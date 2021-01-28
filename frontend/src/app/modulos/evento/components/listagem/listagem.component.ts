@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Evento } from 'src/app/dominios/evento';
+import { EventoService } from '../../services/evento.service';
 
 @Component({
   selector: 'app-listagem',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListagemComponent implements OnInit {
 
-  constructor() { }
+  eventos: Evento[] = [];
+
+  constructor(
+    private servico : EventoService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  private buscarEventos(){
+    this.servico.getEventos()
+    .subscribe((eventos: Evento[])=>{
+        this.eventos = eventos;
+    });
   }
 
 }

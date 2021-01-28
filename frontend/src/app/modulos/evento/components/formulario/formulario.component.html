@@ -1,1 +1,19 @@
-<p>formulario works!</p>
+<form [formGroup]="formEvento">
+
+    <div class="p-grid p-dir-col">
+  
+      <input type="text" [(ngModel)]="evento.titulo" placeholder="Titulo do Evento" formControlName="titulo" pInputText />
+      <!--<div *ngIf="formUsuario.get('nome').invalid">Nome inválido</div> -->
+  
+      <input type="text" [(ngModel)]="evento.dataInicio" placeholder="Data e Hora" formControlName="dataInicio" pInputText />
+      <input type="text" [(ngModel)]="evento.dataTermino" placeholder="Data e Hora" formControlName="dataTermino" pInputText />
+      <input type="text" [(ngModel)]="evento.descricao" placeholder="Descricao" formControlName="descricao" pInputText />
+      <input type="text" [(ngModel)]="evento.quantVagas" placeholder="Vagas" formControlName="quantVagas" pInputText />
+      <input type="text" [(ngModel)]="evento.valor" placeholder="Valor" formControlName="valor" pInputText />
+      <input type="text" [(ngModel)]="evento.localEvento" placeholder="Local" formControlName="localEvento" pInputText />
+      <p-dropdown [options]="tiposEventos" [(ngModel)]="evento.idTipoEvento" formControlName="tipoEvento" optionLabel="descricao" optionValue="id"></p-dropdown>  
+    </div>
+  
+  </form>
+  
+  <button (click)="salvar()" pButton type="button" label="Cadastrar" ></button>
