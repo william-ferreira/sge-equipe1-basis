@@ -15,7 +15,9 @@ export class FormularioComponent implements OnInit {
 
   formEvento: FormGroup;
   evento = new Evento();
+  
   tiposEventos: TipoEvento[] = [];
+  tipoEventoSelecionado: TipoEvento;
 
   constructor( 
     private fb: FormBuilder,
@@ -24,7 +26,7 @@ export class FormularioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listarTiposEventos();
+    this.listarTiposEventos();    
     this.formEvento = this.fb.group({
       titulo: '',
       dataInicio: '',
@@ -42,18 +44,21 @@ export class FormularioComponent implements OnInit {
     .subscribe(tipos=>{
       this.tiposEventos = tipos;
     });
-  }
+  }  
 
   salvar() {
     if (this.formEvento.invalid) {
       alert('Formulário inválido');
       return;
     }
+    
+    this.evento.setIdTipoEvento(this.tipoEventoSelecionado.id);    
 
     this.eventoService.salvarEvento(this.evento)
       .subscribe(evento => {
-        console.log('usuario salvo', evento);
-        alert('Usuário Salvo')
+        console.log('Evento salvo', evento);
+        console.log(this.evento);
+        alert('Evento Salvo')
       }, (erro: HttpErrorResponse) => {
         alert(erro.error.message);
       });

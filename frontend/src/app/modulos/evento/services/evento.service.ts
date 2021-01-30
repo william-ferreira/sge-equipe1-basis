@@ -18,7 +18,7 @@ export class EventoService {
   }
 
   salvarEvento(evento: Evento): Observable<Evento>{
-    return this.http.post<Evento>(this.url, evento);
+    return this.http.post<Evento>(`${this.url}`, evento);
   }
 }
 
