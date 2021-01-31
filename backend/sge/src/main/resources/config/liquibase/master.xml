@@ -7,5 +7,6 @@
 
     <include file="config/liquibase/changelog/v00.0001_criacao_de_tabelas.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/v00.0002_insercao_tabelas_dominio_fixo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/v00.0003_insercao_entidades_teste.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
