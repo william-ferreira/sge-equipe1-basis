@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Evento } from 'src/app/dominios/evento';
 import { EventoService } from '../../services/evento.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TipoEvento } from 'src/app/dominios/tipoEvento';
 import { TipoEventoService } from 'src/app/modulos/tipo_evento/services/tipo-evento.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-formulario',
@@ -12,31 +13,49 @@ import { TipoEventoService } from 'src/app/modulos/tipo_evento/services/tipo-eve
   styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent implements OnInit {
+  
+  @Input() evento = new Evento();
+  @Input() edicao = false;
+  @Output() eventoSalvo = new EventEmitter<Evento>();
 
   formEvento: FormGroup;
-  evento = new Evento();
-  
   tiposEventos: TipoEvento[] = [];
   tipoEventoSelecionado: TipoEvento;
 
   constructor( 
     private fb: FormBuilder,
     private eventoService: EventoService,
-    private tipoEventoService: TipoEventoService
+    private tipoEventoService: TipoEventoService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.listarTiposEventos();    
+    this.listarTiposEventos();
+    
+    this.route.params.subscribe(params =>{
+      if(params.id){
+        this.edicao = true;
+        this.buscarEvento(params.id);        
+      }
+    });
+
     this.formEvento = this.fb.group({
-      titulo: '',
-      dataInicio: '',
-      dataTermino: '', 
+      titulo: ['', Validators.required],
+      dataInicio: ['', Validators.required],
+      dataTermino: ['', Validators.required], 
       descricao: '',
       quantVagas: '',
       valor: '',
       localEvento: '',
-      tipoEvento: ''
+      tipoEvento: ['', Validators.required]
     });
+  }
+
+  buscarEvento(id: number){
+    this.eventoService.buscarEventoPorId(id)
+    .subscribe( evento => {
+      this.evento = evento;
+    })
   }
 
   listarTiposEventos(){
@@ -52,16 +71,31 @@ export class FormularioComponent implements OnInit {
       return;
     }
     
-    this.evento.setIdTipoEvento(this.tipoEventoSelecionado.id);    
-
-    this.eventoService.salvarEvento(this.evento)
+    this.evento.setIdTipoEvento(this.tipoEventoSelecionado.id);
+    
+    if(this.edicao){
+      this.eventoService.editarEvento(this.evento)
+      .subscribe( evento => {
+        alert('Evento Editado');
+        this.fecharDialog(evento);        
+      }, (err: HttpErrorResponse) =>{
+        alert(err.error.message);
+      });
+    }
+    else{
+      this.eventoService.salvarEvento(this.evento)
       .subscribe(evento => {
-        console.log('Evento salvo', evento);
-        console.log(this.evento);
         alert('Evento Salvo')
       }, (erro: HttpErrorResponse) => {
         alert(erro.error.message);
-      });
+      });      
+    }
+
+    
+  }
+
+  fecharDialog(eventoSalvo: Evento){
+    this.eventoSalvo.emit(eventoSalvo);
   }
 
 }

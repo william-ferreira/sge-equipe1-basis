@@ -1,7 +1,8 @@
 <app-card [titulo]="'Lista de eventos'">
 
     <div class="p-d-flex p-jc-end">
-        <button routerLink="formulario" pButton type="button" label="Cadastrar Evento" ></button>
+        <button routerLink="formulario" pButton type="button" label="Cadastrar Evento Rota" ></button>
+        <button class="p-m1-2" type="button" (click)="mostrarDialog()" pButton label="Cadastrar Evento Dialog"></button>
     </div>
 
 
@@ -15,19 +16,33 @@
               <th>Quantidade de Vagas</th>
               <th>Valor</th>
               <th>Local do Evento</th>
+              <th style="width: 100px;">Ações</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-evento>
           <tr>
-              <td>{{evento.titulo}</td>
+              <td>{{evento.titulo}}</td>
               <td>{{evento.dataInicio | date: 'dd/MM/yyyy HH:mm'}}</td>
               <td>{{evento.dataTermino | date: 'dd/MM/yyyy HH:mm'}}</td>
-              <td>{{evento.descricao}</td>
-              <td>{{evento.quantVagas}</td>
+              <td>{{evento.descricao}}</td>
+              <td>{{evento.quantVagas}}</td>
               <td>{{evento.valor}}</td>
-              <td>{{evento.localEvento}</td>
+              <td>{{evento.localEvento}}</td>
+              <td class="p-d-flex p-jc-center">
+                  <button (click)="mostrarDialogEditar(evento.id)" pButton type="button" icon="pi pi-pencil"></button>
+                  <button (click)="deletarEvento(evento.id)" class="p-m1-2" pButton type="button" icon="pi pi-trash"></button>
+              </td>
           </tr>
       </ng-template>
     </p-table>
-
 </app-card>
+
+<p-dialog header="Evento" [(visible)]="exibirDialog">
+    <app-formulario>
+        [evento] = "evento"
+        [edicao] = "formularioEdicao"
+        (eventoSalvo) = "fecharDialog($event)"
+    </app-formulario>        
+</p-dialog>
+
+<!-- <p-confirmDialog header="Confirmar Remover Evento" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->

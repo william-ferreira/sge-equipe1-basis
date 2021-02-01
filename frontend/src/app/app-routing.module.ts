@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { LoginSuccessComponent } from '@nuvem/angular-base';
 import { UsuarioModule } from './modulos/usuario/usuario.module';
-import {EventoModule} from './modulos/evento/evento.module';
+import { EventoModule } from './modulos/evento/evento.module';
 
 const routes: Routes = [
     { path: 'usuarios', loadChildren: () => UsuarioModule, },
