@@ -71,7 +71,7 @@ export class FormularioComponent implements OnInit {
       return;
     }
     
-    this.evento.setIdTipoEvento(this.tipoEventoSelecionado.id);
+    this.evento.tipoEvento = this.tipoEventoSelecionado.id;
     
     if(this.edicao){
       this.eventoService.editarEvento(this.evento)

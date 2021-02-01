@@ -17,7 +17,7 @@ export class ListagemComponent implements OnInit {
 
   constructor(
     private servico : EventoService,
-    // private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -50,14 +50,14 @@ export class ListagemComponent implements OnInit {
     this.buscarEventos();
   } 
 
-  // confirmarDeletarEvento(id: number){
-  //   this.confirmationService.confirm({
-  //     message: 'Tem certeza que deseja excluir o evento?',
-  //     accept: () =>{
-  //         this.deletarEvento(id);
-  //     }
-  //   })
-  // }
+  confirmarDeletarEvento(id: number){
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir o evento?',
+      accept: () =>{
+          this.deletarEvento(id);
+      }
+    })
+  }
 
   deletarEvento(id: number){
     this.servico.deletarEvento(id)

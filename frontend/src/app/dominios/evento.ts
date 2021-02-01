@@ -12,14 +12,9 @@ export class Evento{
     valor: number;
     localEvento: string;
     tipoInscricao = false;
-    idTipoEvento: number;
+    tipoEvento: number;
     //TODO: colocar o tipo do array EventoPergunta
     pergunta: EventoPergunta[] = [];
-
-
+    
     constructor(){}
-
-    setIdTipoEvento(id: number){
-        this.idTipoEvento = id;
-    }
 }

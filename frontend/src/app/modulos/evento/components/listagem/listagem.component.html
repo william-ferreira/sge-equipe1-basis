@@ -30,7 +30,7 @@
               <td>{{evento.localEvento}}</td>
               <td class="p-d-flex p-jc-center">
                   <button (click)="mostrarDialogEditar(evento.id)" pButton type="button" icon="pi pi-pencil"></button>
-                  <button (click)="deletarEvento(evento.id)" class="p-m1-2" pButton type="button" icon="pi pi-trash"></button>
+                  <button (click)="confirmarDeletarEvento(evento.id)" class="p-m1-2" pButton type="button" icon="pi pi-trash"></button>
               </td>
           </tr>
       </ng-template>
@@ -38,11 +38,11 @@
 </app-card>
 
 <p-dialog header="Evento" [(visible)]="exibirDialog">
-    <app-formulario>
+    <app-formulario
         [evento] = "evento"
         [edicao] = "formularioEdicao"
-        (eventoSalvo) = "fecharDialog($event)"
+        (eventoSalvo) = "fecharDialog($event)">
     </app-formulario>        
 </p-dialog>
 
-<!-- <p-confirmDialog header="Confirmar Remover Evento" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
+<p-confirmDialog header="Confirmar Remover Evento" icon="pi pi-exclamation-triangle"></p-confirmDialog>
