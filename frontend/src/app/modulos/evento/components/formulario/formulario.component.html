@@ -17,8 +17,10 @@
       <input type="text" [(ngModel)]="evento.localEvento" placeholder="Local" formControlName="localEvento" pInputText />
       
       <!-- <div *ngIf="formEvento.get('tipoEvento').invalid">Tipo do evento requerido</div> -->
-      <p-dropdown [options]="tiposEventos" [(ngModel)]="tipoEventoSelecionado" placeholder="Tipo do Evento" formControlName="tipoEvento" optionLabel="descricao"></p-dropdown> 
-                     
+      <p-dropdown [options]="tiposEventos" [(ngModel)]="tipoEventoSelecionado" placeholder="Tipo do Evento" formControlName="tipoEvento" optionLabel="descricao"></p-dropdown>
+      
+      <p-inputSwitch [(ngModel)]="checked" formControlName="tipoInscricao"></p-inputSwitch>
+      <p>É necessário uma inscrição?</p>                    
       
     </div>
   </form>

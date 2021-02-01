@@ -11,10 +11,9 @@ export class Evento{
     quantVagas: number;
     valor: number;
     localEvento: string;
-    tipoInscricao = false;
-    tipoEvento: number;
-    //TODO: colocar o tipo do array EventoPergunta
+    tipoInscricao: boolean;
+    idTipoEvento: number;
     pergunta: EventoPergunta[] = [];
-    
+
     constructor(){}
 }

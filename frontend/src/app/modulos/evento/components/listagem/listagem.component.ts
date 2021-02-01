@@ -21,7 +21,7 @@ export class ListagemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buscarEventos();
+    this.buscarEventos();       
   }
 
   private buscarEventos(){
@@ -45,7 +45,6 @@ export class ListagemComponent implements OnInit {
   }
 
   fecharDialog(eventoSalvo: Evento){
-    console.log(eventoSalvo);
     this.exibirDialog = false;
     this.buscarEventos();
   } 
