@@ -1,6 +1,7 @@
 package com.basis.sge.sge.recurso;
 
 import com.basis.sge.sge.servico.PreInscricaoServico;
+import com.basis.sge.sge.servico.dto.DetalhesInscricaoDTO;
 import com.basis.sge.sge.servico.dto.InscricaoChaveUsuarioDTO;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,12 @@ public class PreInscricaoRecurso {
         return ResponseEntity.ok(entidadeDTO);
     }
 
+    @GetMapping("/inscricoes-usuario/{idUsuario}")
+    public ResponseEntity<List<PreInscricaoDTO>> obterPorIdUsuario(@PathVariable Integer idUsuario) {
+        List<PreInscricaoDTO> list = preInscricaoServico.listarPorIdUsuario(idUsuario);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<PreInscricaoDTO> salvar(@RequestBody PreInscricaoDTO entidadeDTO) {
         PreInscricaoDTO entidade = preInscricaoServico.salvar(entidadeDTO);
@@ -55,4 +62,9 @@ public class PreInscricaoRecurso {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/detalhes-inscricao/{id}")
+    public ResponseEntity<List<DetalhesInscricaoDTO>> obterDetalhes(@PathVariable Integer id) {
+        List<DetalhesInscricaoDTO> list = preInscricaoServico.listarDetalhesInscricao(id);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

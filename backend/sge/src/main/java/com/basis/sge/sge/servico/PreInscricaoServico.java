@@ -6,10 +6,7 @@ import com.basis.sge.sge.dominio.Usuario;
 import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
 import com.basis.sge.sge.repositorio.UsuarioRepositorio;
-import com.basis.sge.sge.servico.dto.EmailDTO;
-import com.basis.sge.sge.servico.dto.InscricaoChaveUsuarioDTO;
-import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
-import com.basis.sge.sge.servico.dto.UsuarioDTO;
+import com.basis.sge.sge.servico.dto.*;
 import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
 import com.basis.sge.sge.servico.producer.SgeProducer;
@@ -106,7 +103,7 @@ public class PreInscricaoServico {
         emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, assunto, new ArrayList<>());
     }
 
-    private void validaUsuarioJaInscrito(PreInscricaoDTO inscricaoDTO) {
+    private void validaUsuarioJaInscrito(PreInscricaoDTO inscricaoDTO)  throws RegraNegocioException{
         inscricaoRepositorio.findAll().forEach(preInscricao -> {
             Boolean eventoJaExistente = preInscricao.getEvento().getId().equals(inscricaoDTO.getIdEvento());
             Boolean usuarioJaExistente = preInscricao.getUsuario().getId().equals(inscricaoDTO.getIdUsuario());
@@ -115,4 +112,40 @@ public class PreInscricaoServico {
                 throw new RegraNegocioException("Já existe um usuário inscrito nesse evento");
         });
     }
+
+    public List<PreInscricaoDTO> listarPorIdUsuario(Integer idUsuario) {
+        List<PreInscricao> inscricoes = inscricaoRepositorio.findAllByUsuarioId(idUsuario);
+        return inscricaoMapper.toDto(inscricoes);
+    }
+
+    
+    public List<DetalhesInscricaoDTO> listarDetalhesInscricao(Integer idUsuario){
+
+        List<DetalhesInscricaoDTO> detalhesPreInscricoes = new ArrayList<>();
+
+        for (PreInscricao inscricao: inscricaoRepositorio.findAllByUsuarioId(idUsuario)) {
+            DetalhesInscricaoDTO detalhesInscricao = new DetalhesInscricaoDTO();
+
+            detalhesInscricao.setIdInscricao(inscricao.getId());
+            setDetalhesEvento(detalhesInscricao, inscricao);
+            setDescricaoSituacao(detalhesInscricao, inscricao);
+
+            detalhesPreInscricoes.add(detalhesInscricao);
+        }
+
+        return detalhesPreInscricoes;
+    }
+
+    private void setDetalhesEvento(DetalhesInscricaoDTO detalhesInscricao, PreInscricao inscricao) {
+        Integer idEvento = inscricao.getEvento().getId();
+        Evento evento = eventoRepositorio.findById(idEvento).get();
+
+        detalhesInscricao.setNomeEvento(evento.getTitulo());
+    }
+
+    private void setDescricaoSituacao(DetalhesInscricaoDTO detalhesInscricao, PreInscricao inscricao) {
+        String descricao = inscricao.getTipoSituacao().getDescricao();
+        detalhesInscricao.setTipoSituacao(descricao);
+    }
+
 }

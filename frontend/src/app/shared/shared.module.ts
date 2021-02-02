@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CardComponent } from './card/card.component';
+import { ConfirmationService } from 'primeng';
+import { CardComponent } from './components/card/card.component';
 import { PRIMENG_IMPORTS } from './primeng-imports';
 
 @NgModule({
@@ -9,7 +10,9 @@ import { PRIMENG_IMPORTS } from './primeng-imports';
     imports: [
         PRIMENG_IMPORTS,
     ],
-    providers: [],
+    providers: [
+        ConfirmationService
+    ],
     exports: [
         PRIMENG_IMPORTS,
         CardComponent
