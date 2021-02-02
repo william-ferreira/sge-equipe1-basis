@@ -21,7 +21,6 @@ export class FormularioComponent implements OnInit {
   formEvento: FormGroup;
   tiposEventos: TipoEvento[] = [];
   tipoEventoSelecionado: TipoEvento;
-  checked: boolean;
 
   constructor( 
     private fb: FormBuilder,
@@ -71,16 +70,14 @@ export class FormularioComponent implements OnInit {
     if (this.formEvento.invalid) {
       alert('Formulário inválido');
       return;
-    }    
-    
+    }        
     this.evento.idTipoEvento = this.tipoEventoSelecionado.id;
-    this.evento.tipoInscricao = this.checked;
-    
-    if(this.edicao){
+
+    if(this.edicao){      
       this.eventoService.editarEvento(this.evento)
       .subscribe( evento => {
-        alert('Evento Editado');
-        this.fecharDialog(evento);        
+        alert('Evento Editado');        
+        this.fecharDialog(evento);       
       }, (err: HttpErrorResponse) =>{
         alert(err.error.message);
       });
@@ -93,8 +90,7 @@ export class FormularioComponent implements OnInit {
       }, (erro: HttpErrorResponse) => {
         alert(erro.error.message);
       });      
-    }
-
+    }   
     
   }
 

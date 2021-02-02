@@ -39,6 +39,11 @@ export class ListagemComponent implements OnInit {
     });
   }
 
+  mostrarDialogCadastro(){
+    this.evento = new Evento();
+    this.mostrarDialog();
+  }
+
   mostrarDialog(edicao = false){
     this.exibirDialog = true;
     this.formularioEdicao = edicao;

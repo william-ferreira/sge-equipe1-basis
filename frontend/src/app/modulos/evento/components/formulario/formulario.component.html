@@ -8,7 +8,7 @@
       <div *ngIf="formEvento.get('dataInicio').invalid">Inicio de evento requerido</div>
       <input type="datetime-local" [(ngModel)]="evento.dataInicio" placeholder="Data e Hora" formControlName="dataInicio" pInputText />
       
-      <!-- <div *ngIf="formEvento.get('dataFim').invalid">Fim de evento requerido</div> -->
+      <!-- <div *ngIf="evento.dataInicio.getDay() > evento.dataTermino.getDay() || evento.dataInicio.getMonth() > evento.dataTermino.getMonth()">A data do inicio tem que ser antes do que a data do fim do evento</div> -->
       <input type="datetime-local" [(ngModel)]="evento.dataTermino" placeholder="Data e Hora" formControlName="dataTermino" pInputText />
       
       <input type="text" [(ngModel)]="evento.descricao" placeholder="Descricao" formControlName="descricao" pInputText />
@@ -19,7 +19,7 @@
       <!-- <div *ngIf="formEvento.get('tipoEvento').invalid">Tipo do evento requerido</div> -->
       <p-dropdown [options]="tiposEventos" [(ngModel)]="tipoEventoSelecionado" placeholder="Tipo do Evento" formControlName="tipoEvento" optionLabel="descricao"></p-dropdown>
       
-      <p-inputSwitch [(ngModel)]="checked" formControlName="tipoInscricao"></p-inputSwitch>
+      <p-inputSwitch [(ngModel)]="evento.tipoInscricao" formControlName="tipoInscricao"></p-inputSwitch>
       <p>É necessário uma inscrição?</p>                    
       
     </div>
