@@ -52,7 +52,12 @@ export class ListagemComponent implements OnInit {
   fecharDialog(eventoSalvo: Evento){
     this.exibirDialog = false;
     this.buscarEventos();
-  } 
+  }
+  
+  retornarElementosEmLista(evento: Evento){
+    return [evento];
+
+  }
 
   confirmarDeletarEvento(id: number){
     this.confirmationService.confirm({

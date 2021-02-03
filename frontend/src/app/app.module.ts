@@ -13,7 +13,7 @@ import { PageNotificationModule, BreadcrumbModule, MenuModule, ErrorStackModule 
 import { SecurityModule, VersionTagModule } from '@nuvem/angular-base';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { BlockUIModule } from 'ng-block-ui';
-import { DropdownModule } from 'primeng';
+import { AccordionModule, DropdownModule } from 'primeng';
 
 @NgModule({
     declarations: [
@@ -37,7 +37,8 @@ import { DropdownModule } from 'primeng';
         VersionTagModule,
         SecurityModule.forRoot(environment.auth),
         MenuModule,
-        DropdownModule
+        DropdownModule,
+        AccordionModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy }
