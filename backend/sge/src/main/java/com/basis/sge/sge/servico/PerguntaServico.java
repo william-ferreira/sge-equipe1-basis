@@ -1,6 +1,5 @@
 package com.basis.sge.sge.servico;
 
-import com.basis.sge.sge.dominio.Evento;
 import com.basis.sge.sge.dominio.Pergunta;
 import com.basis.sge.sge.repositorio.PerguntaRepositorio;
 import com.basis.sge.sge.servico.dto.PerguntaDTO;
@@ -33,7 +32,6 @@ public class PerguntaServico {
     public PerguntaDTO salvar(PerguntaDTO perguntaDTO) {
         Pergunta pergunta = perguntaMapper.toEntity(perguntaDTO);
         perguntaRepositorio.save(pergunta);
-        pergunta.getId();
         return perguntaMapper.toDto(pergunta);
     }
 

@@ -1,7 +1,6 @@
 
 package com.basis.sge.sge.servico;
 
-import com.basis.sge.sge.dominio.TipoEvento;
 import com.basis.sge.sge.repositorio.TipoEventoRepositorio;
 import com.basis.sge.sge.servico.dto.TipoEventoDTO;
 import com.basis.sge.sge.servico.mapper.TipoEventoMapper;

@@ -2,13 +2,10 @@ package com.basis.sge.sge.recurso;
 
 import com.basis.sge.sge.servico.PerguntaServico;
 import com.basis.sge.sge.servico.dto.PerguntaDTO;
-import com.basis.sge.sge.servico.dto.UsuarioDTO;
-import liquibase.pro.packaged.U;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

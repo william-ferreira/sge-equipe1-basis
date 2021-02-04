@@ -1,10 +1,8 @@
 package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.InscricaoResposta;
-import com.basis.sge.sge.dominio.InscricaoRespostaId;
 import com.basis.sge.sge.repositorio.InscricaoRespostaRepositorio;
 import com.basis.sge.sge.servico.dto.InscricaoRespostaDTO;
-import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.InscricaoRespostaMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

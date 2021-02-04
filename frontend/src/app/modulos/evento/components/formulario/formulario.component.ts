@@ -107,4 +107,8 @@ export class FormularioComponent implements OnInit {
     this.eventoSalvo.emit(eventoSalvo);
   }
 
+  dataTerminoMaiorDataInicio() {   
+    return this.evento.dataTermino && this.evento.dataInicio && this.evento.dataTermino > this.evento.dataInicio;
+  }
+
 }
