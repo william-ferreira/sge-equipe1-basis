@@ -1,9 +1,5 @@
 <app-card [titulo]="'Lista de eventos'">
 
-    <div class="p-d-flex p-jc-end">
-        <button class="p-m1-2" type="button" (click)="mostrarDialogCadastro()" pButton label="Cadastrar Evento Dialog"></button>
-    </div>
-
     <p-accordion [multiple]="true">
         <p-accordionTab header= {{evento.titulo}} *ngFor="let evento of eventos">
             <p-table [value]="[evento]">
@@ -26,20 +22,8 @@
                     </tr>
                 </ng-template>
             </p-table>
-            <div style="display: flex;">
-                <button style="margin: 5px;" (click)="mostrarDialogEditar(evento.id)" pButton type="button" icon="pi pi-pencil" class="ui-button-raised ui-button-rounded"></button>
-                <button style="margin: 5px;" (click)="confirmarDeletarEvento(evento.id)" class="p-m1-2" pButton type="button" icon="pi pi-trash"></button>
-            </div>
+            <!-- Botão reservado para se inscrever no evento -->
+            <button></button>
         </p-accordionTab>
     </p-accordion>                
 </app-card>
-
-<p-dialog header="Evento" [(visible)]="exibirDialog">
-    <app-formulario
-        [evento] = "evento"
-        [edicao] = "formularioEdicao"
-        (eventoSalvo) = "fecharDialog($event)">
-    </app-formulario>        
-</p-dialog>
-
-<p-confirmDialog header="Confirmar Remover Evento" icon="pi pi-exclamation-triangle"></p-confirmDialog>
