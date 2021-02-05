@@ -1,3 +1,4 @@
+
 import { EventoPergunta } from './eventoPergunta';
 import { TipoEvento } from './tipoEvento';
 
@@ -11,15 +12,9 @@ export class Evento{
     quantVagas: number;
     valor: number;
     localEvento: string;
-    tipoInscricao = false;
+    tipoInscricao: boolean;
     idTipoEvento: number;
-    //TODO: colocar o tipo do array EventoPergunta
     pergunta: EventoPergunta[] = [];
 
-
     constructor(){}
-
-    setIdTipoEvento(id: number){
-        this.idTipoEvento = id;
-    }
 }

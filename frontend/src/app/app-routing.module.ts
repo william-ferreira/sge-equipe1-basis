@@ -4,10 +4,12 @@ import { DiarioErrosComponent } from './components/diario-erros/diario-erros.com
 import { LoginSuccessComponent } from '@nuvem/angular-base';
 import { UsuarioModule } from './modulos/usuario/usuario.module';
 import {EventoModule} from './modulos/evento/evento.module';
+import { QuestaoModule } from './modulos/questao/questao.module';
 
 const routes: Routes = [
     { path: 'usuarios', loadChildren: () => UsuarioModule, },
     { path: 'eventos', loadChildren: () => EventoModule, },
+    { path: 'perguntas', loadChildren :() => QuestaoModule},
     { path: 'diario-erros', component: DiarioErrosComponent, data: { breadcrumb: 'Diário de Erros'} },
     { path: 'login-success', component: LoginSuccessComponent },
 ];

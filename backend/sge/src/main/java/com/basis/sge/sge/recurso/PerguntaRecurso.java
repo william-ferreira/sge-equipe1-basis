@@ -1,5 +1,7 @@
 package com.basis.sge.sge.recurso;
 
+import com.basis.sge.sge.dominio.Pergunta;
+import com.basis.sge.sge.servico.EventoPerguntaServico;
 import com.basis.sge.sge.servico.PerguntaServico;
 import com.basis.sge.sge.servico.dto.PerguntaDTO;
 import com.basis.sge.sge.servico.dto.UsuarioDTO;
@@ -41,11 +43,17 @@ public class PerguntaRecurso {
         return ResponseEntity.ok(entidadeDTO);
     }
 
+    @GetMapping("/evento-pergunta/{idEvento}")
+    public ResponseEntity<List<PerguntaDTO>> ObterPorIdEvento(@PathVariable Integer idEvento) {
+        List<PerguntaDTO> list = perguntaServico.obterPerguntasIdEvento(idEvento);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
     @SneakyThrows
     @PostMapping
     public ResponseEntity<PerguntaDTO> salvar(@Valid @RequestBody PerguntaDTO entidadeDTO) {
         PerguntaDTO entidade = perguntaServico.salvar(entidadeDTO);
-        return ResponseEntity.created(new URI("/api/perguntas")).build();
+        return ResponseEntity.created(new URI("/api/perguntas")).body(entidade);
     }
 
     @PutMapping

@@ -7,6 +7,7 @@ import { ListagemComponent } from './components/listagem/listagem.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventoService } from './services/evento.service';
+import { QuestaoModule } from '../questao/questao.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EventoService } from './services/evento.service';
     FormsModule,
     ReactiveFormsModule,
     EventoRoutingModule,
-    SharedModule
+    SharedModule,
+    QuestaoModule
   ]
 })
 export class EventoModule { }

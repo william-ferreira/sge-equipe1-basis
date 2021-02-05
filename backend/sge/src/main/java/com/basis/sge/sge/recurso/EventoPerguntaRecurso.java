@@ -42,4 +42,10 @@ public class EventoPerguntaRecurso {
         return ResponseEntity.ok(entidade);
     }
 
+    @GetMapping("/{idEvento}")
+    public ResponseEntity<List<EventoPerguntaDTO>> listarPorIdEvento(@PathVariable Integer idEvento) {
+        List<EventoPerguntaDTO> list = eventoPerguntaServico.listarPorIdEvento(idEvento);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
 }

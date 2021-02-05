@@ -34,4 +34,9 @@ public class EventoPerguntaServico {
         return eventoPerguntaMapper.toDto(eventoPergunta);
     }
 
+    public List<EventoPerguntaDTO> listarPorIdEvento(Integer idEvento) {
+        List<EventoPergunta> listaEventoPergunta = eventoPerguntaRepositorio.findAllByEventoId(idEvento);
+        return eventoPerguntaMapper.toDto(listaEventoPergunta);
+    }
+
 }
