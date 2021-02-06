@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 public class PreInscricao implements Serializable {
 
-    // TODO: Ajustar nome da sequence
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_id_pre_inscricao")
     @SequenceGenerator(name = "sq_id_pre_inscricao", allocationSize = 1, sequenceName = "sq_id_pre_inscricao")

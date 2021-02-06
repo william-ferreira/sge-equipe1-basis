@@ -6,7 +6,7 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { ListagemComponent } from './components/listagem/listagem.component';
 import { CardModule } from 'primeng';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { UsuarioService } from './services/usuario.service';
+import { UsuarioService } from './service/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

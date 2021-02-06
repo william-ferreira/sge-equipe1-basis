@@ -10,4 +10,6 @@ public class DetalhesInscricaoDTO {
     private Integer idInscricao;
     private String nomeEvento;
     private String tipoSituacao;
+    private String email;
+    private String nomeUsuario;
 }

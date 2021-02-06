@@ -2,6 +2,7 @@ package com.basis.sge.sge.servico.mapper;
 
 import com.basis.sge.sge.dominio.PreInscricao;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
+import com.basis.sge.sge.servico.dto.PreInscricaoListagemDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -19,4 +20,8 @@ public interface PreInscricaoMapper extends EntityMapper<PreInscricaoDTO, PreIns
     @Mapping(source = "evento.id", target = "idEvento")
     @Mapping(source = "tipoSituacao.id", target = "idTipoSituacao")
     PreInscricaoDTO toDto(PreInscricao preInscricao);
+
+    @Mapping(source = "usuario.nome", target = "nome")
+    @Mapping(source = "usuario.email", target = "email")
+    PreInscricaoListagemDTO toListagem(PreInscricao preInscricao);
 }

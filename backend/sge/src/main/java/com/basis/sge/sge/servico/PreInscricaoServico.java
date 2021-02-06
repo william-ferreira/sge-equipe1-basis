@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -31,8 +32,11 @@ public class PreInscricaoServico {
 
     private final UsuarioRepositorio usuarioRepositorio;
     private final EventoRepositorio eventoRepositorio;
-
+    private final PreInscricaoMapper preInscricaoMapper;
+    private final PreInscricaoRepositorio preInscricaoRepositorio;
     private static final Integer ID_TIPO_SITUACAO_CANCELADO = 4;
+    private static final Integer ID_TIPO_SITUACAO_APROVADO = 2;
+    private static final Integer ID_TIPO_SITUACAO_RECUSADO = 3;
 
     public List<PreInscricaoDTO> listar() {
         List<PreInscricao> inscricoes = inscricaoRepositorio.findAll();
@@ -79,6 +83,14 @@ public class PreInscricaoServico {
         inscricaoRepositorio.deleteById(id);
     }
 
+    public PreInscricaoDTO editar(PreInscricaoDTO preInscricaoDTO) {
+        PreInscricao preInscricao = preInscricaoMapper.toEntity(preInscricaoDTO);
+        preInscricaoRepositorio.save(preInscricao);
+        
+        return preInscricaoMapper.toDto(preInscricao);
+    }
+
+
     public void removerPorChave(InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO) {
         UsuarioDTO usuario = usuarioServico.obterPorChave(inscricaoChaveUsuarioDTO.getChaveUsuario());
 
@@ -93,6 +105,30 @@ public class PreInscricaoServico {
         enviarEmailCancelamento(inscricaoChaveUsuarioDTO, usuario, preInscricaoDTO);
 
         inscricaoMapper.toDto(preInscricao);
+    }
+
+    public void cancelarPorIdEvento(DetalhesInscricaoDTO detalhesInscricaoDTO){
+
+        PreInscricaoDTO preInscricaoDTO = obterPorId(detalhesInscricaoDTO.getIdInscricao());
+        preInscricaoDTO.setIdTipoSituacao(ID_TIPO_SITUACAO_CANCELADO);
+
+        inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
+    }
+
+    public void aprovarPorIdEvento(Integer idPreinscricao){
+
+        PreInscricaoDTO preInscricaoDTO = obterPorId(idPreinscricao);
+        preInscricaoDTO.setIdTipoSituacao(ID_TIPO_SITUACAO_APROVADO);
+
+        inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
+    }
+
+    public void recusarPorIdEvento(Integer idPreinscricao){
+
+        PreInscricaoDTO preInscricaoDTO = obterPorId(idPreinscricao);
+        preInscricaoDTO.setIdTipoSituacao(ID_TIPO_SITUACAO_RECUSADO);
+
+        inscricaoRepositorio.save(inscricaoMapper.toEntity(preInscricaoDTO));
     }
 
     private void enviarEmailCancelamento(InscricaoChaveUsuarioDTO inscricaoChaveUsuarioDTO, UsuarioDTO usuario, PreInscricaoDTO preInscricaoDTO) {
@@ -118,7 +154,6 @@ public class PreInscricaoServico {
         return inscricaoMapper.toDto(inscricoes);
     }
 
-    
     public List<DetalhesInscricaoDTO> listarDetalhesInscricao(Integer idUsuario){
 
         List<DetalhesInscricaoDTO> detalhesPreInscricoes = new ArrayList<>();
@@ -129,11 +164,17 @@ public class PreInscricaoServico {
             detalhesInscricao.setIdInscricao(inscricao.getId());
             setDetalhesEvento(detalhesInscricao, inscricao);
             setDescricaoSituacao(detalhesInscricao, inscricao);
+            setEmailInscricao(detalhesInscricao,inscricao);
+            setUsuarioInscricao(detalhesInscricao,inscricao);
 
             detalhesPreInscricoes.add(detalhesInscricao);
         }
-
         return detalhesPreInscricoes;
+    }
+
+    private void setUsuarioInscricao(DetalhesInscricaoDTO detalhesInscricao, PreInscricao inscricao) {
+        String usuario = inscricao.getUsuario().getNome();
+        detalhesInscricao.setNomeUsuario(usuario);
     }
 
     private void setDetalhesEvento(DetalhesInscricaoDTO detalhesInscricao, PreInscricao inscricao) {
@@ -146,6 +187,15 @@ public class PreInscricaoServico {
     private void setDescricaoSituacao(DetalhesInscricaoDTO detalhesInscricao, PreInscricao inscricao) {
         String descricao = inscricao.getTipoSituacao().getDescricao();
         detalhesInscricao.setTipoSituacao(descricao);
+    }
+    private void setEmailInscricao(DetalhesInscricaoDTO detalhesInscricao,PreInscricao inscricao){
+        String email = inscricao.getUsuario().getEmail();
+        detalhesInscricao.setEmail(email);
+    }
+
+    public List<PreInscricaoListagemDTO> listagemPorIdUsuario(Integer idUsuario) {
+        List<PreInscricao> inscricoes = inscricaoRepositorio.findAllByEventoId(idUsuario);
+        return inscricoes.stream().map(inscricaoMapper::toListagem).collect(Collectors.toList());
     }
 
 }
