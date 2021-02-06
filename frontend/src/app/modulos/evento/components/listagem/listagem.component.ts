@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng';
 import { Evento } from 'src/app/dominios/evento';
-import { EventoService } from '../../services/evento.service';
+import { EventoService } from '../../services/evento-service/evento.service';
 
 @Component({
   selector: 'app-listagem',
@@ -12,75 +12,77 @@ export class ListagemComponent implements OnInit {
 
   eventos: Evento[] = [];
   evento = new Evento();
-  exibirDialog = false;
+  exibirDialogEvento = false;
+  exibirDialogPergunta = false;
+
   formularioEdicao: boolean;
   idEventoSel: number;
 
   constructor(
-    private servico : EventoService,
+    private servico: EventoService,
     private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
-    this.buscarEventos();       
+    this.buscarEventos();
   }
 
-  private buscarEventos(){
+  private buscarEventos() {
     this.servico.getEventos()
-    .subscribe((eventos: Evento[])=>{
+      .subscribe((eventos: Evento[]) => {
         this.eventos = eventos;
-    });
+      });
   }
 
-  mostrarDialogEditar(id: number){
+  mostrarDialogEditar(id: number) {
     this.servico.buscarEventoPorId(id)
-    .subscribe(evento => {
-      this.evento = evento;
-      this.mostrarDialog(true);
-    });
+      .subscribe(evento => {
+        this.evento = evento;
+        this.mostrarDialogEvento(true);
+      });
   }
 
-  mostrarDialogCadastro(){
+  mostrarDialogCadastroEvento() {
     this.evento = new Evento();
-    this.mostrarDialog();
+    this.mostrarDialogEvento();
   }
 
-  mostrarDialogPerguntasPorEvento(idEvento: number) {
-    this.idEventoSel = idEvento;
-    this.mostrarDialog();
-  }
 
-  mostrarDialog(edicao = false){
-    this.exibirDialog = true;
+  mostrarDialogEvento(edicao = false) {
+    this.exibirDialogEvento = true;
     this.formularioEdicao = edicao;
   }
 
-  fecharDialog(eventoSalvo: Evento){
-    this.exibirDialog = false;
+  fecharDialog(eventoSalvo: Evento) {
+    this.exibirDialogEvento = false;
     this.buscarEventos();
-  } 
+  }
 
-  confirmarDeletarEvento(id: number){
+  confirmarDeletarEvento(id: number) {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir o evento?',
-      accept: () =>{
-          this.deletarEvento(id);
+      accept: () => {
+        this.deletarEvento(id);
       }
     })
   }
 
-  deletarEvento(id: number){
+  deletarEvento(id: number) {
     this.servico.deletarEvento(id)
-    .subscribe( () => {
+      .subscribe(() => {
         alert('Evento Deletado');
         this.buscarEventos();
-    },
-    err => alert(err));
+      },
+        err => alert(err));
   }
 
-  
-  mostrarDialogPergunta(id: number){
-    this.exibirDialog = true;
+  mostrarDialogPergunta(id: number) {
+    this.exibirDialogPergunta = true;
+  }
+
+  mostrarDialogPerguntasPorEvento(idEvento: number) {
+    this.idEventoSel = idEvento;
+    this.mostrarDialogPergunta(this.idEventoSel);
   }
 
 }

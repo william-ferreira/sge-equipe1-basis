@@ -6,7 +6,7 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { ListagemComponent } from './components/listagem/listagem.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EventoService } from './services/evento.service';
+import { EventoService } from './services/evento-service/evento.service';
 import { QuestaoModule } from '../questao/questao.module';
 
 

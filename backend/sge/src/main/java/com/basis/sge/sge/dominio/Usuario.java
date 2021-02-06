@@ -1,15 +1,11 @@
 package com.basis.sge.sge.dominio;
 
-import com.sun.xml.bind.v2.TODO;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -40,7 +36,5 @@ public class Usuario implements Serializable {
 
     @Column(name = "chave_usuario")
     private String chave;
-
-
 
 }

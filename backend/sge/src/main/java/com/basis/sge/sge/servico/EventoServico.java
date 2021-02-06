@@ -1,9 +1,7 @@
 package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.Evento;
-import com.basis.sge.sge.dominio.EventoPergunta;
 import com.basis.sge.sge.repositorio.EventoPerguntaRepositorio;
-import com.basis.sge.sge.dominio.PreInscricao;
 import com.basis.sge.sge.repositorio.EventoRepositorio;
 import com.basis.sge.sge.servico.dto.EventoDTO;
 import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -59,6 +56,7 @@ public class EventoServico {
 
     public void remover(Integer id) {
         Evento evento = buscar(id);
+        preInscricaoServico.removerTodosPorIdEvento(id);
         eventoRepositorio.delete(evento);
     }
 
@@ -72,9 +70,7 @@ public class EventoServico {
         for (PreInscricaoDTO preInscricao : preInscritos) {
             if (evento.getId().equals(preInscricao.getIdEvento())) {
                 UsuarioDTO usuario = usuarioServico.obterPorId(preInscricao.getIdUsuario());
-
                 String corpoEmail = "O evento com o titulo:".concat(evento.getTitulo()).concat(" foi alterado.");
-
                 emailUtil.enviarEmail(usuario.getEmail(), corpoEmail, "Alteração no evento", new ArrayList<>());
             }
         }

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventoPergunta } from 'src/app/dominios/eventoPergunta';
 import { Pergunta } from 'src/app/dominios/pergunta';
@@ -17,12 +17,12 @@ export class FormularioComponent implements OnInit {
       this.buscarPergunta(idPergunta);
     }
   }
+  
   @Input() edicao = false
   @Output() perguntaSalva = new EventEmitter<Pergunta>();
 
   pergunta: Pergunta
   formPergunta: FormGroup
-  idEventoAux: number
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +30,6 @@ export class FormularioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.idEventoAux)
     this.pergunta = new Pergunta()
     this.carregarForm()
   }
@@ -43,9 +42,6 @@ export class FormularioComponent implements OnInit {
       this.perguntaService.salvarPergunta(this.pergunta)
         .subscribe(pergunta => {
           alert('Pergunta Salva')
-          let eventoPergunta: EventoPergunta = { idEvento: this.idEventoAux, idPergunta: pergunta.id }
-          this.perguntaService.salvarPerguntaEvento(eventoPergunta)
-            .subscribe(eventoPergunta => { })
           this.fecharDialog(pergunta)
         }, (erro: HttpErrorResponse) => {
           alert(erro.error.message)
@@ -55,9 +51,9 @@ export class FormularioComponent implements OnInit {
 
   buscarPergunta(idPergunta: number) {
     this.perguntaService.getPerguntaId(idPergunta)
-    .subscribe(pergunta => {
-      this.pergunta = pergunta;
-    })
+      .subscribe(pergunta => {
+        this.pergunta = pergunta;
+      })
   }
 
   fecharDialog(perguntaSalva: Pergunta) {

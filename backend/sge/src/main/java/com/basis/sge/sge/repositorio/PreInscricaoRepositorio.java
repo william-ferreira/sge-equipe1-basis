@@ -12,4 +12,7 @@ public interface PreInscricaoRepositorio extends JpaRepository<PreInscricao, Int
     List<PreInscricao> findAllByEventoId(Integer id_evento);
 
     List<PreInscricao> findAllByUsuarioId(Integer id);
+
+    List<PreInscricao> deleteAllByEventoId(Integer id_evento);
+
 }

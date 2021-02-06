@@ -1,9 +1,7 @@
 package com.basis.sge.sge.recurso;
 
-import com.basis.sge.sge.dominio.Evento;
 import com.basis.sge.sge.servico.EventoServico;
 import com.basis.sge.sge.servico.dto.EventoDTO;
-import com.basis.sge.sge.servico.mapper.EventoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

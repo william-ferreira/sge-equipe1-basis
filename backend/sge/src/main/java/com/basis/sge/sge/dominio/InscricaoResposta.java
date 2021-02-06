@@ -2,7 +2,6 @@ package com.basis.sge.sge.dominio;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,6 +32,4 @@ public class InscricaoResposta implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pergunta")
     private Pergunta pergunta;
-
-
 }

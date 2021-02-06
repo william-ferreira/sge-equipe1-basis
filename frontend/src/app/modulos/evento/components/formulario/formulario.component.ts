@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Evento } from 'src/app/dominios/evento';
-import { EventoService } from '../../services/evento.service';
+import { EventoService } from '../../services/evento-service/evento.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TipoEvento } from 'src/app/dominios/tipoEvento';
-import { TipoEventoService } from 'src/app/modulos/tipo_evento/services/tipo-evento.service';
+import { TipoEventoService } from 'src/app/modulos/evento/services/tipo_evento/services/tipo-evento.service';
 import { ActivatedRoute } from '@angular/router';
+import { SelectItem } from 'primeng';
 
 @Component({
   selector: 'app-formulario',
@@ -20,7 +21,8 @@ export class FormularioComponent implements OnInit {
 
   formEvento: FormGroup;
   tiposEventos: TipoEvento[] = [];
-  tipoEventoSelecionado: TipoEvento;
+
+  tipos: SelectItem[] = [];
 
   constructor( 
     private fb: FormBuilder,
@@ -48,7 +50,7 @@ export class FormularioComponent implements OnInit {
       valor: '',
       localEvento: '',
       tipoInscricao: '',
-      tipoEvento: ['', Validators.required]
+      idTipoEvento: ['', Validators.required],
     });
   }
 
@@ -63,6 +65,12 @@ export class FormularioComponent implements OnInit {
     this.tipoEventoService.getTipoEventos()
     .subscribe(tipos=>{
       this.tiposEventos = tipos;
+      this.tipos = this.tiposEventos.map(tipo => {
+        return {
+          value: tipo.id,
+          label: tipo.descricao
+        }
+      })
     });
   }  
 
@@ -70,10 +78,9 @@ export class FormularioComponent implements OnInit {
     if (this.formEvento.invalid) {
       alert('Formulário inválido');
       return;
-    }        
-    this.evento.idTipoEvento = this.tipoEventoSelecionado.id;
+    }
 
-    if(this.edicao){      
+    if(this.edicao){  
       this.eventoService.editarEvento(this.evento)
       .subscribe( evento => {
         alert('Evento Editado');        
@@ -96,6 +103,10 @@ export class FormularioComponent implements OnInit {
 
   fecharDialog(eventoSalvo: Evento){
     this.eventoSalvo.emit(eventoSalvo);
+  }
+
+  dataTerminoMaiorDataInicio() {   
+    return this.evento.dataTermino && this.evento.dataInicio && this.evento.dataTermino > this.evento.dataInicio;
   }
 
 }

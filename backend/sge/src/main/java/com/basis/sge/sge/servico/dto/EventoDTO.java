@@ -1,6 +1,5 @@
 package com.basis.sge.sge.servico.dto;
 
-import com.basis.sge.sge.dominio.TipoEvento;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +23,6 @@ public class EventoDTO implements Serializable {
     private Integer quantVagas;
     private Double valor;
     private String localEvento;
-    // TODO: Encontrar melhor nome para variavel e tabela de tipo inscricao.
     @NotNull(message = "o tipo da inscricao deve ser informado")
     private Boolean tipoInscricao;
     @NotNull(message = "o id do tipo do evento deve ser informado")

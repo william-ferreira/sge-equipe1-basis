@@ -131,7 +131,7 @@
         </insert>
         <insert tableName="pre_inscricao">
             <column name="id_pre_inscricao">4</column>
-            <column name="id_usuario">3</column>
+            <column name="id_usuario">4</column>
             <column name="id_evento">1</column>
             <column name="id_tipo_situacao">1</column>
         </insert>

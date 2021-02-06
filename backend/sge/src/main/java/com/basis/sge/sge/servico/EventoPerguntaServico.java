@@ -1,14 +1,9 @@
 package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.dominio.EventoPergunta;
-import com.basis.sge.sge.dominio.PreInscricao;
 import com.basis.sge.sge.repositorio.EventoPerguntaRepositorio;
-import com.basis.sge.sge.repositorio.PreInscricaoRepositorio;
 import com.basis.sge.sge.servico.dto.EventoPerguntaDTO;
-import com.basis.sge.sge.servico.dto.PreInscricaoDTO;
-import com.basis.sge.sge.servico.exception.RegraNegocioException;
 import com.basis.sge.sge.servico.mapper.EventoPerguntaMapper;
-import com.basis.sge.sge.servico.mapper.PreInscricaoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

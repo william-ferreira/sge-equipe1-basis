@@ -31,6 +31,7 @@ public class PreInscricaoServico {
 
     private final UsuarioRepositorio usuarioRepositorio;
     private final EventoRepositorio eventoRepositorio;
+    private final InscricaoRespostaServico inscricaoRespostaServico;
 
     private static final Integer ID_TIPO_SITUACAO_CANCELADO = 4;
 
@@ -59,10 +60,10 @@ public class PreInscricaoServico {
         Evento evento = eventoRepositorio.findById(inscricao.getEvento().getId()).orElseThrow(() -> new RegraNegocioException("Evento invalido!"));
 
         String mensagem = "Sua Inscrição no evento"
-                + evento.getTitulo() +"e sua Chave de Inscricão é "
-                + usuario.getChave() +" Guarde essa chave para o caso de um Cancelamento";
+                + evento.getTitulo() + "e sua Chave de Inscricão é "
+                + usuario.getChave() + " Guarde essa chave para o caso de um Cancelamento";
 
-        emailUtil.enviarEmail( usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso", new ArrayList<>());
+        emailUtil.enviarEmail(usuario.getEmail(), mensagem, "Incrição Realizada Com Sucesso", new ArrayList<>());
 
         return inscricaoMapper.toDto(inscricao);
     }
@@ -105,5 +106,10 @@ public class PreInscricaoServico {
             if (eventoJaExistente && usuarioJaExistente)
                 throw new RegraNegocioException("Já existe um usuário inscrito nesse evento");
         });
+    }
+
+    public void removerTodosPorIdEvento(Integer idEvento) {
+        inscricaoRespostaServico.removerTodosPorIdEvento(idEvento);
+        inscricaoRepositorio.deleteAllByEventoId(idEvento);
     }
 }

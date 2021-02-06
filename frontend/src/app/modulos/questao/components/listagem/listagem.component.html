@@ -21,12 +21,13 @@
 </app-card>
 
 <p-dialog header="Nova Pergunta" [(visible)]="exibirDialog">
-    <app-formulario-questao  
+    <app-formulario-questao
+        [pergunta]="pergunta"  
         [edicao]="formularioEdicao"
         (perguntaSalva)="fecharDialog($event)"
         ></app-formulario-questao>
 </p-dialog>
 
 <div class="p-d-flex p-jc-end">
-    <button class="p-ml-2" type="button" (click)="mostrarDialog()" pButton label="Cadastrar Pergunta"></button>
+    <button class="p-ml-2" type="button" *ngIf="isAdmin" (click)="mostrarDialogCadastro()" pButton label="Cadastrar Pergunta"></button>
 </div>

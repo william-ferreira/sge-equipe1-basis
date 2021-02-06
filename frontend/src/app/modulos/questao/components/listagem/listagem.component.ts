@@ -11,7 +11,8 @@ export class ListagemComponent {
 
   @Input('idEvento') set eventoFn(idEvento: number) {
     if (idEvento) {
-      this.buscarPerguntas(idEvento);
+      this.idEventoAux = idEvento
+      this.buscarPerguntas(this.idEventoAux);
     }
   }
 
@@ -29,7 +30,6 @@ export class ListagemComponent {
   ) { }
 
   private buscarPerguntas(idEvento: number) {
-    this.idEventoAux = idEvento
     this.perguntaServico.getPerguntasIdEvento(idEvento)
       .subscribe((perguntas: Pergunta[]) => {
         this.perguntas = perguntas;
@@ -40,16 +40,26 @@ export class ListagemComponent {
     this.perguntaServico.getPerguntaId(idPergunta)
       .subscribe((pergunta => {
         this.pergunta = pergunta
+        this.mostrarDialog(true)
       }))
-    this.mostrarDialog(true)
+  }
+
+  private mostrarDialogCadastro(edicao = false) {
+    this.pergunta = new Pergunta;
+    this.mostrarDialog();
   }
 
   private mostrarDialog(edicao = false) {
-    this.formularioEdicao = edicao;
     this.exibirDialog = true;
+    this.formularioEdicao = edicao;
   }
 
   private fecharDialog(perguntaSalva: Pergunta) {
+    let eventoPergunta = { idEvento: this.idEventoAux, idPergunta: perguntaSalva.id }
+
+    this.perguntaServico.salvarPerguntaEvento(eventoPergunta)
+      .subscribe()
+
     this.buscarPerguntas(this.idEventoAux)
     this.exibirDialog = false;
   }
