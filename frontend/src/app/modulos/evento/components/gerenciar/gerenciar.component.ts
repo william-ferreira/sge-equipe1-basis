@@ -45,12 +45,12 @@ export class GerenciarComponent implements OnInit {
 
   buscarDetalhesInscricaoEvento() {
     for (let inscricaoEvento of this.inscricoesEvento) {
-      if (inscricaoEvento.idTipoSituacao === 1) {
+     
         console.log(inscricaoEvento);
         this.servico.obterListagemPorIdUsuario(inscricaoEvento.idUsuario)
           .subscribe(listagem => this.detalhesPreInscricao = listagem);
         console.log(this.detalhesPreInscricao);
-      }
+      
     }
 
   }
@@ -79,9 +79,9 @@ export class GerenciarComponent implements OnInit {
       .subscribe((inscricoes: Inscricao[]) => {
         for (let inscricao of inscricoes) {
           if (inscricao.idEvento === idEvento) {
-            if (inscricao.idTipoSituacao === 1) {
+            
               this.inscricoesEvento.push(inscricao)
-            }
+            
           }
         }
         this.buscarDetalhesInscricaoEvento();
