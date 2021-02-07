@@ -1,22 +1,23 @@
 <app-card [titulo]="'Lista de eventos'">
 
     <div class="p-d-flex p-jc-end">
-        <button class="p-m1-2" type="button" (click)="mostrarDialogCadastroEvento()" pButton label="Cadastrar Evento Dialog"></button>
+        <button class="p-m1-2" type="button" (click)="mostrarDialogCadastroEvento()" pButton
+            label="Cadastrar Evento Dialog"></button>
     </div>
 
     <p-accordion [multiple]="true">
-        <p-accordionTab header= {{evento.titulo}} *ngFor="let evento of eventos">
+        <p-accordionTab header={{evento.titulo}} *ngFor="let evento of eventos">
             <p-table [value]="[evento]">
-                <ng-template pTemplate = "header">
+                <ng-template pTemplate="header">
                     <tr>
                         <th>Data de Inicio</th>
                         <th>Data de Termino</th>
                         <th>Quantidade de Vagas</th>
-                        <th>Valor(R$)</th>                        
+                        <th>Valor(R$)</th>
                         <th>Local do Evento</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate = "body" let-e>
+                <ng-template pTemplate="body" let-e>
                     <tr>
                         <td>{{e.dataInicio | date: 'dd/MM/yyyy HH:mm'}}</td>
                         <td>{{e.dataTermino | date: 'dd/MM/yyyy HH:mm'}}</td>
@@ -31,8 +32,11 @@
                     icon="pi pi-pencil"></button>
                 <button style="margin: 5px;" (click)="confirmarDeletarEvento(evento.id)" class="p-m1-2" pButton
                     type="button" icon="pi pi-trash"></button>
-                <button style="margin: 5px; align-items: center; display: inline-flex;" (click)="mostrarDialogPerguntasPorEvento(evento.id)" class="p-m1-2" pButton
-                    type="button" icon="pi pi-question"></button>
+                <button style="margin: 5px; align-items: center; display: inline-flex;"
+                    (click)="mostrarDialogPerguntasPorEvento(evento.id)" class="p-m1-2" pButton type="button"
+                    icon="pi pi-question"></button>
+                <p-button  style="margin: 5px; align-items: center; display: inline-flex;" type="button" (click)="visibleSidebar3 = true" icon="pi pi-sign-in"></p-button>
+                <p-button  style="margin: 5px; align-items: center; display: inline-flex;" type="button" (click)="mostrarSideBar(evento.id)" icon="pi pi-users"></p-button>
             </div>
         </p-accordionTab>
     </p-accordion>
@@ -54,25 +58,17 @@
 <p-sidebar [style]="{'overflow': 'scroll'}" [(visible)]="visibleSidebar4" position="top" [baseZIndex]="10000">
     <div style="width: 100%">
         <h1 style="font-weight:normal;">{{evento.titulo}}</h1>
-        <app-gerenciar  [idEvento]="idEvento"></app-gerenciar>
+        <app-gerenciar [idEvento]="idEventoSel"></app-gerenciar>
     </div>
 </p-sidebar>
 
 <p-confirmDialog header="Confirmar Remover Evento" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <p-dialog header="Evento" [(visible)]="exibirDialogEvento">
-    <app-formulario
-        [evento] = "evento"
-        [edicao] = "formularioEdicao"
-        (eventoSalvo) = "fecharDialog($event)">
-    </app-formulario>        
+    <app-formulario [evento]="evento" [edicao]="formularioEdicao" (eventoSalvo)="fecharDialog($event)">
+    </app-formulario>
 </p-dialog>
 
 <p-dialog header="Perguntas" [(visible)]="exibirDialogPergunta">
-    <app-listagem-questao 
-    *ngIf="idEventoSel" 
-    [idEvento] = "idEventoSel"
-    [isAdmin] = true
-    ></app-listagem-questao>
+    <app-listagem-questao *ngIf="idEventoSel" [idEvento]="idEventoSel" [isAdmin]=true></app-listagem-questao>
 </p-dialog>
-

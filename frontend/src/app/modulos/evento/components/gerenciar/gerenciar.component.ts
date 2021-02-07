@@ -74,6 +74,8 @@ export class GerenciarComponent implements OnInit {
   }
 
   IdentificarInscricoesEvento(idEvento: number) {
+    console.log(idEvento);
+    
     this.inscricoesEvento = []
     this.servico.getInscricoes()
       .subscribe((inscricoes: Inscricao[]) => {
@@ -81,6 +83,7 @@ export class GerenciarComponent implements OnInit {
           if (inscricao.idEvento === idEvento) {
             
               this.inscricoesEvento.push(inscricao)
+              
             
           }
         }

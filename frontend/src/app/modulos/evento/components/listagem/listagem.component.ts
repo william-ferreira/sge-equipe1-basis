@@ -20,6 +20,7 @@ export class ListagemComponent implements OnInit {
   exibirDialogPergunta: boolean;
 
   idEventoSel: number;
+  idEvento: number;
 
   constructor(
     private servico: EventoService,
