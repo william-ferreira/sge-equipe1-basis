@@ -22,7 +22,7 @@
 
 <p-dialog header="Nova Pergunta" [(visible)]="exibirDialog">
     <app-formulario-questao
-        [pergunta]="pergunta"  
+        [idPergunta]="pergunta"  
         [edicao]="formularioEdicao"
         (perguntaSalva)="fecharDialog($event)"
         ></app-formulario-questao>

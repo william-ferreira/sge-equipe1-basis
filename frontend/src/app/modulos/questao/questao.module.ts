@@ -6,9 +6,10 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { PerguntaService } from './services/pergunta.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListagemUsuarioComponent } from './components/listagem-usuario/listagem-usuario.component';
 
 @NgModule({
-  declarations: [ListagemComponent, FormularioComponent],
+  declarations: [ListagemComponent, FormularioComponent, ListagemUsuarioComponent],
   providers: [
     PerguntaService
   ],
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     ListagemComponent,
-    FormularioComponent
+    FormularioComponent,
+    ListagemUsuarioComponent
   ]
 })
 export class QuestaoModule { }

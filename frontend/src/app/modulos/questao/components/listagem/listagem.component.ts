@@ -54,7 +54,7 @@ export class ListagemComponent {
     this.formularioEdicao = edicao;
   }
 
-  private fecharDialog(perguntaSalva: Pergunta) {
+  fecharDialog(perguntaSalva: Pergunta) {
     let eventoPergunta = { idEvento: this.idEventoAux, idPergunta: perguntaSalva.id }
 
     this.perguntaServico.salvarPerguntaEvento(eventoPergunta)

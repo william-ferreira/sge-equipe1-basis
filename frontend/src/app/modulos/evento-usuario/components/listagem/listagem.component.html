@@ -24,16 +24,16 @@
             </p-table>
             <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
                 <button style="margin: 5px; align-items: center; display: inline-flex;" (click)="mostrarDialogPerguntasPorEvento(evento.id)" class="p-m1-2" pButton
-                    type="button" icon="pi pi-question"></button>
+                    type="button" icon="pi pi-sign-in"></button>
             </div>
         </p-accordionTab>
     </p-accordion>                
 </app-card>
 
 <p-dialog header="Perguntas" [(visible)]="exibirDialogPergunta">
-    <app-listagem-questao 
+    <app-listagem-usuario
     *ngIf="idEventoSel" 
-    [idEvento] = "idEventoSel"
-    [isAdmin] = false
-    ></app-listagem-questao>
+    [idEvento] = "idEventoSel"    
+    ></app-listagem-usuario>
+    <button (click)='inscreverEvento()' pButton type="button" label="Inscrever-se" icon="pi pi-check"></button>
 </p-dialog>
