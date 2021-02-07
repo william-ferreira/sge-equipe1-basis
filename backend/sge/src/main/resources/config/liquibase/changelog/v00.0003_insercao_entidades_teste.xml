@@ -8,7 +8,7 @@
             <column name="id">1</column>
             <column name="nome">Vinicius</column>
             <column name="cpf">74507870089</column>
-            <column name="email">mijan37857@boldhut.com</column>
+            <column name="email">vinicius@boldhut.com</column>
             <column name="telefone">5584992390876</column>
             <column name="data_nascimento">1900-10-11</column>
             <column name="chave_usuario">100369</column>
@@ -17,7 +17,7 @@
             <column name="id">2</column>
             <column name="nome">Auelio</column>
             <column name="cpf">04594375006</column>
-            <column name="email">menon27611@botfed.com</column>
+            <column name="email">aurelio@botfed.com</column>
             <column name="telefone">5581992390122</column>
             <column name="data_nascimento">1900-10-11</column>
             <column name="chave_usuario">263730</column>
@@ -26,7 +26,7 @@
             <column name="id">3</column>
             <column name="nome">Edson</column>
             <column name="cpf">97011690000</column>
-            <column name="email">vacek61458@alicdh.com</column>
+            <column name="email">edson@alicdh.com</column>
             <column name="telefone">5551931256122</column>
             <column name="data_nascimento">1900-10-11</column>
             <column name="chave_usuario">262963</column>
@@ -35,7 +35,7 @@
             <column name="id">4</column>
             <column name="nome">William</column>
             <column name="cpf">21722436042</column>
-            <column name="email">mijan37858@boldhut.com</column>
+            <column name="email">william@boldhut.com</column>
             <column name="telefone">1</column>
             <column name="data_nascimento">1900-10-11</column>
             <column name="chave_usuario">148977</column>

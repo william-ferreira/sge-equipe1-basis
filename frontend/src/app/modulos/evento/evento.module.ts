@@ -1,3 +1,5 @@
+import { UsuarioService } from './services/usuario.service';
+import { InscricaoService } from './services/inscricao.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -9,11 +11,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventoService } from './services/evento-service/evento.service';
 import { QuestaoModule } from '../questao/questao.module';
 
+import { InscreverComponent } from './components/inscrever/inscrever.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { GerenciarComponent } from './components/gerenciar/gerenciar.component';
 
 @NgModule({
-  declarations: [FormularioComponent, ListagemComponent],
-  providers:[
-    EventoService
+  declarations: [FormularioComponent, ListagemComponent, InscreverComponent, GerenciarComponent,],
+  providers: [
+    EventoService, InscricaoService, UsuarioService
   ],
   imports: [
     CommonModule,
@@ -21,7 +27,10 @@ import { QuestaoModule } from '../questao/questao.module';
     ReactiveFormsModule,
     EventoRoutingModule,
     SharedModule,
-    QuestaoModule
+    QuestaoModule,
+    SidebarModule,
+    VirtualScrollerModule,
+    SharedModule,
   ]
 })
 export class EventoModule { }

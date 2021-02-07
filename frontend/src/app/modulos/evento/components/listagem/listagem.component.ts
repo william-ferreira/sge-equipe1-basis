@@ -6,16 +6,19 @@ import { EventoService } from '../../services/evento-service/evento.service';
 @Component({
   selector: 'app-listagem',
   templateUrl: './listagem.component.html',
-  styleUrls: ['./listagem.component.css']
+  styleUrls: ['./listagem.component.css'],
 })
 export class ListagemComponent implements OnInit {
+
+  visibleSidebar3;
+  visibleSidebar4;
 
   eventos: Evento[] = [];
   evento = new Evento();
   exibirDialogEvento = false;
-  exibirDialogPergunta = false;
-
   formularioEdicao: boolean;
+  exibirDialogPergunta: boolean;
+
   idEventoSel: number;
 
   constructor(
@@ -47,15 +50,28 @@ export class ListagemComponent implements OnInit {
     this.mostrarDialogEvento();
   }
 
-
   mostrarDialogEvento(edicao = false) {
     this.exibirDialogEvento = true;
     this.formularioEdicao = edicao;
   }
 
+  mostrarSideBar(idEvento: number) {
+    this.servico.buscarEventoPorId(idEvento)
+      .subscribe(evento => {
+        this.evento = evento;
+      });
+
+    this.visibleSidebar4 = true
+    this.idEventoSel = idEvento
+  }
+
+
   fecharDialog(eventoSalvo: Evento) {
     this.exibirDialogEvento = false;
     this.buscarEventos();
+  }
+  mostrarDialogPerguntas() {
+    this.exibirDialogPergunta = true;
   }
 
   confirmarDeletarEvento(id: number) {

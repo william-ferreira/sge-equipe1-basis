@@ -19,7 +19,7 @@
         </insert>
         <insert tableName="tipo_evento">
             <column name="id">4</column>
-            <column name="descricao">Treinamento,</column>
+            <column name="descricao">Treinamento</column>
         </insert>
     </changeSet>
 

@@ -1,0 +1,7 @@
+.ui-sidebar-top {
+    top: 0;
+    left: 0;
+    width: 85%;
+    height: 80% !important;
+    transform: translateY(-100%);
+}

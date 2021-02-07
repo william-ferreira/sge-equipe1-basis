@@ -39,6 +39,24 @@
 
 </app-card>
 
+<p-sidebar class="sidebarPergunta" [style]="{'overflow': 'scroll'}" [(visible)]="visibleSidebar3" position="top"
+    [baseZIndex]="10000">
+    <div style="width: 100%">
+        <h1 inputmode="" style="font-weight:normal">{{evento.titulo}}</h1>
+        <app-inscrever></app-inscrever>
+        <p-button type="button" (click)="visibleSidebar3 = false" label="Enviar" styleClass="p-button-success">
+        </p-button>
+        <p-button type="button" (click)="visibleSidebar3 = false" label="Cancelar" styleClass="p-button-secondary">
+        </p-button>
+    </div>
+</p-sidebar>
+
+<p-sidebar [style]="{'overflow': 'scroll'}" [(visible)]="visibleSidebar4" position="top" [baseZIndex]="10000">
+    <div style="width: 100%">
+        <h1 style="font-weight:normal;">{{evento.titulo}}</h1>
+        <app-gerenciar  [idEvento]="idEvento"></app-gerenciar>
+    </div>
+</p-sidebar>
 
 <p-confirmDialog header="Confirmar Remover Evento" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
@@ -57,3 +75,4 @@
     [isAdmin] = true
     ></app-listagem-questao>
 </p-dialog>
+

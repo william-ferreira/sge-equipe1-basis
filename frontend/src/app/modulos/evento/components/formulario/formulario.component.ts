@@ -14,7 +14,7 @@ import { SelectItem } from 'primeng';
   styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent implements OnInit {
-  
+
   @Input() evento = new Evento();
   @Input() edicao = false;
   @Output() eventoSalvo = new EventEmitter<Evento>();
@@ -24,7 +24,7 @@ export class FormularioComponent implements OnInit {
 
   tipos: SelectItem[] = [];
 
-  constructor( 
+  constructor(
     private fb: FormBuilder,
     private eventoService: EventoService,
     private tipoEventoService: TipoEventoService,
@@ -33,18 +33,18 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarTiposEventos();
-    
-    this.route.params.subscribe(params =>{
-      if(params.id){
+
+    this.route.params.subscribe(params => {
+      if (params.id) {
         this.edicao = true;
-        this.buscarEvento(params.id);        
+        this.buscarEvento(params.id);
       }
     });
 
     this.formEvento = this.fb.group({
       titulo: ['', Validators.required],
       dataInicio: ['', Validators.required],
-      dataTermino: ['', Validators.required], 
+      dataTermino: ['', Validators.required],
       descricao: '',
       quantVagas: '',
       valor: '',
@@ -54,25 +54,25 @@ export class FormularioComponent implements OnInit {
     });
   }
 
-  buscarEvento(id: number){
+  buscarEvento(id: number) {
     this.eventoService.buscarEventoPorId(id)
-    .subscribe( evento => {
-      this.evento = evento;
-    })
+      .subscribe(evento => {
+        this.evento = evento;
+      })
   }
 
-  listarTiposEventos(){
+  listarTiposEventos() {
     this.tipoEventoService.getTipoEventos()
-    .subscribe(tipos=>{
-      this.tiposEventos = tipos;
-      this.tipos = this.tiposEventos.map(tipo => {
-        return {
-          value: tipo.id,
-          label: tipo.descricao
-        }
-      })
-    });
-  }  
+      .subscribe(tipos => {
+        this.tiposEventos = tipos;
+        this.tipos = this.tiposEventos.map(tipo => {
+          return {
+            value: tipo.id,
+            label: tipo.descricao
+          }
+        })
+      });
+  }
 
   salvar() {
     if (this.formEvento.invalid) {
@@ -80,33 +80,32 @@ export class FormularioComponent implements OnInit {
       return;
     }
 
-    if(this.edicao){  
+    if (this.edicao) {
       this.eventoService.editarEvento(this.evento)
-      .subscribe( evento => {
-        alert('Evento Editado');        
-        this.fecharDialog(evento);       
-      }, (err: HttpErrorResponse) =>{
-        alert(err.error.message);
-      });
+        .subscribe(evento => {
+          alert('Evento Editado');
+          this.fecharDialog(evento);
+        }, (err: HttpErrorResponse) => {
+          alert(err.error.message);
+        });
     }
-    else{
+    else {
       this.eventoService.salvarEvento(this.evento)
-      .subscribe(evento => {
-        alert('Evento Salvo');
-        this.fecharDialog(evento);
-      }, (erro: HttpErrorResponse) => {
-        alert(erro.error.message);
-      });      
-    }   
-    
+        .subscribe(evento => {
+          alert('Evento Salvo');
+          this.fecharDialog(evento);
+        }, (erro: HttpErrorResponse) => {
+          alert(erro.error.message);
+        });
+    }
   }
 
-  fecharDialog(eventoSalvo: Evento){
+  fecharDialog(eventoSalvo: Evento) {
     this.eventoSalvo.emit(eventoSalvo);
   }
 
-  dataTerminoMaiorDataInicio() {   
-    return this.evento.dataTermino && this.evento.dataInicio && this.evento.dataTermino > this.evento.dataInicio;
+  dataTerminoMaiorDataInicio() {
+    return this.evento.dataTermino && this.evento.dataInicio && this.evento.dataTermino >= this.evento.dataInicio;
   }
 
 }

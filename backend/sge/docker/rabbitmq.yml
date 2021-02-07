@@ -1,0 +1,11 @@
+version: '2'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      RABBITMQ_ERLANG_COOKIE: biscoito_caramelisado
+      RABBITMQ_DEFAULT_USER: usuariodabasisadmin
+      RABBITMQ_DEFAULT_PASS: usuariodabasis
+    ports:
+      - 5672:5672
+      - 15672:15672

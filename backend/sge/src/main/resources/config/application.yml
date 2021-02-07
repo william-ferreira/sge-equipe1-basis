@@ -45,6 +45,14 @@ spring:
                         enable: true
                         required: true
                     quitwait: false
+    rabbitmq:
+        username: usuariodabasisadmin
+        password: usuariodabasis
+    cloud:
+        stream:
+            bindings:
+                mailer:
+                    destination: mailer
 server:
     port: 8080
     error:

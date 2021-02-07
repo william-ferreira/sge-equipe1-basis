@@ -2389,3 +2389,10 @@ body .layout-wrapper.layout-compact .ui-datepicker tbody td a, body .layout-wrap
   }
 }
 /* Add your customizations of layout here */
+body .ui-sidebar-top {
+  top: 0;
+  left: 0;
+  width: 85%;
+  height: 80%;
+  transform: translateY(-100%);
+}
