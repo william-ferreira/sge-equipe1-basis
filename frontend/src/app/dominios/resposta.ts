@@ -1,8 +1,9 @@
-export class Resposta{
+export class Resposta {
+    titulo: string;
     resposta: string;
     idInscricao: number;
-    idEvento:number;
+    idEvento: number;
     idPergunta: number
 
-    constructor(){}
+    constructor() { }
 }

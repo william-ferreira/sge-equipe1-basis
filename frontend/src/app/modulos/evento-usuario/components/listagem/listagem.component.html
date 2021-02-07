@@ -30,11 +30,12 @@
     </p-accordion>                
 </app-card>
 
+
+
 <p-dialog header="Perguntas" [(visible)]="exibirDialogPergunta">
-    <app-listagem-questao
+    <app-listagem-perguntas-usuario
     *ngIf="idEventoSel" 
     [idEvento] = "idEventoSel"    
-    [isAdmin] = false
-    ></app-listagem-questao>
-    <button (click)='inscreverEvento()' pButton type="button" label="Inscrever-se" icon="pi pi-check"></button>
+    style="text-align: center;"></app-listagem-perguntas-usuario>
+    <button  (click)='inscreverEvento()' pButton type="button" label="Inscrever-se" icon="pi pi-check"></button>
 </p-dialog>

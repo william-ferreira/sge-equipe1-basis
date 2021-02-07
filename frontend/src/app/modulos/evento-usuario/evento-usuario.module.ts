@@ -7,10 +7,11 @@ import { ListagemComponent } from './components/listagem/listagem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QuestaoModule } from '../questao/questao.module';
+import { ListagemPerguntasUsuarioComponent } from './components/listagem-perguntas-usuario/listagem-perguntas-usuario.component';
 
 
 @NgModule({
-  declarations: [ListagemComponent],
+  declarations: [ListagemComponent, ListagemPerguntasUsuarioComponent],
   providers:[InscricaoService],
   imports: [
     CommonModule,
