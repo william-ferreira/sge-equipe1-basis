@@ -3,6 +3,7 @@ package com.basis.sge.sge.recurso;
 import com.basis.sge.sge.servico.PreInscricaoServico;
 import com.basis.sge.sge.servico.dto.*;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,8 @@ public class PreInscricaoRecurso {
     @PostMapping
     public ResponseEntity<PreInscricaoDTO> salvar(@RequestBody PreInscricaoDTO entidadeDTO) {
         PreInscricaoDTO entidade = preInscricaoServico.salvar(entidadeDTO);
-        return ResponseEntity.status(201).body(entidade);
+        return ResponseEntity.ok(entidade);
+
     }
 
     @DeleteMapping("/{id}")

@@ -1,3 +1,4 @@
+import { InscricaoService } from './../inscricao-adm/service/inscricao.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +11,7 @@ import { QuestaoModule } from '../questao/questao.module';
 
 @NgModule({
   declarations: [ListagemComponent],
+  providers:[InscricaoService],
   imports: [
     CommonModule,
     FormsModule,

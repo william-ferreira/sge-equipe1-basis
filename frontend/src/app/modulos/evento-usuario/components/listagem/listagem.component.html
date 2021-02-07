@@ -31,9 +31,10 @@
 </app-card>
 
 <p-dialog header="Perguntas" [(visible)]="exibirDialogPergunta">
-    <app-listagem-usuario
+    <app-listagem-questao
     *ngIf="idEventoSel" 
     [idEvento] = "idEventoSel"    
-    ></app-listagem-usuario>
+    [isAdmin] = false
+    ></app-listagem-questao>
     <button (click)='inscreverEvento()' pButton type="button" label="Inscrever-se" icon="pi pi-check"></button>
 </p-dialog>

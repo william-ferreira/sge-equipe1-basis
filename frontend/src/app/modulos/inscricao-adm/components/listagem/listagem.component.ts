@@ -27,7 +27,7 @@ export class ListagemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buscarInscricoesUsuario(3);
+    this.buscarInscricoesUsuario(4);
   }
   private buscarInscricoes() {
     this.servico.getInscricoes()

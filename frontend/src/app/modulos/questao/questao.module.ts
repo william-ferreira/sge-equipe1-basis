@@ -6,10 +6,10 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { PerguntaService } from './services/pergunta.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ListagemUsuarioComponent } from './components/listagem-usuario/listagem-usuario.component';
+
 
 @NgModule({
-  declarations: [ListagemComponent, FormularioComponent, ListagemUsuarioComponent],
+  declarations: [ListagemComponent, FormularioComponent],
   providers: [
     PerguntaService
   ],
@@ -23,7 +23,7 @@ import { ListagemUsuarioComponent } from './components/listagem-usuario/listagem
   exports: [
     ListagemComponent,
     FormularioComponent,
-    ListagemUsuarioComponent
+   
   ]
 })
 export class QuestaoModule { }

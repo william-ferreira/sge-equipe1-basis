@@ -3,6 +3,7 @@ export class Inscricao {
     idTipoSituacao: number;
     idUsuario: number;
     idEvento: number;
+    resposta = [];
     
 
     constructor() { }
