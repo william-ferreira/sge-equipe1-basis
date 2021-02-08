@@ -4,8 +4,7 @@
         <ng-template pTemplate="header">
             <tr>
                 <th>Nome do Evento</th>
-                <th>Situação</th>
-                <th>E-Mail</th>               
+                <th>Situação</th>       
                 <th style="width: 80px;" >Cancelar </th>
                 
             </tr>
@@ -15,7 +14,6 @@
             <tr>
                 <td>{{detalheInscricao.nomeEvento}}</td>
                 <td>{{detalheInscricao.tipoSituacao}}</td>
-                <td>{{detalheInscricao.email}}</td>
                 <td class="p-d-flex p-jc-center">
                     <button (click)="cancelarInscricao(detalheInscricao)" class="p-ml-2" pButton
                         type="button" icon="pi pi-times"></button>

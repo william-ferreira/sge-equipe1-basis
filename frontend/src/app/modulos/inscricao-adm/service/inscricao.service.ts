@@ -31,13 +31,9 @@ export class InscricaoService {
     return this.http.post<InscricaoResposta>(this.urlInscricaReposta, inscricaoResposta);
   }
 
-  // editarUsuario(usuario: Usuario): Observable<Usuario> {
-  //   return this.http.put<Usuario>(this.url, usuario);
-  // }
   cancelarInscricaoEvento(detalhesInscricao: DetalhesInscricao): Observable <DetalhesInscricao>{
     return this.http.put<DetalhesInscricao>(`${this.url}/cancelar-inscricao-evento/`,detalhesInscricao );
   }
-
 
   deletarInscricao(id: number): Observable<any> {
     return this.http.delete(`${this.url}/${id}`);
@@ -50,6 +46,5 @@ export class InscricaoService {
   buscarDetalhesInscricaoEvento(idEvento: number): Observable<Inscricao[]> {
     return this.http.get<Inscricao[]>(`${this.url}/detalhes-inscricao/${idEvento}`);
   }
-
 
 }

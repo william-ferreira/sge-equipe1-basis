@@ -1,12 +1,10 @@
-<app-card>
+<p-card>
     <h5>Responda as perguntas a seguir:</h5>
-    <div *ngFor="let pergunta of perguntas" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">
-        <label style="text-align:inherit;" for="firstname2">{{ pergunta.titulo }}</label>        
-        <textarea style="text-align: center;" type="text" pInputText [(ngModel)]="pergunta.resposta" id="firstname2" rows="5" cols="30" pInputTextarea autoResize="autoResize"></textarea> 
-        <div *ngIf="pergunta.obrigatoriedade && !pergunta.resposta"><b>Resposta é obrigatória</b></div>       
-        <!-- <input id="firstname2" [(ngModel)]="pergunta.resposta" type="text" pInputText /> -->
-        {{pergunta | json}}
+    <div *ngFor="let pergunta of perguntas">
+        <p><label style="text-align:inherit;" for="firstname2">{{ pergunta.titulo }}</label></p>
+        <p><textarea style="text-align: center;" type="text" pInputText [(ngModel)]="pergunta.resposta" id="firstname2" rows="5" cols="30" pInputTextarea autoResize="autoResize"></textarea></p>
+        <div *ngIf="pergunta.obrigatoriedade && !pergunta.resposta"><b>Resposta é obrigatória</b></div>
     </div>
     <button pButton label="Inscrever" (click)="construirInscricao()"></button>
     
-</app-card>
+</p-card>

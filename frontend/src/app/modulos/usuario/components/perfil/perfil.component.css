@@ -1,29 +1,29 @@
-.cadastrar-button {
-    margin-top: 30px;
-    padding-top: 20px;
-    padding-right: 60px;
-    padding-left: 60px;
-    background-color: yellowgreen;
-    border: yellowgreen;
+.caixa {
+    transform: scale(1.2);
+}
+
+.perfil-button {
+    margin-top: 20px;
+    padding-left: 50px;
   }
 
-  .cadastro-header-text {
-    padding-bottom: 30px;
-  }
+.perfil-header-text {
+    padding-left: 40px;
+}
 
-  .cadastro-text-button {
+.cadastro-text-button {
     margin-top: -12px;
-  }
+}
 
-  .perfil-panel {
+.cadastro-text {
+    padding-right: 25px;
+}
+
+.perfil-panel {
     display: flex;
     justify-content: center;
-    align-items: center;
-    
-    text-align: center;
-    
-    width: 350px;
     
     
-    margin: 200px auto 7.0vw 40vw;
-  }
+    
+    margin: 200px auto 10vw 0;
+}
