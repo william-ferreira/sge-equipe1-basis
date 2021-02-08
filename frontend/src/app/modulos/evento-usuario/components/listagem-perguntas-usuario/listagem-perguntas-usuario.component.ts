@@ -1,8 +1,11 @@
-import { Component,Input } from '@angular/core';
+import { Component,Input, Output } from '@angular/core';
 import { Pergunta } from 'src/app/dominios/pergunta';
 import { PerguntaService } from '../../../questao/services/pergunta.service';
 import { Resposta } from 'src/app/dominios/resposta';
 import { InscricaoService }from '../../../inscricao-adm/service/inscricao.service'
+import { InscricaoResposta } from 'src/app/dominios/inscricao-resposta';
+import { Inscricao } from 'src/app/dominios/inscricao';
+import { EventEmitter } from 'events';
 
 
 @Component({
@@ -20,7 +23,16 @@ export class ListagemPerguntasUsuarioComponent {
     }
   }
 
+  // @Output() inscricaoSalva = new EventEmitter()
+
   @Input() isAdmin: boolean
+
+  @Input('resposta') set respostaFn(resposta: string){
+    if(resposta){
+      this.resposta = resposta;
+      this.respostas.push(resposta);      
+    }
+  }
 
   perguntas: Pergunta[] = [];
   pergunta: Pergunta;
@@ -29,17 +41,18 @@ export class ListagemPerguntasUsuarioComponent {
   formularioEdicao: boolean
   isAdim = true;
   idInscricao = 1;
-  resposta: String;
-  perguntasResposta: Resposta[] = [];
+  resposta: string;
+  respostas: string[] = [];
+  perguntasResposta: InscricaoResposta[] = [];
+
+  idInscricaoAux: number;
   
-  
+    
 
   constructor(
     private perguntaServico: PerguntaService,
-    private inscricaoSerico: InscricaoService
+    private inscricaoServico: InscricaoService,
   ) { }
-
-
 
   private buscarPerguntas(idEvento: number) {
 
@@ -50,21 +63,54 @@ export class ListagemPerguntasUsuarioComponent {
       })
   }
 
+  public construirInscricao(){
+    let inscricao = new Inscricao();
+
+    this.construirPerguntaResposta();
+    
+    inscricao.resposta = this.perguntasResposta;
+    inscricao.idEvento = this.idEventoAux;
+    inscricao.idUsuario = 4;
+    inscricao.idTipoSituacao = 1;
+    inscricao.id = null;    
+
+    this.inscricaoServico.salvarInscricao(inscricao)
+    .subscribe(inscricao => {
+      this.idInscricaoAux = inscricao.id;
+      console.log("Inscricao Pré-pergunta: ",inscricao);
+
+      this.salvaInscricaoResposta(this.idInscricaoAux);
+
+      this.fecharDialogInscricao();
+
+    });
+  }
+
+  private salvaInscricaoResposta(idInscricao: number){
+    this.perguntasResposta.forEach(resposta =>{
+      resposta.idInscricao = idInscricao;
+      console.log(resposta);
+      
+      this.inscricaoServico.salvarInscricaoResposta(resposta).subscribe();
+    });
+  }
+
   private construirPerguntaResposta() {
     this.perguntasResposta = [];
     this.perguntas.forEach(pergunta => {
-      let perguntaResposta: Resposta = { 
-        idInscricao: this.idInscricao,
-        titulo: pergunta.titulo,
-        resposta: '',
+      let inscricaoResposta: InscricaoResposta = { 
+        idInscricao: null,
+        resposta: pergunta.resposta,
         idEvento: this.idEventoAux ,
         idPergunta: pergunta.id
       }
-      console.log(perguntaResposta);
+      console.log(inscricaoResposta);
       
-      this.perguntasResposta.push(perguntaResposta)
+      this.perguntasResposta.push(inscricaoResposta)
     });
   }
+
+
 
   private mostrarDialogEditar(idPergunta: number) {
     this.perguntaServico.getPerguntaId(idPergunta)
@@ -83,6 +129,12 @@ export class ListagemPerguntasUsuarioComponent {
     this.exibirDialog = true;
     this.formularioEdicao = edicao;
   }
+
+  fecharDialogInscricao(){
+    this.exibirDialog = false;
+  }
+
+
 
   fecharDialog(perguntaSalva: Pergunta) {
     let eventoPergunta = { idEvento: this.idEventoAux, idPergunta: perguntaSalva.id }

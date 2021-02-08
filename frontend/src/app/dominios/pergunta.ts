@@ -2,7 +2,7 @@ export class Pergunta {
     id: number;
     titulo: string = "";
     obrigatoriedade: boolean = true;
-    resposta: String;
+    resposta: string;
 
     constructor() { }
 }

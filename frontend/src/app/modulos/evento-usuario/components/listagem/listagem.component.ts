@@ -13,6 +13,7 @@ export class ListagemComponent implements OnInit {
   eventos: Evento[] = [];
   exibirDialogPergunta = false;
   idEventoSel: number;
+  resposta: string;
 
   constructor(
     private eventoServico: EventoService,

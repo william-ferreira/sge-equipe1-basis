@@ -6,11 +6,13 @@ import { environment } from './../../../../environments/environment';
 
 import { Inscricao } from './../../../dominios/inscricao';
 import { DetalhesInscricao } from 'src/app/dominios/detalhesInscricao';
+import { InscricaoResposta } from 'src/app/dominios/inscricao-resposta';
 
 @Injectable()
 export class InscricaoService {
 
   url = `${environment.apiUrl}/inscricoes`;
+  urlInscricaReposta = `${environment.apiUrl}/respostas`
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +25,10 @@ export class InscricaoService {
 
   salvarInscricao(inscricao: Inscricao): Observable<Inscricao> {
     return this.http.post<Inscricao>(this.url, inscricao);
+  }
+
+  salvarInscricaoResposta(inscricaoResposta: InscricaoResposta): Observable<InscricaoResposta>{
+    return this.http.post<InscricaoResposta>(this.urlInscricaReposta, inscricaoResposta);
   }
 
   // editarUsuario(usuario: Usuario): Observable<Usuario> {

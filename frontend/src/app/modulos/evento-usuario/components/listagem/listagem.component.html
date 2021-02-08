@@ -35,7 +35,8 @@
 <p-dialog header="Perguntas" [(visible)]="exibirDialogPergunta">
     <app-listagem-perguntas-usuario
     *ngIf="idEventoSel" 
-    [idEvento] = "idEventoSel"    
+    [idEvento] = "idEventoSel"
+    [resposta] = "resposta"    
     style="text-align: center;"></app-listagem-perguntas-usuario>
-    <button  (click)='inscreverEvento()' pButton type="button" label="Inscrever-se" icon="pi pi-check"></button>
+    <!-- <button  (click)='inscreverEvento()' pButton type="button" label="Inscrever-se" icon="pi pi-check"></button> -->
 </p-dialog>

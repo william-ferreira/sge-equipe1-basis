@@ -28,7 +28,7 @@ public class InscricaoRespostaRecurso {
     }
 
     @PostMapping
-    public ResponseEntity<InscricaoRespostaDTO> salvar(@Valid @RequestBody InscricaoRespostaDTO inscricaoRespostaDTO) {
+    public ResponseEntity<InscricaoRespostaDTO> salvar(@RequestBody InscricaoRespostaDTO inscricaoRespostaDTO) {
         InscricaoRespostaDTO inscricaoResposta = inscricaoRespostaServico.salvar(inscricaoRespostaDTO);
         return ResponseEntity.ok(inscricaoResposta);
     }
