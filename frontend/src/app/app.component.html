@@ -10,12 +10,12 @@
             'layout-menu-overlay-active': menuService.overlayMenuActive,
             'menu-layout-horizontal': menuService.isHorizontal(),
             'menu-layout-slim': menuService.isSlim(),
-            'layout-menu-static-inactive': menuService.staticMenuDesktopInactive,
+            'layout-menu-static-inactive': !menuService.staticMenuDesktopInactive,
             'layout-menu-static-active': menuService.staticMenuMobileActive
         }">
         <app-topbar></app-topbar>
 
-        <div class="layout-menu" [ngClass]="{ 'layout-menu-dark': darkMenu }" (click)="onMenuClick($event)">
+        <div class="layout-menu" *ngIf="loginService.isLoggedIn()" [ngClass]="{ 'layout-menu-dark': darkMenu }" (click)="onMenuClick($event)">
             <p-scrollPanel #scrollPanel [style]="{ height: '100%' }">
                 <app-menu></app-menu>
             </p-scrollPanel>

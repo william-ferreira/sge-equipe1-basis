@@ -11,6 +11,7 @@ import com.basis.sge.sge.servico.dto.UsuarioDTO;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -34,7 +35,7 @@ public class UsuarioServico {
         return usuarioMapper.toDto(usuario);
     }
 
-    public UsuarioDTO salvar(UsuarioDTO usuarioDTO) throws RegraNegocioException {
+    public UsuarioDTO salvar(UsuarioDTO usuarioDTO) {
         Usuario usuario = usuarioMapper.toEntity(usuarioDTO);
         usuario.setChave(UUID.randomUUID().toString());
 
@@ -57,7 +58,7 @@ public class UsuarioServico {
         usuario.setChave(usuarioSalvo.getChave());
 
         if (cpfExistente(usuario) && (((usuarioSalvo.getId().intValue())!=(usuario.getId().intValue())))) {
-            throw new RegraNegocioException("O número de CPF já está sendo utilizado."); }
+            throw new RuntimeException("O número de CPF já está sendo utilizado."); }
         if (emailExistente(usuario) && (!usuarioSalvo.getId().equals(usuario.getId()))) {
             throw new RegraNegocioException("O endereço de email já está sendo utilizado."); }
 
@@ -75,15 +76,8 @@ public class UsuarioServico {
                 .orElseThrow(() -> new RegraNegocioException("Usuário não encontrado."));
     }
 
-    /**
-     * Retorna true caso o ID seja unico no banco
-     * @param usuario
-     * @return
-     * @Author William
-     */
     public Boolean idUnico(Usuario usuario) {
         List<Usuario> usuariosNoBanco = usuarioRepositorio.findAll();
-
         // Percorre usuarios do banco verificando se há algum elemento com o ID de usuario
         for (Usuario u : usuariosNoBanco) {
             if (u.getId()!=null) {
@@ -100,7 +94,7 @@ public class UsuarioServico {
         List<Usuario> usuariosNoBanco = usuarioRepositorio.findAll();
         // Percorre usuarios do banco verificando se o CPF é unico
         for (Usuario u : usuariosNoBanco) {
-            if (/*(u.getId().intValue() != usuario.getId().intValue()) &&*/ u.getCpf().contentEquals(usuario.getCpf())) {
+            if (u.getCpf().contentEquals(usuario.getCpf())) {
                 return true; // O CPF já está sendo utilizado por algum usuário no banco
             }
         }
@@ -111,9 +105,8 @@ public class UsuarioServico {
     public Boolean emailExistente(Usuario usuario) {
         List<Usuario> usuariosNoBanco = usuarioRepositorio.findAll();
 
-        // Percorre usuarios do banco verificando se o CPF é unico
         for (Usuario u : usuariosNoBanco) {
-            if (/*(u.getId().intValue() != usuario.getId().intValue()) &&*/ u.getEmail().contentEquals(usuario.getEmail())) {
+            if (u.getEmail().contentEquals(usuario.getEmail())) {
                 return true; // O email já está sendo utilizado por algum usuário no banco
             }
         }
@@ -122,11 +115,26 @@ public class UsuarioServico {
     }
 
     public UsuarioDTO obterPorChave(String chave) {
-        Usuario usuario = usuarioRepositorio.findByChave(chave);
-        if (usuario == null)
-            throw new RegraNegocioException("Não há um usuario com essa chave na base");
+        if (isAdmin(chave)) {
+            Usuario admin = buscar(1); // Pesquisando por ID 1, encontrará o admin no banco
 
-        return usuarioMapper.toDto(usuario);
+            return usuarioMapper.toDto(admin);
+        } else {
+            Usuario usuario = usuarioRepositorio.findByChave(chave);
+
+            if (usuario == null) {
+                throw new RegraNegocioException("Não há um usuario com essa chave na base");
+            }
+
+            return usuarioMapper.toDto(usuario);
+        }
+    }
+
+    public Boolean isAdmin(String chave) {
+        if (chave.contentEquals("administradorsgebasis")) {
+            return true;
+        }
+        return false;
     }
 
 }

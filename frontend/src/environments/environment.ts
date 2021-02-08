@@ -5,10 +5,10 @@
 
 export const environment = {
     production: false,
-    apiUrl: '/api',
+    apiUrl: 'api',
     auth: {
         baseUrl: '',
-        loginUrl: '/api/sso/login',
+        loginUrl: '/api/login',
         logoutUrl: '/api/logout',
         detailsUrl: '/api/user/details',
         tokenValidationUrl: '/api/token/validate',

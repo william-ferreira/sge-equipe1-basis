@@ -1,0 +1,29 @@
+.cadastrar-button {
+    margin-top: 30px;
+    padding-top: 20px;
+    padding-right: 60px;
+    padding-left: 60px;
+    background-color: yellowgreen;
+    border: yellowgreen;
+  }
+
+  .cadastro-header-text {
+    padding-bottom: 30px;
+  }
+
+  .cadastro-text-button {
+    margin-top: -12px;
+  }
+
+  .cadastrar-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    text-align: center;
+    
+    width: 350px;
+    
+    
+    margin: 200px auto 7.0vw 40vw;
+  }

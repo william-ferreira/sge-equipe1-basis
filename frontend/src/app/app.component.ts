@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, ElementRef, Renderer2, ViewChild, OnDestroy, OnInit, NgZone } from '@angular/core';
 import { ScrollPanel } from 'primeng';
 import { MenusService, MenuOrientation } from '@nuvem/primeng-components';
+import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -36,6 +38,7 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
     viewMinWidth = 640;
 
+
     @ViewChild('layoutContainer', { static: true }) layourContainerViewChild: ElementRef;
 
     @ViewChild('scrollPanel', { static: true }) layoutMenuScrollerViewChild: ScrollPanel;
@@ -44,15 +47,29 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
     rippleMouseDownListener: EventListenerOrEventListenerObject;
 
-    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService) { }
+    constructor(public renderer2: Renderer2, public zone: NgZone, public menuService: MenusService, public loginService: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
         this.zone.runOutsideAngular(() => { this.bindRipple(); });
 
-        this.menuService.itens = [
-            { label: 'Dashboard', icon: 'dashboard', routerLink: ['/'] },
-            { label: 'Usuario', icon: 'dashboard', routerLink: ['/usuarios'] }
-        ];
+        if (!this.loginService.isLoggedIn()) {
+            this.router.navigate(['login'])
+        }
+        
+        
+        if (this.loginService.isAdminLoggedIn()) { // MENU DE ADMINISTRADOR
+            this.menuService.itens = [
+                // INSERIR TODAS AS ROTAS POSSÍVEIS AO ADMINISTRADOR
+                { label: 'Meus eventos', icon: 'dashboard', routerLink: ['/'] }, // HOME ADMIN
+                { label: 'Usuarios', icon: 'dashboard', routerLink: ['/usuario'] }
+            ];
+        } else if (this.loginService.isUserLoggedIn()) { // MENU DE USUÁRIO 
+            this.menuService.itens = [
+                // INSERIR TODAS AS ROTAS POSSÍVEIS AO USUARIO
+                { label: 'Meu perfil', icon: 'dashboard', routerLink: ['/'] }, // HOME USUARIO
+                //{ label: 'Usuario', icon: 'dashboard', routerLink: ['/usuarios'] }
+            ];
+        }
     }
 
     bindRipple() {
@@ -166,7 +183,7 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
     ngAfterViewInit() {
         this.layoutContainer = this.layourContainerViewChild.nativeElement as HTMLDivElement;
         const time = 100;
-        setTimeout(() => { this.layoutMenuScrollerViewChild.moveBar(); }, time);
+        setTimeout(() => { this.layoutMenuScrollerViewChild.moveBar(); }, time); // move a barra do scrollmenu
     }
 
     onLayoutClick() {
@@ -197,20 +214,20 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     onMenuButtonClick(event) {
+        this.ngOnInit(); // troca os menus dinâmicamente
+        
         this.menuClick = true;
         this.rotateMenuButton = !this.rotateMenuButton;
         this.topbarMenuActive = false;
-
-        if (this.menuService.layoutMode === MenuOrientation.OVERLAY) {
+        if (this.menuService.layoutMode === MenuOrientation.OVERLAY) { 
             this.menuService.overlayMenuActive = !this.menuService.overlayMenuActive;
         } else {
             if (this.isDesktop()) {
-                this.menuService.staticMenuDesktopInactive = !this.menuService.staticMenuDesktopInactive;
+                this.menuService.staticMenuDesktopInactive = !this.menuService.staticMenuDesktopInactive; // Esconde ou abre o menu
             } else {
                 this.menuService.staticMenuMobileActive = !this.menuService.staticMenuMobileActive;
             }
         }
-
         event.preventDefault();
     }
 
@@ -220,7 +237,9 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
     }
 
     onTopbarMenuButtonClick(event) {
+
         this.topbarItemClick = true;
+
         this.topbarMenuActive = !this.topbarMenuActive;
 
         this.hideOverlayMenu();
@@ -230,13 +249,15 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
     onTopbarItemClick(event, item) {
         this.topbarItemClick = true;
-
+        
+        this.menuService.staticMenuDesktopInactive = false; // Esconde o menu deslizável
+        
         if (this.activeTopbarItem === item) {
             this.activeTopbarItem = null;
         } else {
             this.activeTopbarItem = item;
         }
-
+        
         event.preventDefault();
     }
 

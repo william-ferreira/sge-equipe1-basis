@@ -12,6 +12,7 @@ import com.basis.sge.sge.servico.dto.UsuarioDTO;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -33,8 +34,14 @@ public class UsuarioRecurso {
         return ResponseEntity.ok(entidadeDTO);
     }
 
+    @GetMapping("/login/{key}")
+    public ResponseEntity<UsuarioDTO> obterPorChave(@PathVariable String key) throws URISyntaxException {
+        UsuarioDTO entidadeDTO = usuarioServico.obterPorChave(key);
+        return ResponseEntity.ok(entidadeDTO);
+    }
+
     @PostMapping
-    public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO entidadeDTO) {
+    public ResponseEntity<UsuarioDTO> salvar(@Valid @RequestBody UsuarioDTO entidadeDTO) throws URISyntaxException {
         UsuarioDTO entidade = usuarioServico.salvar(entidadeDTO);
         return ResponseEntity.created(URI.create("/api/usuarios")).build();
     }

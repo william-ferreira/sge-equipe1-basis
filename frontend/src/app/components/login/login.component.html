@@ -1,0 +1,31 @@
+<div class="login-panel">
+  <app-card class="caixa">
+    <div class="box-margin">
+      <h2>Bem-vindo ao SGE</h2>
+      <div class="container">
+        <div class="login-input">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" size="30" name="chave" [(ngModel)]="chave" pInputText> 
+            <label class="login-input-text" for="float-input">Chave de usuário</label>
+          </span>
+        </div>
+
+        <button pButton type="button" label="Primary" class="p-button-text" class="login-button" (click)=checkLogin()>
+          <div class="text-button">
+            <strong>Entrar</strong>
+          </div>
+        </button>
+      </div>
+
+      <p class="fake-splitter">__________________________</p>
+      
+      <div>
+        <button pButton type="button" label="Primary" class="cadastrar-button" (click)=cadastrar()>
+          <div class="text-button">
+            <strong>Cadastre-se</strong>
+          </div>
+        </button>
+      </div>
+    </div>
+  </app-card>
+</div>

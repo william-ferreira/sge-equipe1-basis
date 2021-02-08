@@ -7,10 +7,14 @@ import { ListagemComponent } from './components/listagem/listagem.component';
 const routes: Routes = [
   {
     path: '',
-    component: ListagemComponent
+    component: ListagemComponent,
   },
   {
-    path: 'formulario',
+    path: 'cadastrar',
+    component: FormularioComponent
+  },
+  {
+    path: 'formulario/:id',
     component: FormularioComponent
   }
 ];

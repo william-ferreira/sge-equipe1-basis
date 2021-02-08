@@ -1,1 +1,52 @@
-<p>formulario works!</p>
+<div class="cadastrar-panel">
+    <app-card class="caixa">
+        <div class="box-margin">
+            <h2 class="cadastro-header-text">Cadastrar usuário</h2>
+            <form [formGroup]="formUsuario">
+
+                <div class="p-grid p-dir-col">
+                    
+                    <div class="cadastro-input">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" formControlName="nome" [(ngModel)]="usuario.nome" pInputText>
+                            <label for="float-input">Nome</label>
+                        </span>
+                        <div *ngIf="formUsuario.get('nome').invalid">Nome de usuário Inválido</div> 
+                    </div>
+                    <div class="cadastro-input">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" formControlName="cpf" [(ngModel)]="usuario.cpf" pInputText>
+                            <label for="float-input">CPF</label>
+                        </span>
+                    </div>
+                    <div class="cadastro-input">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" formControlName="email" [(ngModel)]="usuario.email" pInputText>
+                            <label for="float-input">Email</label>
+                        </span>
+                    </div>
+                    <div class="cadastro-input">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" formControlName="telefone" [(ngModel)]="usuario.telefone" pInputText>
+                            <label for="float-input">Telefone</label>
+                        </span>
+                    </div>
+                    <div class="cadastro-input">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" formControlName="dataNascimento" [(ngModel)]="usuario.dataNascimento" pInputText>
+                            <label for="float-input">Data de nascimento</label>
+                        </span>
+                    </div>
+                        
+                </div>
+            </form>
+            <div>
+                <button pButton type="button" label="Primary" class="cadastrar-button" (click)="salvar()">
+                  <div class="cadastro-text-button">
+                    <strong>Cadastre-se</strong>
+                  </div>
+                </button>
+            </div>
+        </div>
+    </app-card>
+</div>

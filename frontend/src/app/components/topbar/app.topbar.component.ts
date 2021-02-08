@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { Authentication, User } from '@nuvem/angular-base';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
     selector: 'app-topbar',
@@ -8,14 +9,7 @@ import { Authentication, User } from '@nuvem/angular-base';
 })
 export class AppTopbarComponent {
 
-    constructor(public app: AppComponent, private readonly _authentication: Authentication<User>) {
+    constructor(public app: AppComponent, public loginService: AuthenticationService) {
     }
 
-    get usuario() {
-        return this._authentication.getUser();
-    }
-
-    isAuthenticated() {
-        return this._authentication.isAuthenticated();
-    }
 }

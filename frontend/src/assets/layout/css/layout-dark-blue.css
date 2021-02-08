@@ -59,7 +59,7 @@
   -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  border-radius: 2px;
+  border-radius: 5px;
   background: #ffffff;
   padding: 1em;
   margin-bottom: 1em;
@@ -648,12 +648,18 @@
 }
 
 .login-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   text-align: center;
+  
   width: 350px;
-  min-height: 440px;
-  padding: 50px 20px;
-  margin: 100px auto 0 auto;
+  
+  
+  margin: 200px auto 14vw 40vw;
 }
+
 .login-panel .ui-g .ui-g-12 {
   padding: 25px 40px;
 }
@@ -1213,12 +1219,10 @@ body a {
   padding: 20px;
   height: 75px;
   width: 250px;
-  background-color: #2b3135;
+  background-color: transparent;
   float: left;
-  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 3px 0 6px rgba(0, 0, 0, 0.3);
 }
+
 .layout-container .topbar .topbar-right {
   padding: 15px;
   position: relative;
@@ -1802,7 +1806,7 @@ body a {
   color: #5180ce;
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 300px) {
   .layout-container .topbar-items {
     float: right;
     margin: 0;
@@ -2173,7 +2177,7 @@ body a {
     margin-left: 75px;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 200px) {
   .layout-container.menu-layout-static .topbar .topbar-right #menu-button i {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
@@ -2389,3 +2393,43 @@ body .layout-wrapper.layout-compact .ui-datepicker tbody td a, body .layout-wrap
   }
 }
 /* Add your customizations of layout here */
+
+.caixa {
+  transform: scale(1.2);
+}
+
+.box-margin {
+  margin: 30px;
+}
+
+.top-space {
+  padding-top: 50px;
+}
+
+.login-input {
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.fake-splitter {
+  padding-bottom: 12px;
+  color: darkgrey;
+}
+
+.text-button {
+  margin-top: 8px;
+}
+
+.login-button {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.cadastro-input {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.cadastro-input-text {
+  padding-left: 70px;
+}
