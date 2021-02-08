@@ -32,7 +32,6 @@ export class ListagemComponent implements OnInit {
   }
 
   mostrarDialogPergunta(id: number) {
-    console.log("entrou")
     this.exibirDialogPergunta = true;
   }
 
@@ -40,13 +39,12 @@ export class ListagemComponent implements OnInit {
     this.idEventoSel = idEvento;
     this.mostrarDialogPergunta(this.idEventoSel);
   }
-   inscreverEvento(){
+
+  inscreverEvento(){
     let inscricaoUsuario = {id:null,idTipoSituacao:1,idUsuario:4,idEvento:this.idEventoSel,resposta:[]}
     this.inscricaoServico.salvarInscricao(inscricaoUsuario)
     .subscribe(idInscricao => {console.log(idInscricao)
     })
-    
-  
   }
 
 }

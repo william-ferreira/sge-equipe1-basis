@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Evento } from 'src/app/dominios/evento';
 import { Inscricao } from './../../../../dominios/inscricao';
 import { DetalhesInscricao } from 'src/app/dominios/detalhesInscricao';
+import { Usuario } from 'src/app/dominios/usuario';
 
 @Component({
   selector: 'app-listagem',
@@ -15,6 +16,7 @@ export class ListagemComponent implements OnInit {
   inscricoes: Inscricao[] = [];
   inscricoesUsuario: DetalhesInscricao[] = [];
   inscricoesEvento: Inscricao[] = [];
+  usuario = new Usuario();
   evento = new Evento();
   eventos: Evento[] = [];
   inscricao = new Inscricao();
@@ -27,7 +29,8 @@ export class ListagemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buscarInscricoesUsuario(4);
+    this.usuario = JSON.parse(sessionStorage.getItem('usuario'));
+    this.buscarInscricoesUsuario(this.usuario.id);
   }
   private buscarInscricoes() {
     this.servico.getInscricoes()

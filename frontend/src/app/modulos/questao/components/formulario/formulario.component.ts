@@ -58,6 +58,7 @@ export class FormularioComponent implements OnInit {
 
   fecharDialog(perguntaSalva: Pergunta) {
     this.carregarForm()
+    alert('Inscrição realizada com sucesso.')
     this.perguntaSalva.emit(perguntaSalva);
   }
 

@@ -6,6 +6,7 @@ import { InscricaoService }from '../../../inscricao-adm/service/inscricao.servic
 import { InscricaoResposta } from 'src/app/dominios/inscricao-resposta';
 import { Inscricao } from 'src/app/dominios/inscricao';
 import { EventEmitter } from 'events';
+import { Usuario } from 'src/app/dominios/usuario';
 
 
 @Component({
@@ -60,12 +61,15 @@ export class ListagemPerguntasUsuarioComponent {
 
   public construirInscricao(){
     let inscricao = new Inscricao();
+    
+    let usuario = new Usuario();
+    usuario = JSON.parse(sessionStorage.getItem('usuario'));
 
     this.construirPerguntaResposta();
     
     inscricao.resposta = this.perguntasResposta;
     inscricao.idEvento = this.idEventoAux;
-    inscricao.idUsuario = 4; // PASSAR O ID DO USUÁRIO AQUI
+    inscricao.idUsuario = usuario.id;
     inscricao.idTipoSituacao = 1;
     inscricao.id = null;    
 
