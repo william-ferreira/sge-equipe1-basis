@@ -16,6 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UsuarioService } from './modulos/usuario/services/usuario.service';
 import { AuthenticationService } from './services/authentication.service';
+import { AccordionModule,DropdownModule } from 'primeng';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -40,11 +42,14 @@ import { AuthenticationService } from './services/authentication.service';
         ErrorStackModule,
         VersionTagModule,
         SecurityModule.forRoot(environment.auth),
-        MenuModule
+        MenuModule,
+        DropdownModule,
+        AccordionModule
     ],
     providers: [
         UsuarioService,
-        AuthenticationService
+        AuthenticationService,
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]
 })

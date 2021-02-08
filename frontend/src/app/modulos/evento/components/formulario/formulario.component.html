@@ -1,0 +1,29 @@
+<form [formGroup]="formEvento">
+
+    <div class="p-grid p-dir-col">
+  
+      <div *ngIf="formEvento.get('titulo').invalid">Título requerido</div>
+      <input type="text" [(ngModel)]="evento.titulo" placeholder="Titulo do Evento" formControlName="titulo" pInputText />
+      
+      <div *ngIf="formEvento.get('dataInicio').invalid">Inicio do evento requerido</div>
+      <input type="datetime-local" [(ngModel)]="evento.dataInicio" placeholder="Data e Hora" formControlName="dataInicio" pInputText />
+      
+      <div *ngIf="formEvento.get('dataTermino').invalid">Termino do evento requerido</div>
+      <div *ngIf="!dataTerminoMaiorDataInicio()">O início do evento deve acontecer antes do término</div>
+      <input type="datetime-local" [(ngModel)]="evento.dataTermino" placeholder="Data e Hora" formControlName="dataTermino" pInputText />
+      
+      <input type="text" [(ngModel)]="evento.descricao" placeholder="Descricao" formControlName="descricao" pInputText />
+      <input type="text" [(ngModel)]="evento.quantVagas" placeholder="Vagas" formControlName="quantVagas" pInputText />
+      <input type="text" [(ngModel)]="evento.valor" placeholder="Valor" formControlName="valor" pInputText />
+      <input type="text" [(ngModel)]="evento.localEvento" placeholder="Local" formControlName="localEvento" pInputText />
+      
+      <div *ngIf="formEvento.get('idTipoEvento').invalid">Tipo do evento requerido</div>
+      <p-dropdown [options]="tipos" [(ngModel)]="evento.idTipoEvento" formControlName="idTipoEvento" placeholder="Tipo do Evento"></p-dropdown>
+      
+      <p-inputSwitch [(ngModel)]="evento.tipoInscricao" formControlName="tipoInscricao"></p-inputSwitch>
+      <p>É necessário uma inscrição?</p>                    
+      
+    </div>
+  </form>
+  
+  <button (click)="salvar()"  pButton type="button" [label]="edicao ? 'Editar' : 'Cadastrar'" ></button>

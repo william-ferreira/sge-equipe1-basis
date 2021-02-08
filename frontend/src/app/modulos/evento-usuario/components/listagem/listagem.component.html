@@ -1,0 +1,42 @@
+<app-card [titulo]="'Lista de eventos'">
+
+    <p-accordion [multiple]="true">
+        <p-accordionTab header= {{evento.titulo}} *ngFor="let evento of eventos">
+            <p-table [value]="[evento]">
+                <ng-template pTemplate = "header">
+                    <tr>
+                        <th>Data de Inicio</th>
+                        <th>Data de Termino</th>
+                        <th>Quantidade de Vagas</th>
+                        <th>Valor(R$)</th>                        
+                        <th>Local do Evento</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate = "body" let-e>
+                    <tr>
+                        <td>{{e.dataInicio | date: 'dd/MM/yyyy HH:mm'}}</td>
+                        <td>{{e.dataTermino | date: 'dd/MM/yyyy HH:mm'}}</td>
+                        <td>{{e.quantVagas}}</td>
+                        <td>{{e.valor}}</td>
+                        <td>{{e.localEvento}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
+                <button style="margin: 5px; align-items: center; display: inline-flex;" (click)="mostrarDialogPerguntasPorEvento(evento.id)" class="p-m1-2" pButton
+                    type="button" icon="pi pi-sign-in"></button>
+            </div>
+        </p-accordionTab>
+    </p-accordion>                
+</app-card>
+
+
+
+<p-dialog header="Perguntas" [(visible)]="exibirDialogPergunta">
+    <app-listagem-perguntas-usuario
+    *ngIf="idEventoSel" 
+    [idEvento] = "idEventoSel"
+    [resposta] = "resposta"    
+    style="text-align: center;"></app-listagem-perguntas-usuario>
+    <!-- <button  (click)='inscreverEvento()' pButton type="button" label="Inscrever-se" icon="pi pi-check"></button> -->
+</p-dialog>

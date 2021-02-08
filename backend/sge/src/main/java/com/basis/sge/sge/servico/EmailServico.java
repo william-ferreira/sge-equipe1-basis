@@ -2,6 +2,7 @@ package com.basis.sge.sge.servico;
 
 import com.basis.sge.sge.configuracao.ApplicationProperties;
 import com.basis.sge.sge.servico.dto.EmailDTO;
+import com.basis.sge.sge.servico.producer.SgeProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -20,6 +21,8 @@ public class EmailServico {
     private final JavaMailSender javaMailSender;
 
     private final ApplicationProperties properties;
+
+    private final SgeProducer sgeProducer;
 
     public void sendMail(EmailDTO emailDTO) {
         try {

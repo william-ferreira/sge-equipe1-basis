@@ -1,9 +1,5 @@
 package com.basis.sge.sge.servico.dto;
 
-import com.basis.sge.sge.dominio.Evento;
-import com.basis.sge.sge.dominio.InscricaoResposta;
-import com.basis.sge.sge.dominio.TipoSituacao;
-import com.basis.sge.sge.dominio.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 

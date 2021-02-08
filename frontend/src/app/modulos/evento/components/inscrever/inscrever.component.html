@@ -1,0 +1,8 @@
+<div class="card">
+  <h5>Responda as perguntas a seguir:</h5>
+  <div *ngFor="let pergunta of listaPerguntas" class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">
+    <label for="firstname2">{{ pergunta.titulo }}</label>
+    <input id="firstname2" [(ngModel)]="pergunta.resposta" type="text" pInputText />
+  </div>
+</div>
+

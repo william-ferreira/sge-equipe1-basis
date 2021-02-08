@@ -1,0 +1,12 @@
+<form [formGroup]="formPergunta">
+    <div class="p-grid p-dir-col">
+      <input type="text" [(ngModel)]="pergunta.titulo" placeholder="Título da pergunta"  formControlName="titulo" pInputText />
+      <p>A pergunta é obrigatória ?</p>
+      <p-inputSwitch [(ngModel)]="pergunta.obrigatoriedade" formControlName="obrigatoriedade"></p-inputSwitch>
+    </div>
+</form>
+ 
+<button (click)="salvar()" pButton type="button" [label]="edicao ? 'Editar' : 'Cadastrar'" ></button>
+
+  
+  

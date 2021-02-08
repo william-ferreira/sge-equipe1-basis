@@ -2433,3 +2433,11 @@ body .layout-wrapper.layout-compact .ui-datepicker tbody td a, body .layout-wrap
 .cadastro-input-text {
   padding-left: 70px;
 }
+
+body .ui-sidebar-top {
+  top: 0;
+  left: 0;
+  width: 85%;
+  height: 80%;
+  transform: translateY(-100%);
+}

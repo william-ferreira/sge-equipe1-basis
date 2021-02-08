@@ -16,7 +16,11 @@ const routes: Routes = [
   {
     path: 'formulario/:id',
     component: FormularioComponent
-  }
+  },
+  {
+    path: 'formulario/:id',
+    component: FormularioComponent
+  },
 ];
 
 @NgModule({

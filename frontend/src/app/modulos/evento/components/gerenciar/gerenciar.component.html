@@ -1,0 +1,27 @@
+<app-card [titulo]="'Listas de Pré-Inscrições'">
+
+    <p-table [value]="detalhesPreInscricao">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome do usuario</th>
+                <th>E-Mail</th>               
+                <th style="width: 100px;">Avaliar Inscricao</th>
+                
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-preInscricao>
+            <tr>
+                <td>{{preInscricao.nome}}</td>
+                <td>{{preInscricao.email}}</td>
+                <td><p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+                    <p-button (click)="aprovarInscricao(preInscricao)" icon="pi pi-check" styleClass="p-mr-2"></p-button>
+                    <p-button (click)="recusarInscricao(preInscricao)" icon="pi pi-times" ></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</app-card>
+
+<p-confirmDialog header="Confirmar Remover Inscricao" icon="pi pi-exclamation-triangle"></p-confirmDialog>

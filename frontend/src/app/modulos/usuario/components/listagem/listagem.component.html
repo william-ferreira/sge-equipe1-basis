@@ -1,4 +1,4 @@
-<app-card [titulo]="'Lista de usuários'">
+<p-card>
     <div class="p-d-flex p-jc-end">
         <button routerLink="formulario" pButton type="button" label="Cadastrar Usuário Rota"></button>
         <button class="p-ml-2" type="button" (click)="abrirDialog()" pButton label="Cadastrar Usuário Dialog"></button>
@@ -33,7 +33,7 @@
         </ng-template>
     </p-table>
 
-</app-card>
+</p-card>
 
 <p-dialog header="Title" [(visible)]="exibirDialog">
     <app-formulario [usuario]="usuario" [edicao]="formEdicao" (usuarioSalvo)="fecharDialog($event)"></app-formulario>

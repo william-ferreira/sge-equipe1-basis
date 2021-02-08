@@ -120,7 +120,7 @@ public class PreinscricaoBuilder extends ConstrutorDeEntidade<PreInscricao> {
         usuario.setId(null);
         usuario.setCpf("37128105042");
         usuario.setDataNascimento(LocalDate.now());
-        usuario.setEmail("vo7775832@gmail.com");
+        usuario.setEmail("vmarcoslins@gmail.com");
         usuario.setNome("Usuário de teste");
         usuario.setTelefone("999999999");
         return usuarioMapper.toEntity(usuarioServico.salvar(usuarioMapper.toDto(usuario)));
