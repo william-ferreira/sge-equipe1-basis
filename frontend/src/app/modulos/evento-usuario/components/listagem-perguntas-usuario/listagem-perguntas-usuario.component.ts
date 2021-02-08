@@ -7,6 +7,7 @@ import { InscricaoResposta } from 'src/app/dominios/inscricao-resposta';
 import { Inscricao } from 'src/app/dominios/inscricao';
 import { EventEmitter } from 'events';
 import { Usuario } from 'src/app/dominios/usuario';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -61,7 +62,7 @@ export class ListagemPerguntasUsuarioComponent {
 
   public construirInscricao(){
     let inscricao = new Inscricao();
-    
+
     let usuario = new Usuario();
     usuario = JSON.parse(sessionStorage.getItem('usuario'));
 
@@ -79,9 +80,10 @@ export class ListagemPerguntasUsuarioComponent {
       console.log("Inscricao Pré-pergunta: ",inscricao);
 
       this.salvaInscricaoResposta(this.idInscricaoAux);
-
+      alert("Inscrição realizada com sucesso!")
       this.fecharDialogInscricao();
-
+    }, (erro: HttpErrorResponse) => {
+      alert(erro.error.message);
     });
   }
 

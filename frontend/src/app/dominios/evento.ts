@@ -12,7 +12,7 @@ export class Evento{
     quantVagas: number;
     valor: number;
     localEvento: string;
-    tipoInscricao: boolean;
+    tipoInscricao = false;
     idTipoEvento: number;
     pergunta: EventoPergunta[] = [];
 

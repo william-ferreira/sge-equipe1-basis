@@ -47,7 +47,7 @@ public class UsuarioServico {
         if (emailExistente(usuario)) { throw new RegraNegocioException("O endereço de email já está sendo utilizado."); }
 
         // TODO: Refatorar envio de email
-        String mensagem = "Email de testes";
+        String mensagem = "Usuário cadastrado com sucesso, sua chave é:" + usuario.getChave();
         EmailDTO emailDTO = new EmailDTO();
         emailDTO.setCopias(new ArrayList<>());
         emailDTO.setAssunto("Cadastro do Usuário");

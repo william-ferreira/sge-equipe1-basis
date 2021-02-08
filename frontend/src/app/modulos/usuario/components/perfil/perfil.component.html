@@ -11,7 +11,7 @@
                     <p>Data de Nascimento: <strong>{{usuario.dataNascimento | date: 'dd/MM/yyyy'}}</strong></p>
                     <p class="perfil-button">
                         <button (click)="abrirDialogEditar(usuario.id)" pButton type="button" icon="pi pi-pencil"></button>
-                        <button (click)="confirmarExcluirUsuario(usuario.id)" class="p-ml-2" pButton type="button" icon="pi pi-trash"></button>
+                        <!--button (click)="confirmarExcluirUsuario(usuario.id)" class="p-ml-2" pButton type="button" icon="pi pi-trash"></button-->
                     </p>
                 </ul>
             </div>
@@ -23,4 +23,4 @@
     <app-formulario [usuario]="usuario" [edicao]="formEdicao" (usuarioSalvo)="fecharDialog($event)"></app-formulario>
 </p-dialog>
 
-<p-confirmDialog header="Confirmar Remover Usuário" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<!--p-confirmDialog header="Confirmar Remover Usuário" icon="pi pi-exclamation-triangle"></p-confirmDialog-->
