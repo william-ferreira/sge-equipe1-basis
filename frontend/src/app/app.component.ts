@@ -60,14 +60,14 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
         if (this.loginService.isAdminLoggedIn()) { // MENU DE ADMINISTRADOR
             this.menuService.itens = [
                 // INSERIR TODAS AS ROTAS POSSÍVEIS AO ADMINISTRADOR
-                { label: 'Meus eventos', icon: 'event', routerLink: ['/eventos'] }, // HOME ADMIN
+                { label: 'Cadastrar Evento', icon: 'add', routerLink: ['/eventos/formulario'] }, // HOME ADMIN
+                { label: 'Meus eventos', icon: 'event', routerLink: ['/eventos'] },
                 { label: 'Usuarios', icon: 'person', routerLink: ['/usuario'] }
             ];
         } else if (this.loginService.isUserLoggedIn()) { // MENU DE USUÁRIO 
             this.menuService.itens = [
                 // INSERIR TODAS AS ROTAS POSSÍVEIS AO USUARIO
-                { label: 'Meu perfil', icon: 'person', routerLink: ['/'] }, // HOME USUARIO
-                { label: 'Meus eventos', icon: 'event', routerLink: ['/eventos'] },
+                { label: 'Meu perfil', icon: 'person', routerLink: ['/usuario/perfil'] }, // HOME USUARIO
                 { label: 'Minhas inscrições', icon: 'check', routerLink: ['/inscricao-adm'] },
                 { label: 'Eventos', icon: 'event', routerLink: ['/eventos-usuario'] }
             ];

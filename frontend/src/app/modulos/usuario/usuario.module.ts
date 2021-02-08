@@ -10,14 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { CpfPipe } from './components/pipes/cpf.pipe';
 import { TelefonePipe } from './components/pipes/telefone.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 @NgModule({
   declarations: [
     FormularioComponent, 
-    ListagemComponent, 
+    ListagemComponent,
+    PerfilComponent, 
     CpfPipe, 
-    TelefonePipe
+    TelefonePipe, PerfilComponent
   ],
   providers: [
     UsuarioService,
