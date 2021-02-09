@@ -1,0 +1,29 @@
+.caixa {
+    transform: scale(1.2);
+}
+
+.perfil-button {
+    margin-top: 20px;
+    padding-left: 50px;
+  }
+
+.perfil-header-text {
+    padding-left: 40px;
+}
+
+.cadastro-text-button {
+    margin-top: -12px;
+}
+
+.cadastro-text {
+    padding-right: 25px;
+}
+
+.perfil-panel {
+    display: flex;
+    justify-content: center;
+    
+    
+    
+    margin: 200px auto 10vw 0;
+}

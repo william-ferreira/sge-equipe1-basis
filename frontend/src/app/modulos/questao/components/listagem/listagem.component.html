@@ -1,0 +1,33 @@
+<app-card titulo="Lista de Perguntas">
+
+    <p-table [value]="perguntas">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Titulo</th>
+                <th>Obrigatoriedade</th>
+                <th *ngIf="isAdmin" >Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pergunta>
+            <tr>
+                <td>{{pergunta.titulo}}</td>
+                <td *ngIf="pergunta.obrigatoriedade">Pergunta obrigatória</td>
+                <td *ngIf="! pergunta.obrigatoriedade">Pergunta não obrigatória</td>
+                <td *ngIf="isAdmin" > <button (click)="mostrarDialogEditar(pergunta.id)" pButton type="button" icon="pi pi-pencil"></button> </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</app-card>
+
+<p-dialog header="Nova Pergunta" [(visible)]="exibirDialog">
+    <app-formulario-questao
+        [idPergunta]="pergunta"  
+        [edicao]="formularioEdicao"
+        (perguntaSalva)="fecharDialog($event)"
+        ></app-formulario-questao>
+</p-dialog>
+
+<div class="p-d-flex p-jc-end">
+    <button class="p-ml-2" type="button" *ngIf="isAdmin" (click)="mostrarDialogCadastro()" pButton label="Cadastrar Pergunta"></button>
+</div>

@@ -1,0 +1,39 @@
+.caixa {
+    transform: scale(1.2);
+}
+
+.login {
+    margin: 30px;
+}
+
+.top-space {
+    padding-top: 50px;
+}
+
+.login-input {
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.login-input-text {
+    padding-left: 75px;
+}
+
+.fake-splitter {
+    padding-bottom: 12px;
+    color: darkgrey;
+}
+
+.text-button {
+    margin-top: 8px;
+}
+
+.login-button {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.cadastrar-button {
+    background-color: yellowgreen;
+    border: yellowgreen;
+}

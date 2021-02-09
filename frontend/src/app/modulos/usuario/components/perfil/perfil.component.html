@@ -1,0 +1,26 @@
+<div class="caixa">
+    <div class="perfil-panel">
+        <p-card class="p-d-flex p-jc-center">
+            <h3 class="perfil-header-text">Minhas Informações</h3>
+            <div class="p-d-flex p-jc-center">
+                <ul class="cadastro-text">
+                    <p>Nome: <strong>{{usuario.nome}}</strong></p>
+                    <p>CPF: <strong>{{usuario.cpf | cpf}}</strong></p>
+                    <p>Email: <strong>{{usuario.email}}</strong></p>
+                    <p>Telefone: <strong>{{usuario.telefone | telefone}}</strong></p>
+                    <p>Data de Nascimento: <strong>{{usuario.dataNascimento | date: 'dd/MM/yyyy'}}</strong></p>
+                    <p class="perfil-button">
+                        <button (click)="abrirDialogEditar(usuario.id)" pButton type="button" icon="pi pi-pencil"></button>
+                        <!--button (click)="confirmarExcluirUsuario(usuario.id)" class="p-ml-2" pButton type="button" icon="pi pi-trash"></button-->
+                    </p>
+                </ul>
+            </div>
+        </p-card>    
+    </div>
+</div>
+
+<p-dialog header="Title" [(visible)]="exibirDialog">
+    <app-formulario [usuario]="usuario" [edicao]="formEdicao" (usuarioSalvo)="fecharDialog($event)"></app-formulario>
+</p-dialog>
+
+<!--p-confirmDialog header="Confirmar Remover Usuário" icon="pi pi-exclamation-triangle"></p-confirmDialog-->

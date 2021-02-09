@@ -1,0 +1,29 @@
+<app-card [titulo]="'Listas de Pré-Inscrições'">
+
+    <p-table [value]="inscricoesUsuario">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome do Evento</th>
+                <th>Situação</th>       
+                <th style="width: 80px;" >Cancelar </th>
+                
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-detalheInscricao>
+            <tr>
+                <td>{{detalheInscricao.nomeEvento}}</td>
+                <td>{{detalheInscricao.tipoSituacao}}</td>
+                <td class="p-d-flex p-jc-center">
+                    <button (click)="cancelarInscricao(detalheInscricao)" class="p-ml-2" pButton
+                        type="button" icon="pi pi-times"></button>
+                </td>
+               
+
+            </tr>
+        </ng-template>
+    </p-table>
+
+</app-card>
+
+<p-confirmDialog header="Confirmar Remover Inscricao" icon="pi pi-exclamation-triangle"></p-confirmDialog>
